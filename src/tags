@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Cycle	interconnect.cpp	/^void Interconnect::Cycle() {$/;"	f	class:Interconnect
+GetRequestQueue	interconnect.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
+GetSenderQueue	interconnect.hpp	/^    std::vector<request>* GetSenderQueue() {return sender_queue;}$/;"	f	class:Interconnect
+GetServedQueue	interconnect.hpp	/^    std::vector<request>* GetServedQueue() {return served_queue;}$/;"	f	class:Interconnect
+GetWaitingQueue	interconnect.hpp	/^    std::vector<request>* GetWaitingQueue() {return waiting_queue;}$/;"	f	class:Interconnect
+Interconnect	interconnect.cpp	/^Interconnect::Interconnect(void *_sender, void *_receiver, float _clock, float _bw,$/;"	f	class:Interconnect
+Interconnect	interconnect.hpp	/^class Interconnect {$/;"	c
+MakeRequest	common.hpp	/^request MakeRequest(int order, float size) {$/;"	f
+ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
+bpc	interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
+busy_cycle	interconnect.hpp	/^    int busy_cycle;                         \/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
+bw	interconnect.hpp	/^    float bw;                               \/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
+clock	interconnect.hpp	/^    float clock;                            \/\/ clock in GHz$/;"	m	class:Interconnect
+idle_cycle	interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
+order	common.hpp	/^    int order;$/;"	m	struct:request
+pop_front	common.hpp	/^void pop_front(std::vector<T> &v)$/;"	f
+receiver	interconnect.hpp	/^    void *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
+request	common.hpp	/^struct request {$/;"	s
+request	common.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request_queue	interconnect.hpp	/^    std::vector<request> *request_queue;    \/\/ vector of requests that the receiver needs to request to sender$/;"	m	class:Interconnect
+sender	interconnect.hpp	/^    void *sender;                           \/\/ pointer to the sender of this interconnect$/;"	m	class:Interconnect
+sender_queue	interconnect.hpp	/^    std::vector<request> *sender_queue;     \/\/ vector of requests that sender has left to send to receiver (size changes)$/;"	m	class:Interconnect
+served_queue	interconnect.hpp	/^    std::vector<request> *served_queue;     \/\/ vector of requests that the receiver has been serviced$/;"	m	class:Interconnect
+size	common.hpp	/^    float size;$/;"	m	struct:request
+waiting_queue	interconnect.hpp	/^    std::vector<request> *waiting_queue;    \/\/ vector of requests that the receiver has to receive from sender$/;"	m	class:Interconnect
