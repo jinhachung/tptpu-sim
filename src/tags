@@ -40,9 +40,11 @@ IsMainMemory	dram.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	clas
 IsMainMemory	weightfetcher.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:WeightFetcher
 MakeRequest	common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
 OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
-PrintStats	interconnect.cpp	/^void Interconnect::PrintStats() {$/;"	f	class:Interconnect
+OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
+PrintStats	interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
 ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
 ReceiverFull	interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
+ReceiversSenderQueueSize	interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
 UnifiedBuffer	buffer.cpp	/^UnifiedBuffer::UnifiedBuffer(float buffer_size) {$/;"	f	class:UnifiedBuffer
 UnifiedBuffer	buffer.hpp	/^class UnifiedBuffer {$/;"	c
 WeightFetcher	weightfetcher.cpp	/^WeightFetcher::WeightFetcher(float _size, int _depth) {$/;"	f	class:WeightFetcher
@@ -60,6 +62,7 @@ is_main_memory	dram.hpp	/^	bool is_main_memory;$/;"	m	class:DRAM
 is_main_memory	weightfetcher.hpp	/^	bool is_main_memory;$/;"	m	class:WeightFetcher
 is_sender_main_memory	interconnect.hpp	/^	bool is_sender_main_memory;				\/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
 main	test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 order	common.hpp	/^	int order;$/;"	m	struct:request
 pop_front	common.cpp	/^void pop_front(std::vector<request> &v)$/;"	f
 receiver	interconnect.hpp	/^	void *receiver;							\/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect

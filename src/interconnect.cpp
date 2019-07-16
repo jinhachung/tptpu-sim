@@ -52,7 +52,7 @@ void Interconnect::ReceiveRequest(request req) {
 bool Interconnect::ReceiverFull() {
 	assert(!sender_queue->empty());
 
-	float totalsize = 0;
+	float totalsize = ReceiversSenderQueueSize();
 	std::vector<request>::iterator it;
 	for (it = served_queue->begin(); it != served_queue->end(); ++it) {
 		totalsize += it->size;
@@ -69,6 +69,22 @@ bool Interconnect::ReceiverFull() {
 		totalsize += sender_queue->front().size;
 	// totalsize is amount of data in receiver if we finish the transmission about to start right now
 	return (receiver_capacity < totalsize);
+}
+
+/* Returns the total size of data stored in the sender_queue of receiver
+ * This is needed so that ReceiverFull() can correctly determine the total size of data that the receiver holds
+ * With this function, non-main-mem senders like UnifiedBuffer and WeightFetcher can
+ * move the requests from their served_queue to sender_queue in their respective Cycle()s 
+ * This function is called in ReceiverFull() */
+float Interconnect::ReceiversSenderQueueSize() {
+	// sender_queue of the interconnect's receiver
+	std::vector<request> *receivers_sender_queue = receiver->GetSenderQueue();
+	std::vector<request>::iterator it;
+	float totalsize = 0;
+	for (it = receivers_sender_queue->begin(); it != receivers_sender_queue->end(); ++it) {
+		totalsize += it->size;
+	}
+	return totalsize;
 }
 
 bool Interconnect::IsIdle() {
@@ -125,8 +141,9 @@ void Interconnect::Cycle() {
 	}
 }
 
-void Interconnect::PrintStats() {
+void Interconnect::PrintStats(std::string name) {
    std::cout << "======================================================================" << std::endl;
+   std::cout << "\t" << name << " Statistics:" << std::endl;
    std::cout << "idle cycles: " << idle_cycle << ", busy cycles: " << busy_cycle << std::endl;
    std::cout << "total bytes sent over this interconnect: " << sent_size << std::endl;
    std::cout << "======================================================================" << std::endl;

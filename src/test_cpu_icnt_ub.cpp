@@ -37,6 +37,6 @@ int main(int argc, char *argv[]) {
 	}
 
 	// test complete
-	cpu_ub_icnt->PrintStats();
+	cpu_ub_icnt->PrintStats("CPU - Unified Buffer Interconnect");
 	return 0;
 }

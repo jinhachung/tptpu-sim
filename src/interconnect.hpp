@@ -19,10 +19,11 @@ public:
 	// pushes the given request into receiver's waiting queue
 	void ReceiveRequest(request req);
 	bool ReceiverFull();
+	float ReceiversSenderQueueSize();
 
 	bool IsIdle();
 	void Cycle();
-	void PrintStats();
+	void PrintStats(std::string name);
 
 	std::vector<request> *GetSenderQueue() {return sender_queue;}
 	std::vector<request> *GetServedQueue() {return served_queue;}

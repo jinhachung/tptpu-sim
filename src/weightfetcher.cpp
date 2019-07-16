@@ -5,7 +5,7 @@
 #include <assert.h>
 
 #include "common.hpp"
-#include "buffer.hpp"
+#include "weightfetcher.hpp"
 
 WeightFetcher::WeightFetcher(float _size, int _depth) {
 	size = _size;
@@ -20,5 +20,9 @@ WeightFetcher::WeightFetcher(float _size, int _depth) {
 
 void WeightFetcher::Cycle() {
 	request req;
-	;
+	while (!served_queue->empty()) {
+		req = served_queue->front();
+		pop_front(*served_queue);
+		sender_queue->push_back(MakeRequest(req.order, req.size));
+	}
 }
