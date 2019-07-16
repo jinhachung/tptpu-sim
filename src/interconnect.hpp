@@ -5,6 +5,7 @@
 #include <assert.h>
 
 #include "common.hpp"
+#include "unit.hpp"
 
 #pragma once
 
@@ -12,7 +13,7 @@ void pop_front(std::vector<request> &v);
 
 class Interconnect {
 public:
-	Interconnect(void *_sender, void *_receiver, float _clock, float _bw, float _receiver_capacity,
+	Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,
 				 bool _is_sender_main_memory, std::vector<request> *senderqueue, std::vector<request> *servedqueue,
 				 std::vector<request> *waitingqueue, std::vector<request> *requestqueue);
 	~Interconnect();
@@ -30,8 +31,8 @@ public:
 	std::vector<request> *GetWaitingQueue() {return waiting_queue;}
 	std::vector<request> *GetRequestQueue() {return request_queue;}
 private:  
-	void *sender;							// pointer to the sender of this interconnect
-	void *receiver;							// pointer to the receiver of this interconnect
+	Unit *sender;							// pointer to the sender of this interconnect
+	Unit *receiver;							// pointer to the receiver of this interconnect
 	float clock;							// clock in GHz
 	float bw;								// bandwidth in GB/s
 	float bpc;								// bytes sent per cycle

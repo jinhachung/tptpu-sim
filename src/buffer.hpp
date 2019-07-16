@@ -5,12 +5,13 @@
 #include <assert.h>
 
 #include "common.hpp"
+#include "unit.hpp"
 
 #pragma once
 
 void pop_front(std::vector<request> &v);
 
-class UnifiedBuffer {
+class UnifiedBuffer: public Unit {
 public:
 	UnifiedBuffer(float buffer_size);
 	void Cycle();

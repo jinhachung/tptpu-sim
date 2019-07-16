@@ -5,12 +5,13 @@
 #include <assert.h>
 
 #include "common.hpp"
+#include "unit.hpp"
 
 #pragma once
 
 void pop_front(std::vector<request> &v);
 
-class WeightFetcher {
+class WeightFetcher: public Unit {
 public:
 	WeightFetcher(float _size, int _depth);
 	void Cycle();

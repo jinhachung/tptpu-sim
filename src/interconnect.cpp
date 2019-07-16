@@ -6,8 +6,9 @@
 
 #include "common.hpp"
 #include "interconnect.hpp"
+#include "unit.hpp"
 
-Interconnect::Interconnect(void *_sender, void *_receiver, float _clock, float _bw, float _receiver_capacity,
+Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,
 						   bool _is_sender_main_memory, std::vector<request> *senderqueue, std::vector<request> *servedqueue,
 						   std::vector<request> *waitingqueue, std::vector<request> *requestqueue) {
 	sender = _sender;
