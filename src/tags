@@ -10,21 +10,34 @@ CPU	cpu.cpp	/^CPU::CPU() {$/;"	f	class:CPU
 CPU	cpu.hpp	/^class CPU {$/;"	c
 Cycle	buffer.cpp	/^void UnifiedBuffer::Cycle() {$/;"	f	class:UnifiedBuffer
 Cycle	cpu.cpp	/^void CPU::Cycle() {$/;"	f	class:CPU
+Cycle	dram.cpp	/^void DRAM::Cycle() {$/;"	f	class:DRAM
 Cycle	interconnect.cpp	/^void Interconnect::Cycle() {$/;"	f	class:Interconnect
+Cycle	weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
+DRAM	dram.cpp	/^DRAM::DRAM() {$/;"	f	class:DRAM
+DRAM	dram.hpp	/^class DRAM {$/;"	c
 GetCapacity	buffer.hpp	/^	float GetCapacity() {return capacity;}$/;"	f	class:UnifiedBuffer
+GetCapacity	weightfetcher.hpp	/^	float GetCapacity() {return size * (float)depth;}$/;"	f	class:WeightFetcher
 GetRequestQueue	buffer.hpp	/^	std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:UnifiedBuffer
 GetRequestQueue	interconnect.hpp	/^	std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
+GetRequestQueue	weightfetcher.hpp	/^	std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:WeightFetcher
 GetSenderQueue	buffer.hpp	/^	std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:UnifiedBuffer
 GetSenderQueue	cpu.hpp	/^	std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:CPU
+GetSenderQueue	dram.hpp	/^	std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:DRAM
 GetSenderQueue	interconnect.hpp	/^	std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:Interconnect
+GetSenderQueue	weightfetcher.hpp	/^	std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:WeightFetcher
 GetServedQueue	buffer.hpp	/^	std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:UnifiedBuffer
 GetServedQueue	interconnect.hpp	/^	std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:Interconnect
+GetServedQueue	weightfetcher.hpp	/^	std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:WeightFetcher
 GetWaitingQueue	buffer.hpp	/^	std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:UnifiedBuffer
 GetWaitingQueue	interconnect.hpp	/^	std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:Interconnect
+GetWaitingQueue	weightfetcher.hpp	/^	std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:WeightFetcher
 Interconnect	interconnect.cpp	/^Interconnect::Interconnect(void *_sender, void *_receiver, float _clock, float _bw, float _receiver_capacity,$/;"	f	class:Interconnect
 Interconnect	interconnect.hpp	/^class Interconnect {$/;"	c
 IsIdle	interconnect.cpp	/^bool Interconnect::IsIdle() {$/;"	f	class:Interconnect
+IsMainMemory	buffer.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:UnifiedBuffer
 IsMainMemory	cpu.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:CPU
+IsMainMemory	dram.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:DRAM
+IsMainMemory	weightfetcher.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:WeightFetcher
 MakeRequest	common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
 OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
 PrintStats	interconnect.cpp	/^void Interconnect::PrintStats() {$/;"	f	class:Interconnect
@@ -32,14 +45,19 @@ ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req)
 ReceiverFull	interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
 UnifiedBuffer	buffer.cpp	/^UnifiedBuffer::UnifiedBuffer(float buffer_size) {$/;"	f	class:UnifiedBuffer
 UnifiedBuffer	buffer.hpp	/^class UnifiedBuffer {$/;"	c
+WeightFetcher	weightfetcher.cpp	/^WeightFetcher::WeightFetcher(float _size, int _depth) {$/;"	f	class:WeightFetcher
+WeightFetcher	weightfetcher.hpp	/^class WeightFetcher {$/;"	c
 bpc	interconnect.hpp	/^	float bpc;								\/\/ bytes sent per cycle$/;"	m	class:Interconnect
 busy_cycle	interconnect.hpp	/^	int busy_cycle;							\/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
 bw	interconnect.hpp	/^	float bw;								\/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
 capacity	buffer.hpp	/^	float capacity;			\/\/ 2 x size of one buffer$/;"	m	class:UnifiedBuffer
 clock	interconnect.hpp	/^	float clock;							\/\/ clock in GHz$/;"	m	class:Interconnect
+depth	weightfetcher.hpp	/^	int depth;$/;"	m	class:WeightFetcher
 idle_cycle	interconnect.hpp	/^	int idle_cycle;							\/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
 is_main_memory	buffer.hpp	/^	bool is_main_memory;$/;"	m	class:UnifiedBuffer
 is_main_memory	cpu.hpp	/^	bool is_main_memory;$/;"	m	class:CPU
+is_main_memory	dram.hpp	/^	bool is_main_memory;$/;"	m	class:DRAM
+is_main_memory	weightfetcher.hpp	/^	bool is_main_memory;$/;"	m	class:WeightFetcher
 is_sender_main_memory	interconnect.hpp	/^	bool is_sender_main_memory;				\/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
 main	test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 order	common.hpp	/^	int order;$/;"	m	struct:request
@@ -50,14 +68,20 @@ request	common.hpp	/^struct request {$/;"	s
 request	common.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
 request_queue	buffer.hpp	/^	std::vector<request> *request_queue;$/;"	m	class:UnifiedBuffer
 request_queue	interconnect.hpp	/^	std::vector<request> *request_queue;	\/\/ vector of requests that the receiver needs to request to sender$/;"	m	class:Interconnect
+request_queue	weightfetcher.hpp	/^	std::vector<request> *request_queue;$/;"	m	class:WeightFetcher
 sender	interconnect.hpp	/^	void *sender;							\/\/ pointer to the sender of this interconnect$/;"	m	class:Interconnect
 sender_queue	buffer.hpp	/^	std::vector<request> *sender_queue;$/;"	m	class:UnifiedBuffer
 sender_queue	cpu.hpp	/^	std::vector<request> *sender_queue;$/;"	m	class:CPU
+sender_queue	dram.hpp	/^	std::vector<request> *sender_queue;$/;"	m	class:DRAM
 sender_queue	interconnect.hpp	/^	std::vector<request> *sender_queue;		\/\/ vector of requests that sender has left to send to receiver (size changes)$/;"	m	class:Interconnect
+sender_queue	weightfetcher.hpp	/^	std::vector<request> *sender_queue;$/;"	m	class:WeightFetcher
 sent_size	interconnect.hpp	/^	float sent_size;						\/\/ total number of bytes sent over this interconnect$/;"	m	class:Interconnect
 served_queue	buffer.hpp	/^	std::vector<request> *served_queue;$/;"	m	class:UnifiedBuffer
 served_queue	interconnect.hpp	/^	std::vector<request> *served_queue;		\/\/ vector of requests that the receiver has been serviced$/;"	m	class:Interconnect
+served_queue	weightfetcher.hpp	/^	std::vector<request> *served_queue;$/;"	m	class:WeightFetcher
 size	common.hpp	/^	float size;$/;"	m	struct:request
+size	weightfetcher.hpp	/^	float size;$/;"	m	class:WeightFetcher
 waiting_queue	buffer.hpp	/^	std::vector<request> *waiting_queue;$/;"	m	class:UnifiedBuffer
 waiting_queue	interconnect.hpp	/^	std::vector<request> *waiting_queue;	\/\/ vector of requests that the receiver has to receive from sender$/;"	m	class:Interconnect
+waiting_queue	weightfetcher.hpp	/^	std::vector<request> *waiting_queue;$/;"	m	class:WeightFetcher
 ~Interconnect	interconnect.cpp	/^Interconnect::~Interconnect() {$/;"	f	class:Interconnect
