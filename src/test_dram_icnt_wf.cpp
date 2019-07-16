@@ -6,6 +6,7 @@
 #include "cpu.hpp"
 #include "dram.hpp"
 #include "interconnect.hpp"
+#include "unit.hpp"
 #include "weightfetcher.hpp"
 
 int main(int argc, char *argv[]) {
@@ -17,10 +18,10 @@ int main(int argc, char *argv[]) {
 	WeightFetcher *wf = new WeightFetcher(65536, 4);
 	float clock = 1;	// 1GHz
 	float bw = 1000;	// 1000GB/s
-	Interconnect *cpu_ub_icnt = new Interconnect((void *)cpu, (void *)ub, clock, bw, ub->GetCapacity(),
+	Interconnect *cpu_ub_icnt = new Interconnect((Unit *)cpu, (Unit *)ub, clock, bw, ub->GetCapacity(),
 												 cpu->IsMainMemory(), cpu->GetSenderQueue(),
 												 ub->GetServedQueue(), ub->GetWaitingQueue(), ub->GetRequestQueue());
-	Interconnect *dram_wf_icnt = new Interconnect((void *)dram, (void *)wf, clock, bw, wf->GetCapacity(),
+	Interconnect *dram_wf_icnt = new Interconnect((Unit *)dram, (Unit *)wf, clock, bw, wf->GetCapacity(),
 												  dram->IsMainMemory(), dram->GetSenderQueue(),
 												  wf->GetServedQueue(), wf->GetWaitingQueue(), wf->GetRequestQueue());
 	// setting complete
