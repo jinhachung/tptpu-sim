@@ -4,23 +4,14 @@
 #include <vector>
 #include <assert.h>
 
+#pragma once
+
 struct request {
-    int order;
-    float size;
+	int order;
+	float size;
 };
 typedef struct request request;
 
-request MakeRequest(int order, float size) {
-    request req;
-    req.order = order;
-    req.size = size;
+request MakeRequest(int order, float size);
 
-    return req;
-}
-
-template<typename T>
-void pop_front(std::vector<T> &v)
-{
-    assert(v.size() > 0);
-    v.erase(v.begin());
-}
+void pop_front(std::vector<request> &v);
