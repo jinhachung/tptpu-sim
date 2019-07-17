@@ -10,13 +10,13 @@
 
 class DRAM {
 public:
-	DRAM();
-	void Cycle();
+    DRAM();
+    void Cycle();
 
-	bool IsMainMemory() {return is_main_memory;}
-	std::vector<request> *GetSenderQueue() {return sender_queue;}
+    bool IsMainMemory() {return is_main_memory;}
+    std::vector<request> *GetSenderQueue() {return sender_queue;}
 private:
-	bool is_main_memory;
+    bool is_main_memory;
 
-	std::vector<request> *sender_queue;
+    std::vector<request> *sender_queue;
 };

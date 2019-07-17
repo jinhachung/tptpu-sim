@@ -7,15 +7,15 @@
 #include "common.hpp"
 
 request MakeRequest(int order, float size) {
-	request req;
-	req.order = order;
-	req.size = size;
+    request req;
+    req.order = order;
+    req.size = size;
 
-	return req;
+    return req;
 }
 
 void pop_front(std::vector<request> &v)
 {
-	assert(v.size() > 0);
-	v.erase(v.begin());
+    assert(v.size() > 0);
+    v.erase(v.begin());
 }

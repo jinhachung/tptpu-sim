@@ -8,10 +8,10 @@
 #include "dram.hpp"
 
 DRAM::DRAM() {
-	is_main_memory = true;
-	sender_queue = new std::vector<request>();
+    is_main_memory = true;
+    sender_queue = new std::vector<request>();
 }
 
 void DRAM::Cycle() {
-	;
+    ;
 }

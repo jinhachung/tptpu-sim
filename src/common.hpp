@@ -7,8 +7,8 @@
 #pragma once
 
 struct request {
-	int order;
-	float size;
+    int order;
+    float size;
 };
 typedef struct request request;
 
