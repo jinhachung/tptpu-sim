@@ -34,10 +34,10 @@ int main(int argc, char *argv[]) {
     MatrixMultiplyUnit *mmu = new MatrixMultiplyUnit(sa_width, sa_height, accumulator_size, ub, wf);
     Interconnect *ub_mmu_icnt = new Interconnect((Unit *)ub, (Unit *)mmu, clock, bw_ub_mmu, mmu->GetCapacity(),
                                                  ub->IsMainMemory(), ub->GetSenderQueue(),
-                                                 mmu->GetServedQueue(), mmu->GetWaitingQueue(), mmu->GetRequestQueue());
+                                                 mmu->GetUBServedQueue(), mmu->GetUBWaitingQueue(), mmu->GetUBRequestQueue());
     Interconnect *wf_mmu_icnt = new Interconnect((Unit *)wf, (Unit *)mmu, clock, bw_wf_mmu, mmu->GetCapacity(),
                                                  wf->IsMainMemory(), wf->GetSenderQueue(),
-                                                 mmu->GetServedQueue(), mmu->GetWaitingQueue(), mmu->GetRequestQueue());
+                                                 mmu->GetWFServedQueue(), mmu->GetWFWaitingQueue(), mmu->GetWFRequestQueue());
     // setting complete
     // generate requests
     int id = 1;
