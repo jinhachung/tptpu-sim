@@ -106,8 +106,18 @@ void Interconnect::Cycle() {
             sender_queue->push_back(req);
         }
     }
-    
-    // cycle count
+
+    // special case when the receiver is Matrix Multiply Unit
+    if (receiver->IsMatrixMultiplyUnit()) {
+        if (sender_queue->empty())
+            idle_cycle++;
+        else
+            busy_cycle++;
+
+        return;
+    }
+
+    // cycle count for interconnects other than ones that send to Matrix Multiply Unit
     if (sender_queue->empty() || ReceiverFull())
         idle_cycle++;
     else {

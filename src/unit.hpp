@@ -12,9 +12,10 @@ class Unit {
 public:
     virtual void Cycle() = 0;
     virtual bool IsMainMemory() = 0;
+    virtual bool IsMatrixMultiplyUnit() {return false;}
     // for UnifiedBuffer and WeightFetcher ()
-    virtual std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}
-    virtual std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}
-    virtual std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}
-    virtual std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}
+    virtual std::vector<request> *GetSenderQueue() = 0; 
+    virtual std::vector<request> *GetServedQueue() = 0;
+    virtual std::vector<request> *GetWaitingQueue() = 0;
+    virtual std::vector<request> *GetRequestQueue() = 0;
 };

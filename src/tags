@@ -12,65 +12,91 @@ Cycle	buffer.cpp	/^void UnifiedBuffer::Cycle() {$/;"	f	class:UnifiedBuffer
 Cycle	cpu.cpp	/^void CPU::Cycle() {$/;"	f	class:CPU
 Cycle	dram.cpp	/^void DRAM::Cycle() {$/;"	f	class:DRAM
 Cycle	interconnect.cpp	/^void Interconnect::Cycle() {$/;"	f	class:Interconnect
+Cycle	mmu.cpp	/^void MatrixMultiplyUnit::Cycle() {$/;"	f	class:MatrixMultiplyUnit
 Cycle	weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
 DRAM	dram.cpp	/^DRAM::DRAM() {$/;"	f	class:DRAM
 DRAM	dram.hpp	/^class DRAM {$/;"	c
 GetCapacity	buffer.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:UnifiedBuffer
+GetCapacity	mmu.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:MatrixMultiplyUnit
 GetCapacity	weightfetcher.hpp	/^    float GetCapacity() {return size * (float)depth;}$/;"	f	class:WeightFetcher
 GetRequestQueue	buffer.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:UnifiedBuffer
 GetRequestQueue	interconnect.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
-GetRequestQueue	unit.hpp	/^    virtual std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:Unit
+GetRequestQueue	mmu.hpp	/^    std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetRequestQueue	weightfetcher.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:WeightFetcher
 GetSenderQueue	buffer.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:UnifiedBuffer
 GetSenderQueue	cpu.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:CPU
 GetSenderQueue	dram.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:DRAM
 GetSenderQueue	interconnect.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:Interconnect
-GetSenderQueue	unit.hpp	/^    virtual std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:Unit
+GetSenderQueue	mmu.hpp	/^    std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetSenderQueue	weightfetcher.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:WeightFetcher
 GetServedQueue	buffer.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:UnifiedBuffer
 GetServedQueue	interconnect.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:Interconnect
-GetServedQueue	unit.hpp	/^    virtual std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:Unit
+GetServedQueue	mmu.hpp	/^    std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetServedQueue	weightfetcher.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:WeightFetcher
+GetUBRequestQueue	mmu.hpp	/^    std::vector<request> *GetUBRequestQueue()   {return ub_request_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetUBServedQueue	mmu.hpp	/^    std::vector<request> *GetUBServedQueue()    {return ub_served_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetUBWaitingQueue	mmu.hpp	/^    std::vector<request> *GetUBWaitingQueue()   {return ub_waiting_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFRequestQueue	mmu.hpp	/^    std::vector<request> *GetWFRequestQueue()   {return wf_request_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFServedQueue	mmu.hpp	/^    std::vector<request> *GetWFServedQueue()    {return wf_served_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFWaitingQueue	mmu.hpp	/^    std::vector<request> *GetWFWaitingQueue()   {return wf_waiting_queue;}$/;"	f	class:MatrixMultiplyUnit
 GetWaitingQueue	buffer.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:UnifiedBuffer
 GetWaitingQueue	interconnect.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:Interconnect
-GetWaitingQueue	unit.hpp	/^    virtual std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:Unit
+GetWaitingQueue	mmu.hpp	/^    std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetWaitingQueue	weightfetcher.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:WeightFetcher
 Interconnect	interconnect.cpp	/^Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,$/;"	f	class:Interconnect
 Interconnect	interconnect.hpp	/^class Interconnect {$/;"	c
 IsIdle	interconnect.cpp	/^bool Interconnect::IsIdle() {$/;"	f	class:Interconnect
+IsIdle	mmu.cpp	/^bool MatrixMultiplyUnit::IsIdle() {$/;"	f	class:MatrixMultiplyUnit
 IsMainMemory	buffer.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:UnifiedBuffer
 IsMainMemory	cpu.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:CPU
 IsMainMemory	dram.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:DRAM
+IsMainMemory	mmu.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:MatrixMultiplyUnit
 IsMainMemory	weightfetcher.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:WeightFetcher
+IsMatrixMultiplyUnit	mmu.hpp	/^    bool IsMatrixMultiplyUnit() {return true;}$/;"	f	class:MatrixMultiplyUnit
+IsMatrixMultiplyUnit	unit.hpp	/^    virtual bool IsMatrixMultiplyUnit() {return false;}$/;"	f	class:Unit
 MakeRequest	common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
+MatrixMultiplyUnit	mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {$/;"	f	class:MatrixMultiplyUnit
 MatrixMultiplyUnit	mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
 OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
 OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
+OBJS3	Makefile	/^OBJS3 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp$/;"	m
 PrintStats	interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
+PrintStats	mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixMultiplyUnit
 ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
 ReceiverFull	interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
 ReceiversSenderQueueSize	interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
 UnifiedBuffer	buffer.cpp	/^UnifiedBuffer::UnifiedBuffer(float buffer_size) {$/;"	f	class:UnifiedBuffer
 UnifiedBuffer	buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
 Unit	unit.hpp	/^class Unit {$/;"	c
+UpdateTilingQueue	mmu.cpp	/^void MatrixMultiplyUnit::UpdateTilingQueue() {$/;"	f	class:MatrixMultiplyUnit
 WeightFetcher	weightfetcher.cpp	/^WeightFetcher::WeightFetcher(float _size, int _depth) {$/;"	f	class:WeightFetcher
 WeightFetcher	weightfetcher.hpp	/^class WeightFetcher: public Unit {$/;"	c
+accumulator_size	mmu.hpp	/^    int accumulator_size;           \/\/ size of accumulator, probably 2048$/;"	m	class:MatrixMultiplyUnit
+add_all	common.cpp	/^float add_all(std::vector<float> &v, int size) {$/;"	f
 bpc	interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
 busy_cycle	interconnect.hpp	/^    int busy_cycle;                         \/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
+busy_cycle	mmu.hpp	/^    int busy_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed computations$/;"	m	class:MatrixMultiplyUnit
 bw	interconnect.hpp	/^    float bw;                               \/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
 capacity	buffer.hpp	/^    float capacity;         \/\/ 2 x size of one buffer$/;"	m	class:UnifiedBuffer
+capacity	mmu.hpp	/^    float capacity;                 \/\/ systolic_array_width x systolic_array_height$/;"	m	class:MatrixMultiplyUnit
 clock	interconnect.hpp	/^    float clock;                            \/\/ clock in GHz$/;"	m	class:Interconnect
+current_order	mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
 depth	weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFetcher
+find_and_delete_by_order	common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
 idle_cycle	interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
+idle_cycle	mmu.hpp	/^    int idle_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed no computations$/;"	m	class:MatrixMultiplyUnit
 is_main_memory	buffer.hpp	/^    bool is_main_memory;$/;"	m	class:UnifiedBuffer
 is_main_memory	cpu.hpp	/^    bool is_main_memory;$/;"	m	class:CPU
 is_main_memory	dram.hpp	/^    bool is_main_memory;$/;"	m	class:DRAM
+is_main_memory	mmu.hpp	/^    bool is_main_memory;$/;"	m	class:MatrixMultiplyUnit
 is_main_memory	weightfetcher.hpp	/^    bool is_main_memory;$/;"	m	class:WeightFetcher
 is_sender_main_memory	interconnect.hpp	/^    bool is_sender_main_memory;             \/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
 main	test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 order	common.hpp	/^    int order;$/;"	m	struct:request
-pop_front	common.cpp	/^void pop_front(std::vector<request> &v)$/;"	f
+pop_front	common.cpp	/^void pop_front(std::vector<float> &v) {$/;"	f
+pop_front	common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
 receiver	interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
 receiver_capacity	interconnect.hpp	/^    float receiver_capacity;                \/\/ total amount of bytes the receiver can endure (store) up to$/;"	m	class:Interconnect
 request	common.hpp	/^struct request {$/;"	s
@@ -90,7 +116,20 @@ served_queue	interconnect.hpp	/^    std::vector<request> *served_queue;     \/\/
 served_queue	weightfetcher.hpp	/^    std::vector<request> *served_queue;$/;"	m	class:WeightFetcher
 size	common.hpp	/^    float size;$/;"	m	struct:request
 size	weightfetcher.hpp	/^    float size;$/;"	m	class:WeightFetcher
+systolic_array_height	mmu.hpp	/^    int systolic_array_height;      \/\/ how far deep the values can go$/;"	m	class:MatrixMultiplyUnit
+systolic_array_width	mmu.hpp	/^    int systolic_array_width;       \/\/ how many values come each cycle from UnifiedBuffer$/;"	m	class:MatrixMultiplyUnit
+tiling_queue	mmu.hpp	/^    std::vector<request> *tiling_queue;$/;"	m	class:MatrixMultiplyUnit
+total_computation_number	mmu.hpp	/^    float total_computation_number; \/\/ total number of computations Matrix Multiply Unit performed$/;"	m	class:MatrixMultiplyUnit
+ub	mmu.hpp	/^    UnifiedBuffer *ub;              \/\/ pointer to Unified Buffer connected to this unit$/;"	m	class:MatrixMultiplyUnit
+ub_request_queue	mmu.hpp	/^    std::vector<request> *ub_request_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_served_queue	mmu.hpp	/^    std::vector<request> *ub_served_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_waiting_queue	mmu.hpp	/^    std::vector<request> *ub_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
+wait_cycle	mmu.hpp	/^    int wait_cycle;                 \/\/ number of cycles Matrix Multiply Unit needs to wait (is computing)$/;"	m	class:MatrixMultiplyUnit
 waiting_queue	buffer.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:UnifiedBuffer
 waiting_queue	interconnect.hpp	/^    std::vector<request> *waiting_queue;    \/\/ vector of requests that the receiver has to receive from sender$/;"	m	class:Interconnect
 waiting_queue	weightfetcher.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:WeightFetcher
+wf	mmu.hpp	/^    WeightFetcher *wf;              \/\/ pointer to Weight Fetcher connected to this unit$/;"	m	class:MatrixMultiplyUnit
+wf_request_queue	mmu.hpp	/^    std::vector<request> *wf_request_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_served_queue	mmu.hpp	/^    std::vector<request> *wf_served_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_waiting_queue	mmu.hpp	/^    std::vector<request> *wf_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
 ~Interconnect	interconnect.cpp	/^Interconnect::~Interconnect() {$/;"	f	class:Interconnect
