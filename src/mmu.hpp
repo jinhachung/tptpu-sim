@@ -15,14 +15,14 @@ void find_and_delete_by_order(std::vector<request> &v, int order);
 
 class MatrixMultiplyUnit: public Unit {
 public:
-	MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher);
+    MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher);
 
     void UpdateTilingQueue();
     bool IsIdle();
-	void Cycle();
+    void Cycle();
     void PrintStats();
 
-	bool IsMainMemory() {return is_main_memory;}
+    bool IsMainMemory() {return is_main_memory;}
     bool IsMatrixMultiplyUnit() {return true;}
     // Matrix Multiply Unit should not call these methods
     std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}
