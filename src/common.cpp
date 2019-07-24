@@ -13,6 +13,18 @@ request MakeRequest(int order, float size) {
 
     return req;
 }
+
+tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile_height, int total_width, int total_height) {
+    tile t;
+    t.order = order;
+    t.starting_address = starting_address;
+
+    t.tile_width = tile_width;
+    t.tile_height = tile_height;
+    t.total_width = total_width;
+    t.total_height = total_height;
+}
+
 // functions for std::vector<request>
 void pop_front(std::vector<request> &v) {
     assert(v.size() > 0);
@@ -28,18 +40,17 @@ void find_and_delete_by_order(std::vector<request> &v, int order) {
     v.erase(it);
 }
 
-// functions for std::vector<float>
-void pop_front(std::vector<float> &v) {
+// functions for std::vector<tile>
+void pop_front(std::vector<tile> &v) {
     assert(v.size() > 0);
     v.erase(v.begin());
 }
 
-float add_all(std::vector<float> &v, int size) {
-    assert(v.size() == size);
-    std::vector<float>::iterator it;
-    float total_value = (float)0;
+void find_and_delete_by_order(std::vector<tile> &v, int order) {
+    std::vector<tile>::iterator it;
     for (it = v.begin(); it != v.end(); ++it) {
-        total_value += *it;
+        if (it->order == order)
+            break;
     }
-    return total_value;
+    v.erase(it);
 }
