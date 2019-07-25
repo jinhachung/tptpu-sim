@@ -8,19 +8,23 @@
 #include "controller.hpp"
 #include "unit.hpp"
 
-Controller::Controller(int sa_width, int sa_height, int acc_size, MatrixMultiplyUnit *matrixmultiplyunit) {
-    systolic_array_width = sa_width;
-    systolic_array_height = sa_height;
-    accumulator_size = acc_size;
+Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit,
+                       std::vector<tile> *weighttilequeue, std::vector<tile> *activationtilequeue) {
+    systolic_array_width = matrixmultiplyunit->GetSystolicArrayWidth();
+    systolic_array_height = matrixmultiplyunit->GetSystolicArrayHeight();
+    accumulator_size = matrixmultiplyunit->GetAccumulatorSize();
     mmu = matrixmultiplyunit;
 
     id = 1;
-
-    weight_tile_queue = new std::vector<tile>();
-    activation_tile_queue = new std::vector<tile>();
+    
+    // let them be allocated in DRAM and CPU
+    //weight_tile_queue = new std::vector<tile>();
+    //activation_tile_queue = new std::vector<tile>();
+    weight_tile_queue = weighttilequeue;
+    activation_tile_queue = activationtilequeue;
 }
 
-/* This function is called in Tile()
+/* This function is called in MatrixMultiply()
  * It takes two matrices X and Y (A by B and B by C) and tiles them into
  * systolic_array_width by systolic_array_height and systolic_array_width by accumulator_size matrices respectively
  * Then the tiles of corresponding sizes are pushed into request_queues of Matrix Multiply Unit
@@ -66,14 +70,36 @@ void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,
     }
 }
 
-/* This function 
- *
- *  */
+/* This function is called in MatrixMultiply()
+ * It checks tile informations of weight_tile_queue and activation_tile_queue and pushes them into
+ * Matrix Multiply Unit's wf_request_queue and ub_request queue, respectively */
+void Controller::PushRequestsFromTiles() {
+    std::vector<tile>::iterator it;
+    std::vector<request> *wf_request_queue = mmu->GetWFRequestQueue();
+    std::vector<request> *ub_request_queue = mmu->GetUBRequestQueue();
+    float size;
+
+    for (it = weight_tile_queue->begin(); it != weight_tile_queue->end(); ++it) {
+        size = (float)(it->tile_width) * (float)(it->tile_height);
+        wf_request_queue->push_back(MakeRequest(it->order, size));
+    }
+
+    for (it = activation_tile_queue->begin(); it != activation_tile_queue->end(); ++it) {
+        size = (float)(it->tile_width) * (float)(it->tile_height);
+        ub_request_queue->push_back(MakeRequest(it->order, size));
+    }
+}
+
+/* This function takes the specified matrix multiplication of weight and activation, and tiles them accordingly via Tile()
+ * Afterwards, the tile information in weight_tile_queue and activation_tile_queue are pushed into
+ * the connected Matrix Multiplication Unit's wf_request_queue and ub_request_queue, respectively 
+ * Note that the two queues are from DRAM and CPU originally, and the tile_queues are not deleted afterwards 
+ * since DRAM and possibly CPU will use them to check for address information */
 void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,
                                 unsigned int address_X, unsigned int address_Y) {
     // first push tiles into tile_queues
     Tile(A, B, C, is_dimension_nchw, channel, address_X, address_Y);
-
+    PushRequestsFromTiles();
 }
 
 void Controller::PrintAllTiles() {

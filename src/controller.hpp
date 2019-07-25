@@ -12,10 +12,11 @@
 
 class Controller {
 public:
-    Controller(int sa_width, int sa_height, int acc_size, MatrixMultiplyUnit *matrixmultiplyunit);
-    
+    Controller(MatrixMultiplyUnit *matrixmultiplyunit,
+               std::vector<tile> *weighttilequeue, std::vector<tile> *activationtilequeue);
     void Tile(int A, int B, int C, bool is_dimension_nchw, int channel,
               unsigned int address_X, unsigned int address_Y);
+    void PushRequestsFromTiles();
     void MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,
                         unsigned int address_X, unsigned int address_Y);
     void PrintAllTiles();
