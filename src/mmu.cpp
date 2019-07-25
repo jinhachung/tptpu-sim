@@ -12,6 +12,7 @@ MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size
     capacity = (float)sa_width * (float)sa_height;
     systolic_array_width = sa_width;
     systolic_array_height = sa_height;
+    accumulator_size = acc_size;
     is_main_memory = false;
 
     idle_cycle = 0;
@@ -19,8 +20,6 @@ MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size
     wait_cycle = 0;
     total_computation_number = (float)0;
     current_order = 0;
-
-    accumulator_size = acc_size;
 
     ub = unifiedbuffer;
     wf = weightfetcher;

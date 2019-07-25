@@ -20,8 +20,14 @@ public:
     void Cycle();
     void PrintStats();
 
-    bool IsMainMemory() {return is_main_memory;}
     bool IsMatrixMultiplyUnit() {return true;}
+    
+    float GetCapacity() {return capacity;}
+    int GetSystolicArrayWidth() {return systolic_array_width;}
+    int GetSystolicArrayHeight() {return systolic_array_height;}
+    int GetAccumulatorSize() {return accumulator_size;}
+    bool IsMainMemory() {return is_main_memory;}
+
     // Matrix Multiply Unit should not call these methods
     std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}
     std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}
@@ -36,11 +42,11 @@ public:
     std::vector<request> *GetUBWaitingQueue()   {return ub_waiting_queue;}
     std::vector<request> *GetUBRequestQueue()   {return ub_request_queue;}
 
-    float GetCapacity() {return capacity;}
 private:
     float capacity;                 // systolic_array_width x systolic_array_height
     int systolic_array_width;       // how many values come each cycle from UnifiedBuffer
     int systolic_array_height;      // how far deep the values can go
+    int accumulator_size;           // size of accumulator, probably 2048
     bool is_main_memory;
 
     int idle_cycle;                 // number of cycles Matrix Multiply Unit performed no computations
@@ -48,9 +54,6 @@ private:
     int wait_cycle;                 // number of cycles Matrix Multiply Unit needs to wait (is computing)
     float total_computation_number; // total number of computations Matrix Multiply Unit performed
     int current_order;              // the order being computer right now, 0 if none
-
-    int accumulator_size;           // size of accumulator, probably 2048
-    
 
     UnifiedBuffer *ub;              // pointer to Unified Buffer connected to this unit
     WeightFetcher *wf;              // pointer to Weight Fetcher connected to this unit
