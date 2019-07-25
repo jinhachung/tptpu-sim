@@ -3,6 +3,7 @@
 
 #include "buffer.hpp"
 #include "common.hpp"
+#include "controller.hpp"
 #include "cpu.hpp"
 #include "dram.hpp"
 #include "interconnect.hpp"
@@ -38,11 +39,10 @@ int main(int argc, char *argv[]) {
     Interconnect *wf_mmu_icnt = new Interconnect((Unit *)wf, (Unit *)mmu, clock, bw_wf_mmu, mmu->GetCapacity(),
                                                  wf->IsMainMemory(), wf->GetSenderQueue(),
                                                  mmu->GetWFServedQueue(), mmu->GetWFWaitingQueue(), mmu->GetWFRequestQueue());
+    Controller *ctrl = new Controller(mmu, dram->GetWeightTileQueue(), cpu->GetActivationTileQueue());
     // setting complete
-    // generate requests
-    int id = 1;
-    
-    
+    // generate request for matrix multiplication
+    ctrl->MatrixMultiply(640, 640, 1080, true, 3, (unsigned int)0, (unsigned int)100000000);
     
     while (!( cpu_ub_icnt->IsIdle() && dram_wf_icnt->IsIdle() && ub_mmu_icnt->IsIdle()
               && wf_mmu_icnt->IsIdle() && mmu->IsIdle() )) {
