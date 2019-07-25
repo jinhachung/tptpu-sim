@@ -9,8 +9,6 @@
 
 #pragma once
 
-void pop_front(std::vector<request> &v);
-
 class UnifiedBuffer: public Unit {
 public:
     UnifiedBuffer(float buffer_size);

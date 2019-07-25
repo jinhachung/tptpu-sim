@@ -9,8 +9,6 @@
 
 #pragma once
 
-void pop_front(std::vector<request> &v);
-
 class WeightFetcher: public Unit {
 public:
     WeightFetcher(float _size, int _depth);

@@ -20,12 +20,13 @@ Controller::Controller(int sa_width, int sa_height, int acc_size, MatrixMultiply
     activation_tile_queue = new std::vector<tile>();
 }
 
-/* This functions takes two matrices X and Y (A by B and B by C) and tiles them into
+/* This function is called in Tile()
+ * It takes two matrices X and Y (A by B and B by C) and tiles them into
  * systolic_array_width by systolic_array_height and systolic_array_width by accumulator_size matrices respectively
  * Then the tiles of corresponding sizes are pushed into request_queues of Matrix Multiply Unit
  * In this case, the weight matrix from Weight Fetcher is the matrix X, starting at address address_X,
  * and the activation matrix from Unified Buffer is the matrix Y, starting at address address_Y */
-void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,
+void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,
                                 unsigned int address_X, unsigned int address_Y) {
     
     int tile_width, tile_height, total_width, total_height, order, multiply_factor;
@@ -63,6 +64,16 @@ void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int
             }
         }
     }
+}
+
+/* This function 
+ *
+ *  */
+void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,
+                                unsigned int address_X, unsigned int address_Y) {
+    // first push tiles into tile_queues
+    Tile(A, B, C, is_dimension_nchw, channel, address_X, address_Y);
+
 }
 
 void Controller::PrintAllTiles() {

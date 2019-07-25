@@ -11,10 +11,6 @@
 
 #pragma once
 
-void pop_front(std::vector<request> &v);
-void pop_front(std::vector<float> &v);
-void find_and_delete_by_order(std::vector<request> &v, int order);
-
 class MatrixMultiplyUnit: public Unit {
 public:
     MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher);

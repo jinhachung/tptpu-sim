@@ -71,6 +71,7 @@ PrintStats	mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixM
 ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
 ReceiverFull	interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
 ReceiversSenderQueueSize	interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
+Tile	controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 UnifiedBuffer	buffer.cpp	/^UnifiedBuffer::UnifiedBuffer(float buffer_size) {$/;"	f	class:UnifiedBuffer
 UnifiedBuffer	buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
 Unit	unit.hpp	/^class Unit {$/;"	c

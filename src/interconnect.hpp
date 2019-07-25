@@ -9,8 +9,6 @@
 
 #pragma once
 
-void pop_front(std::vector<request> &v);
-
 class Interconnect {
 public:
     Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,
