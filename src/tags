@@ -8,6 +8,8 @@ CC	Makefile	/^CC = g++$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -g$/;"	m
 CPU	cpu.cpp	/^CPU::CPU() {$/;"	f	class:CPU
 CPU	cpu.hpp	/^class CPU {$/;"	c
+Controller	controller.cpp	/^Controller::Controller(int sa_width, int sa_height, int acc_size, MatrixMultiplyUnit *matrixmultiplyunit) {$/;"	f	class:Controller
+Controller	controller.hpp	/^class Controller {$/;"	c
 Cycle	buffer.cpp	/^void UnifiedBuffer::Cycle() {$/;"	f	class:UnifiedBuffer
 Cycle	cpu.cpp	/^void CPU::Cycle() {$/;"	f	class:CPU
 Cycle	dram.cpp	/^void DRAM::Cycle() {$/;"	f	class:DRAM
@@ -50,16 +52,20 @@ IsIdle	mmu.cpp	/^bool MatrixMultiplyUnit::IsIdle() {$/;"	f	class:MatrixMultiplyU
 IsMainMemory	buffer.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:UnifiedBuffer
 IsMainMemory	cpu.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:CPU
 IsMainMemory	dram.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:DRAM
-IsMainMemory	mmu.hpp	/^	bool IsMainMemory() {return is_main_memory;}$/;"	f	class:MatrixMultiplyUnit
+IsMainMemory	mmu.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:MatrixMultiplyUnit
 IsMainMemory	weightfetcher.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:WeightFetcher
 IsMatrixMultiplyUnit	mmu.hpp	/^    bool IsMatrixMultiplyUnit() {return true;}$/;"	f	class:MatrixMultiplyUnit
 IsMatrixMultiplyUnit	unit.hpp	/^    virtual bool IsMatrixMultiplyUnit() {return false;}$/;"	f	class:Unit
 MakeRequest	common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
+MakeTile	common.cpp	/^tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile_height, int total_width, int total_height) {$/;"	f
+MatrixMultiply	controller.cpp	/^void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 MatrixMultiplyUnit	mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {$/;"	f	class:MatrixMultiplyUnit
 MatrixMultiplyUnit	mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
 OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
 OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
 OBJS3	Makefile	/^OBJS3 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp$/;"	m
+OBJTILE	Makefile	/^OBJTILE = common.cpp controller.cpp mmu.cpp test_tile.cpp$/;"	m
+PrintAllTiles	controller.cpp	/^void Controller::PrintAllTiles() {$/;"	f	class:Controller
 PrintStats	interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
 PrintStats	mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixMultiplyUnit
 ReceiveRequest	interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
@@ -71,8 +77,9 @@ Unit	unit.hpp	/^class Unit {$/;"	c
 UpdateTilingQueue	mmu.cpp	/^void MatrixMultiplyUnit::UpdateTilingQueue() {$/;"	f	class:MatrixMultiplyUnit
 WeightFetcher	weightfetcher.cpp	/^WeightFetcher::WeightFetcher(float _size, int _depth) {$/;"	f	class:WeightFetcher
 WeightFetcher	weightfetcher.hpp	/^class WeightFetcher: public Unit {$/;"	c
+accumulator_size	controller.hpp	/^    int accumulator_size;$/;"	m	class:Controller
 accumulator_size	mmu.hpp	/^    int accumulator_size;           \/\/ size of accumulator, probably 2048$/;"	m	class:MatrixMultiplyUnit
-add_all	common.cpp	/^float add_all(std::vector<float> &v, int size) {$/;"	f
+activation_tile_queue	controller.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:Controller
 bpc	interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
 busy_cycle	interconnect.hpp	/^    int busy_cycle;                         \/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
 busy_cycle	mmu.hpp	/^    int busy_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed computations$/;"	m	class:MatrixMultiplyUnit
@@ -83,6 +90,8 @@ clock	interconnect.hpp	/^    float clock;                            \/\/ clock 
 current_order	mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
 depth	weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFetcher
 find_and_delete_by_order	common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
+find_and_delete_by_order	common.cpp	/^void find_and_delete_by_order(std::vector<tile> &v, int order) {$/;"	f
+id	controller.hpp	/^    int id;             \/\/ number to set for next request's order in tiling process$/;"	m	class:Controller
 idle_cycle	interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
 idle_cycle	mmu.hpp	/^    int idle_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed no computations$/;"	m	class:MatrixMultiplyUnit
 is_main_memory	buffer.hpp	/^    bool is_main_memory;$/;"	m	class:UnifiedBuffer
@@ -94,9 +103,12 @@ is_sender_main_memory	interconnect.hpp	/^    bool is_sender_main_memory;        
 main	test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+mmu	controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
 order	common.hpp	/^    int order;$/;"	m	struct:request
-pop_front	common.cpp	/^void pop_front(std::vector<float> &v) {$/;"	f
+order	common.hpp	/^    int order;$/;"	m	struct:tile
 pop_front	common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
+pop_front	common.cpp	/^void pop_front(std::vector<tile> &v) {$/;"	f
 receiver	interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
 receiver_capacity	interconnect.hpp	/^    float receiver_capacity;                \/\/ total amount of bytes the receiver can endure (store) up to$/;"	m	class:Interconnect
 request	common.hpp	/^struct request {$/;"	s
@@ -116,10 +128,19 @@ served_queue	interconnect.hpp	/^    std::vector<request> *served_queue;     \/\/
 served_queue	weightfetcher.hpp	/^    std::vector<request> *served_queue;$/;"	m	class:WeightFetcher
 size	common.hpp	/^    float size;$/;"	m	struct:request
 size	weightfetcher.hpp	/^    float size;$/;"	m	class:WeightFetcher
+starting_address	common.hpp	/^    unsigned int starting_address;$/;"	m	struct:tile
+systolic_array_height	controller.hpp	/^    int systolic_array_height;$/;"	m	class:Controller
 systolic_array_height	mmu.hpp	/^    int systolic_array_height;      \/\/ how far deep the values can go$/;"	m	class:MatrixMultiplyUnit
+systolic_array_width	controller.hpp	/^    int systolic_array_width;$/;"	m	class:Controller
 systolic_array_width	mmu.hpp	/^    int systolic_array_width;       \/\/ how many values come each cycle from UnifiedBuffer$/;"	m	class:MatrixMultiplyUnit
+tile	common.hpp	/^struct tile {$/;"	s
+tile	common.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile_height	common.hpp	/^    int tile_height;$/;"	m	struct:tile
+tile_width	common.hpp	/^    int tile_width;$/;"	m	struct:tile
 tiling_queue	mmu.hpp	/^    std::vector<request> *tiling_queue;$/;"	m	class:MatrixMultiplyUnit
 total_computation_number	mmu.hpp	/^    float total_computation_number; \/\/ total number of computations Matrix Multiply Unit performed$/;"	m	class:MatrixMultiplyUnit
+total_height	common.hpp	/^    int total_height;$/;"	m	struct:tile
+total_width	common.hpp	/^    int total_width;$/;"	m	struct:tile
 ub	mmu.hpp	/^    UnifiedBuffer *ub;              \/\/ pointer to Unified Buffer connected to this unit$/;"	m	class:MatrixMultiplyUnit
 ub_request_queue	mmu.hpp	/^    std::vector<request> *ub_request_queue;$/;"	m	class:MatrixMultiplyUnit
 ub_served_queue	mmu.hpp	/^    std::vector<request> *ub_served_queue;$/;"	m	class:MatrixMultiplyUnit
@@ -128,6 +149,7 @@ wait_cycle	mmu.hpp	/^    int wait_cycle;                 \/\/ number of cycles M
 waiting_queue	buffer.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:UnifiedBuffer
 waiting_queue	interconnect.hpp	/^    std::vector<request> *waiting_queue;    \/\/ vector of requests that the receiver has to receive from sender$/;"	m	class:Interconnect
 waiting_queue	weightfetcher.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:WeightFetcher
+weight_tile_queue	controller.hpp	/^    std::vector<tile> *weight_tile_queue;$/;"	m	class:Controller
 wf	mmu.hpp	/^    WeightFetcher *wf;              \/\/ pointer to Weight Fetcher connected to this unit$/;"	m	class:MatrixMultiplyUnit
 wf_request_queue	mmu.hpp	/^    std::vector<request> *wf_request_queue;$/;"	m	class:MatrixMultiplyUnit
 wf_served_queue	mmu.hpp	/^    std::vector<request> *wf_served_queue;$/;"	m	class:MatrixMultiplyUnit

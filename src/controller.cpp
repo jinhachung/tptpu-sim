@@ -29,6 +29,7 @@ void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int
                                 unsigned int address_X, unsigned int address_Y) {
     
     int tile_width, tile_height, total_width, total_height, order, multiply_factor;
+    unsigned int starting_address;
 
     int a = int( (A - 1) / systolic_array_height ) + 1; // smallest integer greater than or equal to A / systolic_array_height
     int b = int( (B - 1) / systolic_array_width ) + 1;
@@ -53,7 +54,7 @@ void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int
                 weight_tile_queue->push_back(MakeTile(id, starting_address, tile_width, tile_height, total_width, total_height));
                 // activations
                 starting_address = address_Y + multiply_factor * ((bb * systolic_array_width * C) + (cc * accumulator_size));
-                tile_width = (cc == (c - 1) ? remainder_c : accumulator_size;
+                tile_width = (cc == (c - 1)) ? remainder_c : accumulator_size;
                 tile_height = (aa == (a - 1)) ? remainder_a : systolic_array_height;    // same as weight, but just in case
 
                 activation_tile_queue->push_back(MakeTile(id, starting_address, tile_width, tile_height, total_width, total_height));
@@ -63,3 +64,24 @@ void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int
         }
     }
 }
+
+void Controller::PrintAllTiles() {
+    std::cout << "total number of tiles - weights: " << weight_tile_queue->size()
+              << ", activations: " << activation_tile_queue->size() << std::endl;
+    std::vector<tile>::iterator wit = weight_tile_queue->begin();
+    std::vector<tile>::iterator ait = activation_tile_queue->begin();
+    while ((wit != weight_tile_queue->end()) || (ait !=activation_tile_queue->end())) {
+        if (wit != weight_tile_queue->end()) {
+            std::cout << "weight id: " << wit->order << ", address starts at: " << wit->starting_address << std::endl;
+            wit++;
+        }
+        if (ait != activation_tile_queue->end()) {
+            std::cout << "activation id: " << ait->order << ", address starts at: " << ait->starting_address << std::endl;
+            ait++;
+        }
+    }
+}
+
+
+
+

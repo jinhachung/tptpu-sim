@@ -9,6 +9,8 @@
 #include "unit.hpp"
 #include "weightfetcher.hpp"
 
+#pragma once
+
 void pop_front(std::vector<request> &v);
 void pop_front(std::vector<float> &v);
 void find_and_delete_by_order(std::vector<request> &v, int order);

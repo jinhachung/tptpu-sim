@@ -23,6 +23,8 @@ tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile
     t.tile_height = tile_height;
     t.total_width = total_width;
     t.total_height = total_height;
+
+    return t;
 }
 
 // functions for std::vector<request>

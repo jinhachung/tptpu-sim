@@ -20,7 +20,7 @@ struct tile {
     int tile_height;
     int total_width;
     int total_height;
-}
+};
 typedef struct tile tile;
 
 request MakeRequest(int order, float size);
