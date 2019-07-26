@@ -64,7 +64,7 @@ void MatrixMultiplyUnit::Cycle() {
     UpdateTilingQueue();
     // check for cycles
     if (wait_cycle == 0) {
-        if (!tiling_queue->empty()) {
+        if (tiling_queue->empty()) {
             // not computing, not ready to compute -> idle
             idle_cycle++;
             return;

@@ -68,8 +68,8 @@ MatrixMultiplyUnit	mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width
 MatrixMultiplyUnit	mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
 OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
 OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
-OBJS3	Makefile	/^OBJS3 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp$/;"	m
-OBJST	Makefile	/^OBJST = buffer.cpp common.cpp controller.cpp mmu.cpp test_tile.cpp weightfetcher.cpp$/;"	m
+OBJS3	Makefile	/^OBJS3 = buffer.cpp common.cpp controller.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp$/;"	m
+OBJST	Makefile	/^OBJST = buffer.cpp common.cpp controller.cpp mmu.cpp weightfetcher.cpp test_tile.cpp$/;"	m
 PrintAllTiles	controller.cpp	/^void Controller::PrintAllTiles() {$/;"	f	class:Controller
 PrintStats	interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
 PrintStats	mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixMultiplyUnit
