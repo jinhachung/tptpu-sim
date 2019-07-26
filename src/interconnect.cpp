@@ -109,6 +109,25 @@ void Interconnect::Cycle() {
 
     // special case when the receiver is Matrix Multiply Unit
     if (receiver->IsMatrixMultiplyUnit()) {
+        // copy all wait_queue items to sender's request_queue (no duplicates)
+        std::vector<request>::iterator rwqit, swqit;
+        int order;
+        float size;
+        // duplicate check
+        for (rwqit = waiting_queue->begin(); rwqit != waiting_queue->end(); ++rwqit) {
+            order = rwqit->order;
+            size = rwqit->size;
+            // check for sender's waiting_queue
+            for (swqit = sender->GetWaitingQueue()->begin(); swqit != sender->GetWaitingQueue()->end(); ++swqit) {
+                if (order == swqit->order)
+                    break;
+            }
+            if (swqit == sender->GetWaitingQueue()->end()) {
+                // not found -> copy to sender's requeust_queue
+                sender->GetRequestQueue()->push_back(MakeRequest(order, size));
+            }
+        }
+        // take care of cycle
         if (sender_queue->empty())
             idle_cycle++;
         else

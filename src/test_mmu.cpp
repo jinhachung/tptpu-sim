@@ -13,8 +13,9 @@
 
 int main(int argc, char *argv[]) {
     CPU *cpu = new CPU();
-    // 30KB per buffer, 60KB total
-    UnifiedBuffer *ub = new UnifiedBuffer(30000);
+    // 256 * 48KiB (12 * 2^20B) per buffer, 256 * 96KiB total (24MiB)
+    float buffer_size = (float)(3 * (1 << 22));
+    UnifiedBuffer *ub = new UnifiedBuffer(buffer_size);
     DRAM *dram = new DRAM();
     // 64KiB per tile, 4 tiles deep
     WeightFetcher *wf = new WeightFetcher(65536, 4);
