@@ -1,13 +1,7 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef WEIGHTFETCHER_H
+#define WEIGHTFETCHER_H
 
 #include "common.hpp"
-#include "unit.hpp"
-
-#pragma once
 
 class WeightFetcher: public Unit {
 public:
@@ -35,3 +29,5 @@ private:
     std::vector<request> *waiting_queue;
     std::vector<request> *request_queue;
 };
+
+#endif /* WEIGHTFETCHER_H */

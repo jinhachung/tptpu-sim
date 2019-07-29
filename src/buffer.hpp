@@ -1,13 +1,8 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef BUFFER_H
+#define BUFFER_H
 
 #include "common.hpp"
 #include "unit.hpp"
-
-#pragma once
 
 class UnifiedBuffer: public Unit {
 public:
@@ -34,3 +29,5 @@ private:
     std::vector<request> *waiting_queue;
     std::vector<request> *request_queue;
 };
+
+#endif /* BUFFER_H */

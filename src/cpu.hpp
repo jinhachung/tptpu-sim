@@ -1,12 +1,7 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef CPU_H
+#define CPU_H
 
 #include "common.hpp"
-
-#pragma once
 
 class CPU {
 public:
@@ -24,3 +19,5 @@ private:
     // shared with Controller
     std::vector<tile> *activation_tile_queue;
 };
+
+#endif /* CPU_H */

@@ -1,10 +1,3 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
-
-#include "common.hpp"
 #include "weightfetcher.hpp"
 
 WeightFetcher::WeightFetcher(float _size, int _depth) {

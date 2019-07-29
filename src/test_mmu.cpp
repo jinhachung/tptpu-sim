@@ -40,7 +40,12 @@ int main(int argc, char *argv[]) {
     Interconnect *wf_mmu_icnt = new Interconnect((Unit *)wf, (Unit *)mmu, clock, bw_wf_mmu, mmu->GetCapacity(),
                                                  wf->IsMainMemory(), wf->GetSenderQueue(),
                                                  mmu->GetWFServedQueue(), mmu->GetWFWaitingQueue(), mmu->GetWFRequestQueue());
-    Controller *ctrl = new Controller(mmu, dram->GetWeightTileQueue(), cpu->GetActivationTileQueue());
+    std::vector<Interconnect *> *icnt_list = new std::vector<Interconnect *>();
+    icnt_list->push_back(cpu_ub_icnt);
+    icnt_list->push_back(dram_wf_icnt);
+    icnt_list->push_back(ub_mmu_icnt);
+    icnt_list->push_back(wf_mmu_icnt);
+    Controller *ctrl = new Controller(mmu, icnt_list, dram->GetWeightTileQueue(), cpu->GetActivationTileQueue());
     // setting complete
     // generate request for matrix multiplication
     ctrl->MatrixMultiply(640, 640, 1080, true, 3, (unsigned int)0, (unsigned int)100000000);

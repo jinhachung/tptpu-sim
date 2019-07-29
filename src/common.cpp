@@ -1,9 +1,3 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
-
 #include "common.hpp"
 
 request MakeRequest(int order, float size) {

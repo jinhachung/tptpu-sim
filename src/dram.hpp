@@ -1,12 +1,7 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef DRAM_H
+#define DRAM_H
 
 #include "common.hpp"
-
-#pragma once
 
 class DRAM {
 public:
@@ -24,3 +19,5 @@ private:
     // shared with Controller
     std::vector<tile> *weight_tile_queue;
 };
+
+#endif /* DRAM_H */

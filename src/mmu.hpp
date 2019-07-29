@@ -1,15 +1,7 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef MMU_H
+#define MMU_H
 
-#include "buffer.hpp"
 #include "common.hpp"
-#include "unit.hpp"
-#include "weightfetcher.hpp"
-
-#pragma once
 
 class MatrixMultiplyUnit: public Unit {
 public:
@@ -34,13 +26,17 @@ public:
     std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}
     std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}
     // connected to Weight Fetcher
+    std::vector<request> *GetWFSenderQueue()    {return wf_sender_queue;}
     std::vector<request> *GetWFServedQueue()    {return wf_served_queue;}
     std::vector<request> *GetWFWaitingQueue()   {return wf_waiting_queue;}
     std::vector<request> *GetWFRequestQueue()   {return wf_request_queue;}
     // connected to Unified Buffer
+    std::vector<request> *GetUBSenderQueue()    { return ub_sender_queue;}
     std::vector<request> *GetUBServedQueue()    {return ub_served_queue;}
     std::vector<request> *GetUBWaitingQueue()   {return ub_waiting_queue;}
     std::vector<request> *GetUBRequestQueue()   {return ub_request_queue;}
+    // queue to keep track of computations
+    std::vector<request> *GetTilingQueue()      { return tiling_queue;}
 
 private:
     float capacity;                 // systolic_array_width x systolic_array_height
@@ -71,3 +67,5 @@ private:
     // queue to keep track of computations
     std::vector<request> *tiling_queue;
 };
+
+#endif /* MMU_H */

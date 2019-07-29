@@ -1,12 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
-
-#include "common.hpp"
 #include "interconnect.hpp"
-#include "unit.hpp"
 
 Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,
                            bool _is_sender_main_memory, std::vector<request> *senderqueue, std::vector<request> *servedqueue,
@@ -24,6 +16,8 @@ Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _
     idle_cycle = 0;
     busy_cycle = 0;
     sent_size = 0;
+
+    controller = NULL;
 
     sender_queue = senderqueue;
     served_queue = servedqueue;
@@ -110,7 +104,7 @@ void Interconnect::Cycle() {
     // special case when the receiver is Matrix Multiply Unit
     if (receiver->IsMatrixMultiplyUnit()) {
         // copy all wait_queue items to sender's request_queue (no duplicates)
-        std::vector<request>::iterator rwqit, swqit;
+        std::vector<request>::iterator rwqit, swqit, srqit;
         int order;
         float size;
         // duplicate check
@@ -122,9 +116,21 @@ void Interconnect::Cycle() {
                 if (order == swqit->order)
                     break;
             }
-            if (swqit == sender->GetWaitingQueue()->end()) {
-                // not found -> copy to sender's requeust_queue
-                sender->GetRequestQueue()->push_back(MakeRequest(order, size));
+            for (srqit = sender->GetRequestQueue()->begin(); srqit != sender->GetRequestQueue()->end(); ++srqit) {
+                if (order == srqit->order)
+                    break;
+            }
+            if ((swqit == sender->GetWaitingQueue()->end()) && (srqit == sender->GetRequestQueue()->end())) {
+                // not found -> copy to sender's request_queue, after checking Matrix Multiply Unit's tiling_queue
+                std::vector<request> *tiling_queue = receiver->GetTilingQueue();
+                std::vector<request>::iterator it;
+                for (it = tiling_queue->begin(); it != tiling_queue->end(); ++it) {
+                    if (order == it->order)
+                        break;
+                }
+                // not in tiling_queue -> new request!
+                if (it == tiling_queue->end())
+                    sender->GetRequestQueue()->push_back(MakeRequest(order, size));
             }
         }
         // take care of cycle
@@ -164,6 +170,8 @@ void Interconnect::Cycle() {
                 // found
                 waiting_queue->erase(it);
                 served_queue->push_back(MakeRequest(order, bts));
+                // CHECK...
+                controller->RaiseDoneSignal(receiver, order);
             }
             else {
                 // not found... something wrong

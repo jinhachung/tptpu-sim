@@ -1,13 +1,9 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
+#ifndef ICNT_H
+#define ICNT_H
 
 #include "common.hpp"
-#include "unit.hpp"
 
-#pragma once
+class Controller;
 
 class Interconnect {
 public:
@@ -23,6 +19,11 @@ public:
     bool IsIdle();
     void Cycle();
     void PrintStats(std::string name);
+    
+    void SetController(Controller *ctrl) {controller = ctrl;}
+
+    Unit *GetSender() {return sender;}
+    Unit *GetReceiver() {return receiver;}
 
     std::vector<request> *GetSenderQueue() {return sender_queue;}
     std::vector<request> *GetServedQueue() {return served_queue;}
@@ -41,6 +42,8 @@ private:
     int busy_cycle;                         // number of cycles that the interconnect was busy
     float sent_size;                        // total number of bytes sent over this interconnect
 
+    Controller *controller;                 // pointer to Controller
+
     // sender queue (one who serves)
     std::vector<request> *sender_queue;     // vector of requests that sender has left to send to receiver (size changes)
     // receiver queues (one who requests)
@@ -48,3 +51,5 @@ private:
     std::vector<request> *waiting_queue;    // vector of requests that the receiver has to receive from sender
     std::vector<request> *request_queue;    // vector of requests that the receiver needs to request to sender
 };
+
+#endif /* ICNT_H */

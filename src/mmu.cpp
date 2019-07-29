@@ -1,11 +1,3 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <queue>
-#include <assert.h>
-
-#include "common.hpp"
-#include "buffer.hpp"
 #include "mmu.hpp"
 
 MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {
@@ -87,9 +79,6 @@ void MatrixMultiplyUnit::Cycle() {
         // delete from Matrix Multiply Unit's waiting queues
         find_and_delete_by_order(*ub_waiting_queue, current_order);
         find_and_delete_by_order(*wf_waiting_queue, current_order);
-        // delete from Unified Buffer or Weight Fetcher's waiting queues
-        //find_and_delete_by_order(*(ub->GetWaitingQueue()), current_order);
-        //find_and_delete_by_order(*(wf->GetWaitingQueue()), current_order);
         // delete from Unified Buffer or Weight Fetcher's sender queues
         find_and_delete_by_order(*(ub->GetSenderQueue()), current_order);
         find_and_delete_by_order(*(wf->GetSenderQueue()), current_order);

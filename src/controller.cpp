@@ -1,14 +1,6 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <assert.h>
-
-#include "common.hpp"
 #include "controller.hpp"
-#include "unit.hpp"
 
-Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit,
+Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit, std::vector<Interconnect *> *icnt_list,
                        std::vector<tile> *weighttilequeue, std::vector<tile> *activationtilequeue) {
     systolic_array_width = matrixmultiplyunit->GetSystolicArrayWidth();
     systolic_array_height = matrixmultiplyunit->GetSystolicArrayHeight();
@@ -17,11 +9,29 @@ Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit,
 
     id = 1;
     
-    // let them be allocated in DRAM and CPU
-    //weight_tile_queue = new std::vector<tile>();
-    //activation_tile_queue = new std::vector<tile>();
+    interconnect_list = icnt_list;
+    std::vector<Interconnect *>::iterator it;
+    Interconnect *ptr;
+    for (it = interconnect_list->begin(); it != interconnect_list->end(); ++it) {
+        ptr = *it;
+        ptr->SetController(this);
+    }
+
     weight_tile_queue = weighttilequeue;
     activation_tile_queue = activationtilequeue;
+}
+
+/* This function is called in Interconnect::Cycle() when its receiver is not Matrix Multiply Unit
+ * In here we look for the Interconnect whose sender is done_unit and if that Interconnect's receiver
+ * is Matrix Multiply Unit, delete the request in that Interconnect's waiting_queue with the given order */
+void Controller::RaiseDoneSignal(Unit *done_unit, int order) {
+    std::vector<Interconnect *>::iterator it;
+    Interconnect *ptr;
+    for (it = interconnect_list->begin(); it != interconnect_list->end(); ++it) {
+        ptr = *it;
+        if ((ptr->GetSender() == done_unit) && (ptr->GetReceiver()->IsMatrixMultiplyUnit()))
+            find_and_delete_by_order(*ptr->GetWaitingQueue(), order);
+    }
 }
 
 /* This function is called in MatrixMultiply()
@@ -118,7 +128,6 @@ void Controller::PrintAllTiles() {
         }
     }
 }
-
 
 
 
