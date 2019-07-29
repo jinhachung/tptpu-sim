@@ -59,10 +59,12 @@ private:
     WeightFetcher *wf;              // pointer to Weight Fetcher connected to this unit
 
     // connected to Weight Fetcher
+    std::vector<request> *wf_sender_queue;
     std::vector<request> *wf_served_queue;
     std::vector<request> *wf_waiting_queue;
     std::vector<request> *wf_request_queue;
     // connected to Unified Buffer
+    std::vector<request> *ub_sender_queue;
     std::vector<request> *ub_served_queue;
     std::vector<request> *ub_waiting_queue;
     std::vector<request> *ub_request_queue;

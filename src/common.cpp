@@ -39,7 +39,8 @@ void find_and_delete_by_order(std::vector<request> &v, int order) {
         if (it->order == order)
             break;
     }
-    v.erase(it);
+    if (it != v.end())
+        v.erase(it);
 }
 
 // functions for std::vector<tile>

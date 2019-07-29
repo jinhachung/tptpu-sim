@@ -151,6 +151,7 @@ total_height	common.hpp	/^    int total_height;$/;"	m	struct:tile
 total_width	common.hpp	/^    int total_width;$/;"	m	struct:tile
 ub	mmu.hpp	/^    UnifiedBuffer *ub;              \/\/ pointer to Unified Buffer connected to this unit$/;"	m	class:MatrixMultiplyUnit
 ub_request_queue	mmu.hpp	/^    std::vector<request> *ub_request_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_sender_queue	mmu.hpp	/^    std::vector<request> *ub_sender_queue;$/;"	m	class:MatrixMultiplyUnit
 ub_served_queue	mmu.hpp	/^    std::vector<request> *ub_served_queue;$/;"	m	class:MatrixMultiplyUnit
 ub_waiting_queue	mmu.hpp	/^    std::vector<request> *ub_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
 wait_cycle	mmu.hpp	/^    int wait_cycle;                 \/\/ number of cycles Matrix Multiply Unit needs to wait (is computing)$/;"	m	class:MatrixMultiplyUnit
@@ -161,6 +162,7 @@ weight_tile_queue	controller.hpp	/^    std::vector<tile> *weight_tile_queue;$/;"
 weight_tile_queue	dram.hpp	/^    std::vector<tile> *weight_tile_queue;$/;"	m	class:DRAM
 wf	mmu.hpp	/^    WeightFetcher *wf;              \/\/ pointer to Weight Fetcher connected to this unit$/;"	m	class:MatrixMultiplyUnit
 wf_request_queue	mmu.hpp	/^    std::vector<request> *wf_request_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_sender_queue	mmu.hpp	/^    std::vector<request> *wf_sender_queue;$/;"	m	class:MatrixMultiplyUnit
 wf_served_queue	mmu.hpp	/^    std::vector<request> *wf_served_queue;$/;"	m	class:MatrixMultiplyUnit
 wf_waiting_queue	mmu.hpp	/^    std::vector<request> *wf_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
 ~CPU	cpu.cpp	/^CPU::~CPU() {$/;"	f	class:CPU
