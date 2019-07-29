@@ -138,8 +138,15 @@ pop_front	common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
 pop_front	common.cpp	/^void pop_front(std::vector<tile> &v) {$/;"	f
 receiver	interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
 receiver_capacity	interconnect.hpp	/^    float receiver_capacity;                \/\/ total amount of bytes the receiver can endure (store) up to$/;"	m	class:Interconnect
+request	buffer.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
 request	common.hpp	/^struct request {$/;"	s
 request	common.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	cpu.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	dram.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	interconnect.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	mmu.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	unit.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	weightfetcher.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
 request_queue	buffer.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:UnifiedBuffer
 request_queue	interconnect.hpp	/^    std::vector<request> *request_queue;    \/\/ vector of requests that the receiver needs to request to sender$/;"	m	class:Interconnect
 request_queue	weightfetcher.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:WeightFetcher
@@ -162,6 +169,9 @@ systolic_array_width	controller.hpp	/^    int systolic_array_width;$/;"	m	class:
 systolic_array_width	mmu.hpp	/^    int systolic_array_width;       \/\/ how many values come each cycle from UnifiedBuffer$/;"	m	class:MatrixMultiplyUnit
 tile	common.hpp	/^struct tile {$/;"	s
 tile	common.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	controller.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	cpu.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	dram.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
 tile_height	common.hpp	/^    int tile_height;$/;"	m	struct:tile
 tile_width	common.hpp	/^    int tile_width;$/;"	m	struct:tile
 tiling_queue	mmu.hpp	/^    std::vector<request> *tiling_queue;$/;"	m	class:MatrixMultiplyUnit

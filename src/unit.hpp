@@ -3,7 +3,8 @@
 
 #include "common.hpp"
 
-#pragma once
+struct request;
+typedef struct request request;
 
 class Unit {
 public:

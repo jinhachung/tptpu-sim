@@ -2,6 +2,13 @@
 #define MMU_H
 
 #include "common.hpp"
+#include "unit.hpp"
+
+struct request;
+typedef struct request request;
+class UnifiedBuffer;
+class Unit;
+class WeightFetcher;
 
 class MatrixMultiplyUnit: public Unit {
 public:

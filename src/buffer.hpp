@@ -4,6 +4,10 @@
 #include "common.hpp"
 #include "unit.hpp"
 
+struct request;
+typedef struct request request;
+class Unit;
+
 class UnifiedBuffer: public Unit {
 public:
     UnifiedBuffer(float buffer_size);

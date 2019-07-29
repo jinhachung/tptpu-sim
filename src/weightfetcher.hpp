@@ -2,6 +2,11 @@
 #define WEIGHTFETCHER_H
 
 #include "common.hpp"
+#include "unit.hpp"
+
+struct request;
+typedef struct request request;
+class Unit;
 
 class WeightFetcher: public Unit {
 public:

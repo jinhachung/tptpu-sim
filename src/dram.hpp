@@ -3,6 +3,11 @@
 
 #include "common.hpp"
 
+struct request;
+typedef struct request request;
+struct tile;
+typedef struct tile tile;
+
 class DRAM {
 public:
     DRAM();

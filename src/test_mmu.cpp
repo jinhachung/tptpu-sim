@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <cstdlib>
 
@@ -10,6 +11,8 @@
 #include "mmu.hpp"
 #include "unit.hpp"
 #include "weightfetcher.hpp"
+*/
+#include "common.hpp"
 
 int main(int argc, char *argv[]) {
     CPU *cpu = new CPU();
@@ -67,8 +70,8 @@ int main(int argc, char *argv[]) {
     // test complete
     cpu_ub_icnt->PrintStats("CPU - Unified Buffer Interconnect");
     dram_wf_icnt->PrintStats("DRAM - Weight Fetcher Interconnect");
-    ub_mmu_icnt->PrintStats("Unified Buffer - Matrix Multiply Unit Interconnect");
-    wf_mmu_icnt->PrintStats("Weight Fetcher - Matrix Multiply Unit Interconnect");
+    //ub_mmu_icnt->PrintStats("Unified Buffer - Matrix Multiply Unit Interconnect");
+    //wf_mmu_icnt->PrintStats("Weight Fetcher - Matrix Multiply Unit Interconnect");
     mmu->PrintStats();
     return 0;
 }

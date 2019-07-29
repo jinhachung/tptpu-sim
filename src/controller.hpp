@@ -8,6 +8,9 @@
 #include "unit.hpp"
 
 class Interconnect;
+class MatrixMultiplyUnit;
+struct tile;
+typedef struct tile tile;
 
 class Controller {
 public:

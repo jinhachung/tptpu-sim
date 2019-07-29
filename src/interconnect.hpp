@@ -3,6 +3,9 @@
 
 #include "common.hpp"
 
+struct request;
+typedef struct request request;
+class Unit;
 class Controller;
 
 class Interconnect {
