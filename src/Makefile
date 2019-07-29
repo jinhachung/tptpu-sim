@@ -2,8 +2,8 @@ all: main
 CC = g++
 CFLAGS = -g
 
-OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp
-OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp
+OBJS1 = buffer.cpp common.cpp controller.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp
+OBJS2 = buffer.cpp common.cpp controller.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp
 OBJST = buffer.cpp common.cpp controller.cpp mmu.cpp weightfetcher.cpp test_tile.cpp
 OBJS3 = buffer.cpp common.cpp controller.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp
 

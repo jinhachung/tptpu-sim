@@ -170,7 +170,7 @@ void Interconnect::Cycle() {
                 // found
                 waiting_queue->erase(it);
                 served_queue->push_back(MakeRequest(order, bts));
-                // CHECK...
+                // Erase value if the receiver is sender to Matrix Multiply Unit!
                 controller->RaiseDoneSignal(receiver, order);
             }
             else {

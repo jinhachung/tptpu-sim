@@ -1,17 +1,3 @@
-/*
-#include <iostream>
-#include <cstdlib>
-
-#include "buffer.hpp"
-#include "common.hpp"
-#include "controller.hpp"
-#include "cpu.hpp"
-#include "dram.hpp"
-#include "interconnect.hpp"
-#include "mmu.hpp"
-#include "unit.hpp"
-#include "weightfetcher.hpp"
-*/
 #include "common.hpp"
 
 int main(int argc, char *argv[]) {
@@ -53,10 +39,8 @@ int main(int argc, char *argv[]) {
     // generate request for matrix multiplication
     ctrl->MatrixMultiply(640, 640, 1080, true, 3, (unsigned int)0, (unsigned int)100000000);
     
-    while (!( cpu_ub_icnt->IsIdle() && dram_wf_icnt->IsIdle() && ub_mmu_icnt->IsIdle()
-              && wf_mmu_icnt->IsIdle() && mmu->IsIdle() )) {
+    while (!(cpu_ub_icnt->IsIdle() && dram_wf_icnt->IsIdle() && ub_mmu_icnt->IsIdle() && wf_mmu_icnt->IsIdle() && mmu->IsIdle())) {
         mmu->Cycle();
-        // right order?
         ub_mmu_icnt->Cycle();
         wf_mmu_icnt->Cycle();
         ub->Cycle();
@@ -70,8 +54,6 @@ int main(int argc, char *argv[]) {
     // test complete
     cpu_ub_icnt->PrintStats("CPU - Unified Buffer Interconnect");
     dram_wf_icnt->PrintStats("DRAM - Weight Fetcher Interconnect");
-    //ub_mmu_icnt->PrintStats("Unified Buffer - Matrix Multiply Unit Interconnect");
-    //wf_mmu_icnt->PrintStats("Weight Fetcher - Matrix Multiply Unit Interconnect");
     mmu->PrintStats();
     return 0;
 }

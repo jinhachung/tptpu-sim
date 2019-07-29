@@ -79,8 +79,8 @@ MakeTile	common.cpp	/^tile MakeTile(int order, unsigned int starting_address, in
 MatrixMultiply	controller.cpp	/^void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 MatrixMultiplyUnit	mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {$/;"	f	class:MatrixMultiplyUnit
 MatrixMultiplyUnit	mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
-OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
-OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
+OBJS1	Makefile	/^OBJS1 = buffer.cpp common.cpp controller.cpp cpu.cpp interconnect.cpp test_cpu_icnt_ub.cpp$/;"	m
+OBJS2	Makefile	/^OBJS2 = buffer.cpp common.cpp controller.cpp cpu.cpp dram.cpp interconnect.cpp weightfetcher.cpp test_dram_icnt_wf.cpp$/;"	m
 OBJS3	Makefile	/^OBJS3 = buffer.cpp common.cpp controller.cpp cpu.cpp dram.cpp interconnect.cpp mmu.cpp weightfetcher.cpp test_mmu.cpp$/;"	m
 OBJST	Makefile	/^OBJST = buffer.cpp common.cpp controller.cpp mmu.cpp weightfetcher.cpp test_tile.cpp$/;"	m
 PrintAllTiles	controller.cpp	/^void Controller::PrintAllTiles() {$/;"	f	class:Controller
@@ -127,8 +127,8 @@ is_main_memory	dram.hpp	/^    bool is_main_memory;$/;"	m	class:DRAM
 is_main_memory	mmu.hpp	/^    bool is_main_memory;$/;"	m	class:MatrixMultiplyUnit
 is_main_memory	weightfetcher.hpp	/^    bool is_main_memory;$/;"	m	class:WeightFetcher
 is_sender_main_memory	interconnect.hpp	/^    bool is_sender_main_memory;             \/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
-main	test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
-main	test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 mmu	controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
