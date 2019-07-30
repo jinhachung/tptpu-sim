@@ -3,6 +3,6 @@ cd ..
 clear
 clear
 make clean
-make testtile
+make testmmu
 cd build
-./testtile.exe
+./testmmu.exe
