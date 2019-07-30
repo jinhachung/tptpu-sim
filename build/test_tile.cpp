@@ -1,12 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-
-#include "buffer.hpp"
 #include "common.hpp"
-#include "controller.hpp"
-#include "interconnect.hpp"
-#include "mmu.hpp"
-#include "weightfetcher.hpp"
 
 int main(int argc, char *argv[]) {
     std::vector<tile> *wtq = new std::vector<tile>();

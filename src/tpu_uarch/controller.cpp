@@ -43,7 +43,7 @@ void Controller::RaiseDoneSignal(Unit *done_unit, int order) {
 void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,
                                 unsigned int address_X, unsigned int address_Y) {
     
-    int tile_width, tile_height, total_width, total_height, order, multiply_factor;
+    int tile_width, tile_height, total_width, total_height, multiply_factor;
     unsigned int starting_address;
 
     int a = int( (A - 1) / systolic_array_height ) + 1; // smallest integer greater than or equal to A / systolic_array_height

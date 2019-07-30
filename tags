@@ -1,0 +1,223 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUFFER_H	include/tpu_uarch/buffer.hpp	2;"	d
+BUILD_DIR	Makefile	/^BUILD_DIR = .\/build$/;"	m
+CC	Makefile	/^CC := g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS := -g -Wall -std=c++11$/;"	m
+COMMON_H	include/tpu_uarch/common.hpp	2;"	d
+CONTROLLER_H	include/tpu_uarch/controller.hpp	2;"	d
+CPP_SUFFIX	Makefile	/^CPP_SUFFIX := cpp$/;"	m
+CPU	include/tpu_uarch/cpu.hpp	/^class CPU {$/;"	c
+CPU	src/tpu_uarch/cpu.cpp	/^CPU::CPU() {$/;"	f	class:CPU
+CPU_H	include/tpu_uarch/cpu.hpp	2;"	d
+Controller	include/tpu_uarch/controller.hpp	/^class Controller {$/;"	c
+Controller	src/tpu_uarch/controller.cpp	/^Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit, std::vector<Interconnect *> *icnt_list,$/;"	f	class:Controller
+Cycle	src/tpu_uarch/buffer.cpp	/^void UnifiedBuffer::Cycle() {$/;"	f	class:UnifiedBuffer
+Cycle	src/tpu_uarch/cpu.cpp	/^void CPU::Cycle() {$/;"	f	class:CPU
+Cycle	src/tpu_uarch/dram.cpp	/^void DRAM::Cycle() {$/;"	f	class:DRAM
+Cycle	src/tpu_uarch/interconnect.cpp	/^void Interconnect::Cycle() {$/;"	f	class:Interconnect
+Cycle	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::Cycle() {$/;"	f	class:MatrixMultiplyUnit
+Cycle	src/tpu_uarch/weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
+DIR	Makefile	/^DIR = $(dir $(OBJ))$/;"	m
+DRAM	include/tpu_uarch/dram.hpp	/^class DRAM {$/;"	c
+DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM() {$/;"	f	class:DRAM
+DRAM_H	include/tpu_uarch/dram.hpp	2;"	d
+GetAccumulatorSize	include/tpu_uarch/mmu.hpp	/^    int GetAccumulatorSize() {return accumulator_size;}$/;"	f	class:MatrixMultiplyUnit
+GetActivationTileQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<tile> *GetActivationTileQueue() {return activation_tile_queue;}$/;"	f	class:CPU
+GetCapacity	include/tpu_uarch/buffer.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:UnifiedBuffer
+GetCapacity	include/tpu_uarch/mmu.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:MatrixMultiplyUnit
+GetCapacity	include/tpu_uarch/weightfetcher.hpp	/^    float GetCapacity() {return size * (float)depth;}$/;"	f	class:WeightFetcher
+GetReceiver	include/tpu_uarch/interconnect.hpp	/^    Unit *GetReceiver() {return receiver;}$/;"	f	class:Interconnect
+GetRequestQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:UnifiedBuffer
+GetRequestQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
+GetRequestQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
+GetRequestQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:WeightFetcher
+GetSender	include/tpu_uarch/interconnect.hpp	/^    Unit *GetSender() {return sender;}$/;"	f	class:Interconnect
+GetSenderQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:UnifiedBuffer
+GetSenderQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:CPU
+GetSenderQueue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:DRAM
+GetSenderQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:Interconnect
+GetSenderQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
+GetSenderQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:WeightFetcher
+GetServedQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:UnifiedBuffer
+GetServedQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:Interconnect
+GetServedQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
+GetServedQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:WeightFetcher
+GetSystolicArrayHeight	include/tpu_uarch/mmu.hpp	/^    int GetSystolicArrayHeight() {return systolic_array_height;}$/;"	f	class:MatrixMultiplyUnit
+GetSystolicArrayWidth	include/tpu_uarch/mmu.hpp	/^    int GetSystolicArrayWidth() {return systolic_array_width;}$/;"	f	class:MatrixMultiplyUnit
+GetTilingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetTilingQueue()      { return tiling_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetTilingQueue	include/tpu_uarch/unit.hpp	/^    virtual std::vector<request> *GetTilingQueue() {assert(0);  return NULL;}$/;"	f	class:Unit
+GetUBRequestQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetUBRequestQueue()   {return ub_request_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetUBSenderQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetUBSenderQueue()    { return ub_sender_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetUBServedQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetUBServedQueue()    {return ub_served_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetUBWaitingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetUBWaitingQueue()   {return ub_waiting_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFRequestQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFRequestQueue()   {return wf_request_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFSenderQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFSenderQueue()    {return wf_sender_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFServedQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFServedQueue()    {return wf_served_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWFWaitingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFWaitingQueue()   {return wf_waiting_queue;}$/;"	f	class:MatrixMultiplyUnit
+GetWaitingQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:UnifiedBuffer
+GetWaitingQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:Interconnect
+GetWaitingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
+GetWaitingQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:WeightFetcher
+GetWeightTileQueue	include/tpu_uarch/dram.hpp	/^    std::vector<tile> *GetWeightTileQueue() {return weight_tile_queue;}$/;"	f	class:DRAM
+ICNT_H	include/tpu_uarch/interconnect.hpp	2;"	d
+INCLUDE_DIR	Makefile	/^INCLUDE_DIR := -I.\/include\/tpu_uarch$/;"	m
+Interconnect	include/tpu_uarch/interconnect.hpp	/^class Interconnect {$/;"	c
+Interconnect	src/tpu_uarch/interconnect.cpp	/^Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,$/;"	f	class:Interconnect
+IsIdle	src/tpu_uarch/interconnect.cpp	/^bool Interconnect::IsIdle() {$/;"	f	class:Interconnect
+IsIdle	src/tpu_uarch/mmu.cpp	/^bool MatrixMultiplyUnit::IsIdle() {$/;"	f	class:MatrixMultiplyUnit
+IsMainMemory	include/tpu_uarch/buffer.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:UnifiedBuffer
+IsMainMemory	include/tpu_uarch/cpu.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:CPU
+IsMainMemory	include/tpu_uarch/dram.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:DRAM
+IsMainMemory	include/tpu_uarch/mmu.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:MatrixMultiplyUnit
+IsMainMemory	include/tpu_uarch/weightfetcher.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:WeightFetcher
+IsMatrixMultiplyUnit	include/tpu_uarch/mmu.hpp	/^    bool IsMatrixMultiplyUnit() {return true;}$/;"	f	class:MatrixMultiplyUnit
+IsMatrixMultiplyUnit	include/tpu_uarch/unit.hpp	/^    virtual bool IsMatrixMultiplyUnit() {return false;}$/;"	f	class:Unit
+LDFLAGS	Makefile	/^LDFLAGS :=$/;"	m
+LIBS	Makefile	/^LIBS :=$/;"	m
+MMU_H	include/tpu_uarch/mmu.hpp	2;"	d
+MakeRequest	src/tpu_uarch/common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
+MakeTile	src/tpu_uarch/common.cpp	/^tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile_height, int total_width, int total_height) {$/;"	f
+MatrixMultiply	src/tpu_uarch/controller.cpp	/^void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
+MatrixMultiplyUnit	include/tpu_uarch/mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
+MatrixMultiplyUnit	src/tpu_uarch/mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {$/;"	f	class:MatrixMultiplyUnit
+OBJ	Makefile	/^OBJ = $(patsubst $(SRC_DIR)\/%.$(CPP_SUFFIX), $(OBJ_DIR)\/%.o, $(SRC))$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR = .\/obj$/;"	m
+PrintAllTiles	src/tpu_uarch/controller.cpp	/^void Controller::PrintAllTiles() {$/;"	f	class:Controller
+PrintStats	src/tpu_uarch/interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
+PrintStats	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixMultiplyUnit
+PushRequestsFromTiles	src/tpu_uarch/controller.cpp	/^void Controller::PushRequestsFromTiles() {$/;"	f	class:Controller
+RaiseDoneSignal	src/tpu_uarch/controller.cpp	/^void Controller::RaiseDoneSignal(Unit *done_unit, int order) {$/;"	f	class:Controller
+ReceiveRequest	src/tpu_uarch/interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
+ReceiverFull	src/tpu_uarch/interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
+ReceiversSenderQueueSize	src/tpu_uarch/interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
+SRC	Makefile	/^SRC = $(wildcard $(SRC_DIR)\/*.$(CPP_SUFFIX))$/;"	m
+SRC_DIR	Makefile	/^SRC_DIR = .\/src$/;"	m
+SetController	include/tpu_uarch/interconnect.hpp	/^    void SetController(Controller *ctrl) {controller = ctrl;}$/;"	f	class:Interconnect
+TESTMMU	Makefile	/^TESTMMU := .\/build\/testmmu.exe$/;"	m
+TESTMMU_OBJ	Makefile	/^TESTMMU_OBJ := .\/obj\/test_mmu.o$/;"	m
+TESTTILE	Makefile	/^TESTTILE := .\/build\/testtile.exe$/;"	m
+TESTTILE_OBJ	Makefile	/^TESTTILE_OBJ := .\/obj\/test_tile.o$/;"	m
+Tile	src/tpu_uarch/controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
+UNIT_H	include/tpu_uarch/unit.hpp	2;"	d
+UnifiedBuffer	include/tpu_uarch/buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
+UnifiedBuffer	src/tpu_uarch/buffer.cpp	/^UnifiedBuffer::UnifiedBuffer(float buffer_size) {$/;"	f	class:UnifiedBuffer
+Unit	include/tpu_uarch/unit.hpp	/^class Unit {$/;"	c
+UpdateTilingQueue	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::UpdateTilingQueue() {$/;"	f	class:MatrixMultiplyUnit
+WEIGHTFETCHER_H	include/tpu_uarch/weightfetcher.hpp	2;"	d
+WeightFetcher	include/tpu_uarch/weightfetcher.hpp	/^class WeightFetcher: public Unit {$/;"	c
+WeightFetcher	src/tpu_uarch/weightfetcher.cpp	/^WeightFetcher::WeightFetcher(float _size, int _depth) {$/;"	f	class:WeightFetcher
+accumulator_size	include/tpu_uarch/controller.hpp	/^    int accumulator_size;$/;"	m	class:Controller
+accumulator_size	include/tpu_uarch/mmu.hpp	/^    int accumulator_size;           \/\/ size of accumulator, probably 2048$/;"	m	class:MatrixMultiplyUnit
+activation_tile_queue	include/tpu_uarch/controller.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:Controller
+activation_tile_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:CPU
+addrlist	generate_instruction.py	/^addrlist        = []$/;"	v
+bpc	include/tpu_uarch/interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
+busy_cycle	include/tpu_uarch/interconnect.hpp	/^    int busy_cycle;                         \/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
+busy_cycle	include/tpu_uarch/mmu.hpp	/^    int busy_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed computations$/;"	m	class:MatrixMultiplyUnit
+bw	include/tpu_uarch/interconnect.hpp	/^    float bw;                               \/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
+capacity	include/tpu_uarch/buffer.hpp	/^    float capacity;         \/\/ 2 x size of one buffer$/;"	m	class:UnifiedBuffer
+capacity	include/tpu_uarch/mmu.hpp	/^    float capacity;                 \/\/ systolic_array_width x systolic_array_height$/;"	m	class:MatrixMultiplyUnit
+clock	include/tpu_uarch/interconnect.hpp	/^    float clock;                            \/\/ clock in GHz$/;"	m	class:Interconnect
+controller	include/tpu_uarch/interconnect.hpp	/^    Controller *controller;                 \/\/ pointer to Controller$/;"	m	class:Interconnect
+current_order	include/tpu_uarch/mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
+depth	include/tpu_uarch/weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFetcher
+directory_name	generate_instruction.py	/^directory_name  = "build\/" + sys.argv[8]$/;"	v
+f	generate_instruction.py	/^f = open(file_name, "w+")$/;"	v
+file_name	generate_instruction.py	/^file_name       = directory_name + "\/" + sys.argv[7] + ".txt"$/;"	v
+find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
+find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<tile> &v, int order) {$/;"	f
+hexaddr	generate_instruction.py	/^        hexaddr = "0" + hexaddr$/;"	v
+hexaddr	generate_instruction.py	/^    hexaddr = "0x" + hexaddr.upper()$/;"	v
+hexaddr	generate_instruction.py	/^    hexaddr = hex(addrlist[order]).lstrip("0x")$/;"	v
+id	include/tpu_uarch/controller.hpp	/^    int id;                                         \/\/ number to set for next request's order in tiling process$/;"	m	class:Controller
+idle_cycle	include/tpu_uarch/interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
+idle_cycle	include/tpu_uarch/mmu.hpp	/^    int idle_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed no computations$/;"	m	class:MatrixMultiplyUnit
+interconnect_list	include/tpu_uarch/controller.hpp	/^    std::vector<Interconnect *> *interconnect_list;   \/\/ list of all interconnects in the architecture$/;"	m	class:Controller
+is_main_memory	include/tpu_uarch/buffer.hpp	/^    bool is_main_memory;$/;"	m	class:UnifiedBuffer
+is_main_memory	include/tpu_uarch/cpu.hpp	/^    bool is_main_memory;$/;"	m	class:CPU
+is_main_memory	include/tpu_uarch/dram.hpp	/^    bool is_main_memory;$/;"	m	class:DRAM
+is_main_memory	include/tpu_uarch/mmu.hpp	/^    bool is_main_memory;$/;"	m	class:MatrixMultiplyUnit
+is_main_memory	include/tpu_uarch/weightfetcher.hpp	/^    bool is_main_memory;$/;"	m	class:WeightFetcher
+is_sender_main_memory	include/tpu_uarch/interconnect.hpp	/^    bool is_sender_main_memory;             \/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
+jump_size	generate_instruction.py	/^jump_size       = int(sys.argv[2])$/;"	v
+main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+mmu	include/tpu_uarch/controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
+order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:request
+order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:tile
+pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
+pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<tile> &v) {$/;"	f
+receiver	include/tpu_uarch/interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
+receiver_capacity	include/tpu_uarch/interconnect.hpp	/^    float receiver_capacity;                \/\/ total amount of bytes the receiver can endure (store) up to$/;"	m	class:Interconnect
+request	include/tpu_uarch/buffer.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/common.hpp	/^struct request {$/;"	s
+request	include/tpu_uarch/common.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/cpu.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/dram.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/interconnect.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/mmu.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/unit.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request	include/tpu_uarch/weightfetcher.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request_queue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:UnifiedBuffer
+request_queue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *request_queue;    \/\/ vector of requests that the receiver needs to request to sender$/;"	m	class:Interconnect
+request_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:WeightFetcher
+sender	include/tpu_uarch/interconnect.hpp	/^    Unit *sender;                           \/\/ pointer to the sender of this interconnect$/;"	m	class:Interconnect
+sender_queue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *sender_queue;$/;"	m	class:UnifiedBuffer
+sender_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *sender_queue;$/;"	m	class:CPU
+sender_queue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *sender_queue;$/;"	m	class:DRAM
+sender_queue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *sender_queue;     \/\/ vector of requests that sender has left to send to receiver (size changes)$/;"	m	class:Interconnect
+sender_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *sender_queue;$/;"	m	class:WeightFetcher
+sent_size	include/tpu_uarch/interconnect.hpp	/^    float sent_size;                        \/\/ total number of bytes sent over this interconnect$/;"	m	class:Interconnect
+served_queue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *served_queue;$/;"	m	class:UnifiedBuffer
+served_queue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *served_queue;     \/\/ vector of requests that the receiver has been serviced$/;"	m	class:Interconnect
+served_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *served_queue;$/;"	m	class:WeightFetcher
+size	include/tpu_uarch/common.hpp	/^    float size;$/;"	m	struct:request
+size	include/tpu_uarch/weightfetcher.hpp	/^    float size;$/;"	m	class:WeightFetcher
+start_address	generate_instruction.py	/^start_address   = int(sys.argv[1])$/;"	v
+starting_address	include/tpu_uarch/common.hpp	/^    unsigned int starting_address;$/;"	m	struct:tile
+systolic_array_height	include/tpu_uarch/controller.hpp	/^    int systolic_array_height;$/;"	m	class:Controller
+systolic_array_height	include/tpu_uarch/mmu.hpp	/^    int systolic_array_height;      \/\/ how far deep the values can go$/;"	m	class:MatrixMultiplyUnit
+systolic_array_width	include/tpu_uarch/controller.hpp	/^    int systolic_array_width;$/;"	m	class:Controller
+systolic_array_width	include/tpu_uarch/mmu.hpp	/^    int systolic_array_width;       \/\/ how many values come each cycle from UnifiedBuffer$/;"	m	class:MatrixMultiplyUnit
+tile	include/tpu_uarch/common.hpp	/^struct tile {$/;"	s
+tile	include/tpu_uarch/common.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	include/tpu_uarch/controller.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	include/tpu_uarch/cpu.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile	include/tpu_uarch/dram.hpp	/^typedef struct tile tile;$/;"	t	typeref:struct:tile
+tile_height	generate_instruction.py	/^tile_height     = int(sys.argv[4])$/;"	v
+tile_height	include/tpu_uarch/common.hpp	/^    int tile_height;$/;"	m	struct:tile
+tile_width	generate_instruction.py	/^tile_width      = int(sys.argv[3])$/;"	v
+tile_width	include/tpu_uarch/common.hpp	/^    int tile_width;$/;"	m	struct:tile
+tiling_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *tiling_queue;$/;"	m	class:MatrixMultiplyUnit
+total_computation_number	include/tpu_uarch/mmu.hpp	/^    float total_computation_number; \/\/ total number of computations Matrix Multiply Unit performed$/;"	m	class:MatrixMultiplyUnit
+total_height	generate_instruction.py	/^total_height    = int(sys.argv[6])$/;"	v
+total_height	include/tpu_uarch/common.hpp	/^    int total_height;$/;"	m	struct:tile
+total_width	generate_instruction.py	/^total_width     = int(sys.argv[5])$/;"	v
+total_width	include/tpu_uarch/common.hpp	/^    int total_width;$/;"	m	struct:tile
+ub	include/tpu_uarch/mmu.hpp	/^    UnifiedBuffer *ub;              \/\/ pointer to Unified Buffer connected to this unit$/;"	m	class:MatrixMultiplyUnit
+ub_request_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_request_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_sender_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_sender_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_served_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_served_queue;$/;"	m	class:MatrixMultiplyUnit
+ub_waiting_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
+wait_cycle	include/tpu_uarch/mmu.hpp	/^    int wait_cycle;                 \/\/ number of cycles Matrix Multiply Unit needs to wait (is computing)$/;"	m	class:MatrixMultiplyUnit
+waiting_queue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:UnifiedBuffer
+waiting_queue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *waiting_queue;    \/\/ vector of requests that the receiver has to receive from sender$/;"	m	class:Interconnect
+waiting_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *waiting_queue;$/;"	m	class:WeightFetcher
+weight_tile_queue	include/tpu_uarch/controller.hpp	/^    std::vector<tile> *weight_tile_queue;$/;"	m	class:Controller
+weight_tile_queue	include/tpu_uarch/dram.hpp	/^    std::vector<tile> *weight_tile_queue;$/;"	m	class:DRAM
+wf	include/tpu_uarch/mmu.hpp	/^    WeightFetcher *wf;              \/\/ pointer to Weight Fetcher connected to this unit$/;"	m	class:MatrixMultiplyUnit
+wf_request_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *wf_request_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_sender_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *wf_sender_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_served_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *wf_served_queue;$/;"	m	class:MatrixMultiplyUnit
+wf_waiting_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *wf_waiting_queue;$/;"	m	class:MatrixMultiplyUnit
+~CPU	src/tpu_uarch/cpu.cpp	/^CPU::~CPU() {$/;"	f	class:CPU
+~Controller	include/tpu_uarch/controller.hpp	/^    ~Controller() {delete interconnect_list;}$/;"	f	class:Controller
+~DRAM	src/tpu_uarch/dram.cpp	/^DRAM::~DRAM() {$/;"	f	class:DRAM
+~Interconnect	src/tpu_uarch/interconnect.cpp	/^Interconnect::~Interconnect() {$/;"	f	class:Interconnect

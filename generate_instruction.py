@@ -13,7 +13,7 @@ tile_width      = int(sys.argv[3])
 tile_height     = int(sys.argv[4])
 total_width     = int(sys.argv[5])
 total_height    = int(sys.argv[6])
-directory_name  = sys.argv[8]
+directory_name  = "build/" + sys.argv[8]
 file_name       = directory_name + "/" + sys.argv[7] + ".txt"
 addrlist        = []
 
@@ -23,6 +23,8 @@ for h in range(tile_height):
         addrlist.append(start_address + jump_size * ((h * total_width) + w))
 
 # create directory if it does not already exist, and open file in write(& create) mode
+if not os.path.exists("build"):
+    os.mkdir("build")
 if not os.path.exists(directory_name):
     os.mkdir(directory_name)
 f = open(file_name, "w+")
