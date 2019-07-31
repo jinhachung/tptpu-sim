@@ -5,7 +5,8 @@ int main(int argc, char *argv[]) {
     // 256 * 48KiB (12 * 2^20B) per buffer, 256 * 96KiB total (24MiB)
     float buffer_size = (float)(3 * (1 << 22));
     UnifiedBuffer *ub = new UnifiedBuffer(buffer_size);
-    DRAM *dram = new DRAM();
+    // DDR3-1600K
+    DRAM *dram = new DRAM("DDR3_1600K");
     // 64KiB per tile, 4 tiles deep
     WeightFetcher *wf = new WeightFetcher(65536, 4);
     float clock = 1;        // 1GHz

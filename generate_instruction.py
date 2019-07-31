@@ -1,5 +1,6 @@
 # the code should be run in the following format:
 # python generate_instruction.py start_address_in_decimal jump_size tile_width tile_height total_width total_height order dirname
+# for example, python generate_instruction.py 268435456 1 256 256 640 640 1 dram, where 0x10000000 = 268435456
 import sys
 import os
 
@@ -14,7 +15,10 @@ tile_height     = int(sys.argv[4])
 total_width     = int(sys.argv[5])
 total_height    = int(sys.argv[6])
 directory_name  = "build/" + sys.argv[8]
-file_name       = directory_name + "/" + sys.argv[7] + ".txt"
+# k6_*.trc for DRAMSim2
+#file_name       = directory_name + "/k6_" + sys.argv[7] + ".trc"
+# *.trace for ramulator
+file_name       = directory_name + "/" + sys.argv[7] + ".trace"
 addrlist        = []
 
 # make list of address
@@ -36,9 +40,15 @@ for order in range(len(addrlist)):
     # add 0s at the beginning to get 00ab -> 000000ab
     while (len(hexaddr) < 8):
         hexaddr = "0" + hexaddr
-    # properly format to get 000000ab -> 0x000000AB (just like DRAMSim2 wants it)
-    hexaddr = "0x" + hexaddr.upper()
+    # properly format
+    # 000000ab -> 0x000000AB for DRAMSim2
+    #hexaddr = "0x" + hexaddr.upper()
+    # 000000ab -> 0x000000ab for ramulator
+    hexaddr = "0x" + hexaddr
     #write to file
-    f.write(hexaddr + " P_MEM_RD " + str(order) + "\n")
+    # "0x000000AB P_MEM_RD 1" for DRAMSim2
+    #f.write(hexaddr + " P_MEM_RD " + str(order) + "\n")
+    # "0x000000ab R" for ramulator
+    f.write(hexaddr + "R\n")
 
 f.close()

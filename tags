@@ -24,13 +24,18 @@ Cycle	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::Cycle() {$/;"	f	class:Mat
 Cycle	src/tpu_uarch/weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
 DIR	Makefile	/^DIR = $(dir $(OBJ))$/;"	m
 DRAM	include/tpu_uarch/dram.hpp	/^class DRAM {$/;"	c
-DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM() {$/;"	f	class:DRAM
+DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM(std::string name) {$/;"	f	class:DRAM
 DRAM_H	include/tpu_uarch/dram.hpp	2;"	d
+DRAM_frequency	include/tpu_uarch/dram.hpp	/^    double DRAM_frequency;$/;"	m	class:DRAM
+DRAM_name	include/tpu_uarch/dram.hpp	/^    std::string DRAM_name;$/;"	m	class:DRAM
 GetAccumulatorSize	include/tpu_uarch/mmu.hpp	/^    int GetAccumulatorSize() {return accumulator_size;}$/;"	f	class:MatrixMultiplyUnit
 GetActivationTileQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<tile> *GetActivationTileQueue() {return activation_tile_queue;}$/;"	f	class:CPU
 GetCapacity	include/tpu_uarch/buffer.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:UnifiedBuffer
 GetCapacity	include/tpu_uarch/mmu.hpp	/^    float GetCapacity() {return capacity;}$/;"	f	class:MatrixMultiplyUnit
 GetCapacity	include/tpu_uarch/weightfetcher.hpp	/^    float GetCapacity() {return size * (float)depth;}$/;"	f	class:WeightFetcher
+GetDRAMFrequency	include/tpu_uarch/dram.hpp	/^    double GetDRAMFrequency() {return DRAM_frequency;}$/;"	f	class:DRAM
+GetDRAMName	include/tpu_uarch/dram.hpp	/^    std::string GetDRAMName() {return DRAM_name;}$/;"	f	class:DRAM
+GetFrequencyByName	src/tpu_uarch/dram.cpp	/^double DRAM::GetFrequencyByName(std::string name) {$/;"	f	class:DRAM
 GetReceiver	include/tpu_uarch/interconnect.hpp	/^    Unit *GetReceiver() {return receiver;}$/;"	f	class:Interconnect
 GetRequestQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:UnifiedBuffer
 GetRequestQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
@@ -100,8 +105,8 @@ SRC_DIR	Makefile	/^SRC_DIR = .\/src$/;"	m
 SetController	include/tpu_uarch/interconnect.hpp	/^    void SetController(Controller *ctrl) {controller = ctrl;}$/;"	f	class:Interconnect
 TESTMMU	Makefile	/^TESTMMU := .\/build\/testmmu.exe$/;"	m
 TESTMMU_OBJ	Makefile	/^TESTMMU_OBJ := .\/obj\/test_mmu.o$/;"	m
-TESTTILE	Makefile	/^TESTTILE := .\/build\/testtile.exe$/;"	m
 TESTTILE_OBJ	Makefile	/^TESTTILE_OBJ := .\/obj\/test_tile.o$/;"	m
+TTILE	Makefile	/^TTILE := .\/build\/testtile.exe$/;"	m
 Tile	src/tpu_uarch/controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 UNIT_H	include/tpu_uarch/unit.hpp	2;"	d
 UnifiedBuffer	include/tpu_uarch/buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
@@ -127,12 +132,12 @@ controller	include/tpu_uarch/interconnect.hpp	/^    Controller *controller;     
 current_order	include/tpu_uarch/mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
 depth	include/tpu_uarch/weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFetcher
 directory_name	generate_instruction.py	/^directory_name  = "build\/" + sys.argv[8]$/;"	v
-f	generate_instruction.py	/^f = open(file_name, "w+")$/;"	v
-file_name	generate_instruction.py	/^file_name       = directory_name + "\/" + sys.argv[7] + ".txt"$/;"	v
+f	generate_instruction.py	/^                f = open(file_name, "w+")$/;"	v
+file_name	generate_instruction.py	/^file_name       = directory_name + "\/" + sys.argv[7] + ".trace"$/;"	v
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<tile> &v, int order) {$/;"	f
 hexaddr	generate_instruction.py	/^        hexaddr = "0" + hexaddr$/;"	v
-hexaddr	generate_instruction.py	/^    hexaddr = "0x" + hexaddr.upper()$/;"	v
+hexaddr	generate_instruction.py	/^    hexaddr = "0x" + hexaddr$/;"	v
 hexaddr	generate_instruction.py	/^    hexaddr = hex(addrlist[order]).lstrip("0x")$/;"	v
 id	include/tpu_uarch/controller.hpp	/^    int id;                                         \/\/ number to set for next request's order in tiling process$/;"	m	class:Controller
 idle_cycle	include/tpu_uarch/interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect

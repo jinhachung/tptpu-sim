@@ -45,8 +45,7 @@ obj/test_mmu.o: $(BUILD_DIR)/test_mmu.cpp
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
 
-
 clean:
 	rm -rf $(OBJ_DIR)
 	rm $(TESTTILE)
-	rm $(TEST3MMU)
+	rm $(TESTMMU)
