@@ -10,6 +10,7 @@ class Unit {
 public:
     virtual void Cycle() = 0;
     virtual bool IsMainMemory() = 0;
+    virtual bool IsDRAM() {return false;}
     virtual bool IsMatrixMultiplyUnit() {return false;}
     // for UnifiedBuffer and WeightFetcher
     virtual std::vector<request> *GetSenderQueue() = 0; 

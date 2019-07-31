@@ -11,7 +11,7 @@ CFLAGS	Makefile	/^CFLAGS := -g -Wall -std=c++11$/;"	m
 COMMON_H	include/tpu_uarch/common.hpp	2;"	d
 CONTROLLER_H	include/tpu_uarch/controller.hpp	2;"	d
 CPP_SUFFIX	Makefile	/^CPP_SUFFIX := cpp$/;"	m
-CPU	include/tpu_uarch/cpu.hpp	/^class CPU {$/;"	c
+CPU	include/tpu_uarch/cpu.hpp	/^class CPU: public Unit {$/;"	c
 CPU	src/tpu_uarch/cpu.cpp	/^CPU::CPU() {$/;"	f	class:CPU
 CPU_H	include/tpu_uarch/cpu.hpp	2;"	d
 Controller	include/tpu_uarch/controller.hpp	/^class Controller {$/;"	c
@@ -23,7 +23,7 @@ Cycle	src/tpu_uarch/interconnect.cpp	/^void Interconnect::Cycle() {$/;"	f	class:
 Cycle	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::Cycle() {$/;"	f	class:MatrixMultiplyUnit
 Cycle	src/tpu_uarch/weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
 DIR	Makefile	/^DIR = $(dir $(OBJ))$/;"	m
-DRAM	include/tpu_uarch/dram.hpp	/^class DRAM {$/;"	c
+DRAM	include/tpu_uarch/dram.hpp	/^class DRAM: public Unit {$/;"	c
 DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM(std::string name) {$/;"	f	class:DRAM
 DRAM_H	include/tpu_uarch/dram.hpp	2;"	d
 DRAM_frequency	include/tpu_uarch/dram.hpp	/^    double DRAM_frequency;$/;"	m	class:DRAM
@@ -38,6 +38,8 @@ GetDRAMName	include/tpu_uarch/dram.hpp	/^    std::string GetDRAMName() {return D
 GetFrequencyByName	src/tpu_uarch/dram.cpp	/^double DRAM::GetFrequencyByName(std::string name) {$/;"	f	class:DRAM
 GetReceiver	include/tpu_uarch/interconnect.hpp	/^    Unit *GetReceiver() {return receiver;}$/;"	f	class:Interconnect
 GetRequestQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:UnifiedBuffer
+GetRequestQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *GetRequestQueue() {assert(0); return NULL;}$/;"	f	class:CPU
+GetRequestQueue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *GetRequestQueue() {assert(0); return NULL;}$/;"	f	class:DRAM
 GetRequestQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:Interconnect
 GetRequestQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetRequestQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetRequestQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetRequestQueue() {return request_queue;}$/;"	f	class:WeightFetcher
@@ -49,6 +51,8 @@ GetSenderQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *Ge
 GetSenderQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetSenderQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetSenderQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetSenderQueue() {return sender_queue;}$/;"	f	class:WeightFetcher
 GetServedQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:UnifiedBuffer
+GetServedQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *GetServedQueue() {assert(0); return NULL;}$/;"	f	class:CPU
+GetServedQueue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *GetServedQueue() {assert(0); return NULL;}$/;"	f	class:DRAM
 GetServedQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:Interconnect
 GetServedQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetServedQueue()  {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetServedQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetServedQueue() {return served_queue;}$/;"	f	class:WeightFetcher
@@ -65,6 +69,8 @@ GetWFSenderQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFSend
 GetWFServedQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFServedQueue()    {return wf_served_queue;}$/;"	f	class:MatrixMultiplyUnit
 GetWFWaitingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWFWaitingQueue()   {return wf_waiting_queue;}$/;"	f	class:MatrixMultiplyUnit
 GetWaitingQueue	include/tpu_uarch/buffer.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:UnifiedBuffer
+GetWaitingQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *GetWaitingQueue() {assert(0); return NULL;}$/;"	f	class:CPU
+GetWaitingQueue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *GetWaitingQueue() {assert(0); return NULL;}$/;"	f	class:DRAM
 GetWaitingQueue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:Interconnect
 GetWaitingQueue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *GetWaitingQueue() {assert(0); return new std::vector<request>();}$/;"	f	class:MatrixMultiplyUnit
 GetWaitingQueue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *GetWaitingQueue() {return waiting_queue;}$/;"	f	class:WeightFetcher
@@ -73,6 +79,8 @@ ICNT_H	include/tpu_uarch/interconnect.hpp	2;"	d
 INCLUDE_DIR	Makefile	/^INCLUDE_DIR := -I.\/include\/tpu_uarch$/;"	m
 Interconnect	include/tpu_uarch/interconnect.hpp	/^class Interconnect {$/;"	c
 Interconnect	src/tpu_uarch/interconnect.cpp	/^Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,$/;"	f	class:Interconnect
+IsDRAM	include/tpu_uarch/dram.hpp	/^    bool IsDRAM() {return true;}$/;"	f	class:DRAM
+IsDRAM	include/tpu_uarch/unit.hpp	/^    virtual bool IsDRAM() {return false;}$/;"	f	class:Unit
 IsIdle	src/tpu_uarch/interconnect.cpp	/^bool Interconnect::IsIdle() {$/;"	f	class:Interconnect
 IsIdle	src/tpu_uarch/mmu.cpp	/^bool MatrixMultiplyUnit::IsIdle() {$/;"	f	class:MatrixMultiplyUnit
 IsMainMemory	include/tpu_uarch/buffer.hpp	/^    bool IsMainMemory() {return is_main_memory;}$/;"	f	class:UnifiedBuffer
@@ -105,8 +113,8 @@ SRC_DIR	Makefile	/^SRC_DIR = .\/src$/;"	m
 SetController	include/tpu_uarch/interconnect.hpp	/^    void SetController(Controller *ctrl) {controller = ctrl;}$/;"	f	class:Interconnect
 TESTMMU	Makefile	/^TESTMMU := .\/build\/testmmu.exe$/;"	m
 TESTMMU_OBJ	Makefile	/^TESTMMU_OBJ := .\/obj\/test_mmu.o$/;"	m
+TESTTILE	Makefile	/^TESTTILE := .\/build\/testtile.exe$/;"	m
 TESTTILE_OBJ	Makefile	/^TESTTILE_OBJ := .\/obj\/test_tile.o$/;"	m
-TTILE	Makefile	/^TTILE := .\/build\/testtile.exe$/;"	m
 Tile	src/tpu_uarch/controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 UNIT_H	include/tpu_uarch/unit.hpp	2;"	d
 UnifiedBuffer	include/tpu_uarch/buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
@@ -130,9 +138,11 @@ capacity	include/tpu_uarch/mmu.hpp	/^    float capacity;                 \/\/ sy
 clock	include/tpu_uarch/interconnect.hpp	/^    float clock;                            \/\/ clock in GHz$/;"	m	class:Interconnect
 controller	include/tpu_uarch/interconnect.hpp	/^    Controller *controller;                 \/\/ pointer to Controller$/;"	m	class:Interconnect
 current_order	include/tpu_uarch/mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
+data	generate_dram_config.py	/^    data = f.readlines()$/;"	v
 depth	include/tpu_uarch/weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFetcher
 directory_name	generate_instruction.py	/^directory_name  = "build\/" + sys.argv[8]$/;"	v
-f	generate_instruction.py	/^                f = open(file_name, "w+")$/;"	v
+dram_name	generate_dram_config.py	/^dram_name       = sys.argv[1]$/;"	v
+f	generate_instruction.py	/^f = open(file_name, "w+")$/;"	v
 file_name	generate_instruction.py	/^file_name       = directory_name + "\/" + sys.argv[7] + ".trace"$/;"	v
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<tile> &v, int order) {$/;"	f

@@ -1,4 +1,5 @@
 #include "dram.hpp"
+#include <bits/stdc++.h>
 
 DRAM::DRAM(std::string name) {
     is_main_memory = true;
@@ -8,6 +9,10 @@ DRAM::DRAM(std::string name) {
 
     sender_queue = new std::vector<request>();
     weight_tile_queue = new std::vector<tile>();
+
+    // set DRAM name in dram-config.cfg
+    std::string cmdline = "python generate_dram_config.py " + DRAM_name;
+    system(cmdline.c_str());
 }
 
 DRAM::~DRAM() {
