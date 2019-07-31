@@ -106,6 +106,8 @@ PrintStats	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f
 PushRequestsFromTiles	src/tpu_uarch/controller.cpp	/^void Controller::PushRequestsFromTiles() {$/;"	f	class:Controller
 RaiseDoneSignal	src/tpu_uarch/controller.cpp	/^void Controller::RaiseDoneSignal(Unit *done_unit, int order) {$/;"	f	class:Controller
 ReceiveRequest	src/tpu_uarch/interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
+ReceiveRequestSignal	include/tpu_uarch/unit.hpp	/^    virtual void ReceiveRequestSignal(int order, float size) {assert(0);}$/;"	f	class:Unit
+ReceiveRequestSignal	src/tpu_uarch/dram.cpp	/^void DRAM::ReceiveRequestSignal(int order, float size) {$/;"	f	class:DRAM
 ReceiverFull	src/tpu_uarch/interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
 ReceiversSenderQueueSize	src/tpu_uarch/interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
 SRC	Makefile	/^SRC = $(wildcard $(SRC_DIR)\/*.$(CPP_SUFFIX))$/;"	m
@@ -164,6 +166,7 @@ main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+memory_request_queue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *memory_request_queue; \/\/ queue of memory request coming from the other side of Interconnect$/;"	m	class:DRAM
 mmu	include/tpu_uarch/controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
 order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:request
 order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:tile
@@ -195,6 +198,7 @@ served_queue	include/tpu_uarch/interconnect.hpp	/^    std::vector<request> *serv
 served_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *served_queue;$/;"	m	class:WeightFetcher
 size	include/tpu_uarch/common.hpp	/^    float size;$/;"	m	struct:request
 size	include/tpu_uarch/weightfetcher.hpp	/^    float size;$/;"	m	class:WeightFetcher
+stall_cycle	include/tpu_uarch/dram.hpp	/^    int stall_cycle;        \/\/ cycles DRAM needs to wait for it to fetch data from memory -> calculated via ramulator$/;"	m	class:DRAM
 start_address	generate_instruction.py	/^start_address   = int(sys.argv[1])$/;"	v
 starting_address	include/tpu_uarch/common.hpp	/^    unsigned int starting_address;$/;"	m	struct:tile
 systolic_array_height	include/tpu_uarch/controller.hpp	/^    int systolic_array_height;$/;"	m	class:Controller

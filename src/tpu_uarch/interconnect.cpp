@@ -95,8 +95,14 @@ void Interconnect::Cycle() {
         request req = MakeRequest(request_queue->front().order, request_queue->front().size);
         waiting_queue->push_back(req);
         pop_front(*request_queue);
-        // if sender is main memory (DRAM, CPU), then they automagically have all the data they need to send already
-        if (is_sender_main_memory) {
+        // if sender is DRAM, it needs to go through ramulator to see how long it'll be stalled
+        // if sender is CPU (is main memory AND is NOT DRAM), then it automagically has all the data it needs to send
+        if (sender->IsDRAM()) {
+            // sender is DRAM
+            sender->ReceiveRequestSignal(req.order, req.size);
+        }
+        else if (is_sender_main_memory) {
+            // sender is main memory but NOT DRAM
             sender_queue->push_back(req);
         }
     }

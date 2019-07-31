@@ -15,7 +15,7 @@ public:
     ~DRAM();
 
     double GetFrequencyByName(std::string name);
-
+    void ReceiveRequestSignal(int order, float size);
     void Cycle();
 
     bool IsMainMemory() {return is_main_memory;}
@@ -31,11 +31,13 @@ public:
 
 private:
     bool is_main_memory;
-
+    int stall_cycle;        // cycles DRAM needs to wait for it to fetch data from memory -> calculated via ramulator
+    
     std::string DRAM_name;
     double DRAM_frequency;
 
     std::vector<request> *sender_queue;
+    std::vector<request> *memory_request_queue; // queue of memory request coming from the other side of Interconnect
     // shared with Controller
     std::vector<tile> *weight_tile_queue;
 };

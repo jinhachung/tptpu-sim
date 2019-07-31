@@ -19,6 +19,8 @@ public:
     virtual std::vector<request> *GetRequestQueue() = 0;
     // for MatrixMultiplyUnit
     virtual std::vector<request> *GetTilingQueue() {assert(0);  return NULL;}
+    // for DRAM
+    virtual void ReceiveRequestSignal(int order, float size) {assert(0);}
 };
 
 #endif /* UNIT_H */

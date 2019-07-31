@@ -1,13 +1,16 @@
 #include "dram.hpp"
+#include <vector>
 #include <bits/stdc++.h>
 
 DRAM::DRAM(std::string name) {
     is_main_memory = true;
+    stall_cycle = 0;
     
     DRAM_name = name;
     DRAM_frequency = GetFrequencyByName(name);
 
     sender_queue = new std::vector<request>();
+    memory_request_queue = new std::vector<request>();
     weight_tile_queue = new std::vector<tile>();
 
     // set DRAM name in dram-config.cfg
@@ -49,6 +52,15 @@ double DRAM::GetFrequencyByName(std::string name) {
     assert(0);
 }
 
+void DRAM::ReceiveRequestSignal(int order, float size) {
+    memory_request_queue->push_back(MakeRequest(order, size));
+}
+
 void DRAM::Cycle() {
-    ;
+    // only for easy debugging... will change to use ramulator later on
+    if (!memory_request_queue->empty()) {
+        request req = memory_request_queue->front();
+        sender_queue->push_back(MakeRequest(req.order, req.size));
+        pop_front(*memory_request_queue);
+    }
 }
