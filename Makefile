@@ -47,5 +47,5 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
 
 clean:
 	rm -rf $(OBJ_DIR)
-	rm $(TESTTILE)
 	rm $(TESTMMU)
+	rm $(TESTTILE)
