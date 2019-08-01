@@ -27,7 +27,7 @@ make -j
 cd ..
 cd tptpu-sim/
 make testtptpu
-./testtptpu -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
+.build/testtptpu.exe -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
 ```
 
 ### Architecture:
