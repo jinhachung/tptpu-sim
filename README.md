@@ -13,7 +13,8 @@ TPTPU-Sim is a cycle-level simulator built to simulate with different bandwidth/
 1. clone both TPTPU(https://github.com/gobblygobble/tptpu-sim) and Ramulator(https://github.com/CMU-SAFARI/ramulator) into the same directory
 2. build ramulator with `make -j` in ramulator directory
 3. build tptpu-sim with `make sim` in tptpu-sim directory
-4. run simulator with proper options (-a A -b B -c C -d D for A-by-B matrix times B-by-C matrix multiplication with DRAM type D)\
+4. run simulator with proper options\
+(-d D -c C -r R -x X -y Y -z Z -l L for X-by-Y matrix times Y-by-Z matrix multiplication with DRAM type D, with C channels and R ranks, and dimension layout L - nchw or nhwc)\
 Different types of DRAMs supported can be easily spotted in the function `double DRAM::GetFrequencyByName(std::string name)` of `tptpu-sim/src/dram.cpp`.
 
 For example:
@@ -25,8 +26,8 @@ cd ramulator/
 make -j
 cd ..
 cd tptpu-sim/
-make sim
-./sim -a 640 -b 640 -c 1080 -d DDR3_1600K
+make testtptpu
+.build/testtptpu.exe -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
 ```
 
 ### Architecture:
