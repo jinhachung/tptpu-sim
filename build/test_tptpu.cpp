@@ -1,17 +1,74 @@
 #include "common.hpp"
+#include <unistd.h> // for getopt()
 
 int main(int argc, char *argv[]) {
+    /*
+    if (argc != 15) {
+        std::cerr << "14 arguments should be given:" << std::endl
+                  << "-d -c -r for DRAM type, channel number, rank number," << std::endl
+                  << "-x -y -z for matrix dimensions: X-by-Y * Y-by-Z matrix multiplication, and" << std::endl
+                  << "-l for dimension layout (nchw or nhwc)" << std::endl;
+        return -1;
+    }
+    */
+    int opt, channels, ranks, X, Y, Z;
+    std::string dram_name, dimension_layout;
+    bool is_nchw;
+    // set default values:
+    channels = 1;
+    ranks = 1;
+    X = 640;
+    Y = 640;
+    Z = 1080;
+    dram_name = "DDR3_1600K";
+    dimension_layout = "nchw";
+    // get values given via CLI
+    while((opt = getopt(argc, argv, "c:d:l:r:x:y:z:")) != -1) {
+        switch(opt) {
+            case 'c':
+                channels = atoi(optarg);
+                break;
+            case 'd':
+                dram_name = optarg;
+                break;
+            case 'l':
+                dimension_layout = optarg;
+                break;
+            case 'r':
+                ranks = atoi(optarg);
+                break;
+            case 'x':
+                X = atoi(optarg);
+                break;
+            case 'y':
+                Y = atoi(optarg);
+                break;
+            case 'z':
+                Z = atoi(optarg);
+                break;
+            default:
+                // shouldn't reach here
+                std::cerr << "Something wrong with command line arguments..." << std::endl;
+                return -1;
+        }
+    }
+    // check for dimension layout
+    if (dimension_layout == "nchw")
+        is_nchw = true;
+    else if (dimension_layout == "nhwc")
+        is_nchw = false;
+    else {
+        std::cerr << "Something wrong with dimension layout: only nchw and nhwc allowed" << std::endl;
+        return -1;
+    }
     CPU *cpu = new CPU();
     // 256 * 48KiB (12 * 2^20B) per buffer, 256 * 96KiB total (24MiB)
     float buffer_size = (float)(3 * (1 << 22));
     UnifiedBuffer *ub = new UnifiedBuffer(buffer_size);
-    float clock         = 0.7;                              // 700MHz
-    float bw_dram_wf    = 30 * (float)((1 << 30) / (10^9)); // 30GiB/s
-    float bw_cpu_ub     = 10 * (float)((1 << 30) / (10^9)); // 10GiB/s
-    int channels = 1;
-    int ranks = 1;
-    // DDR3-1600K
-    DRAM *dram = new DRAM("DDR3_1600K", clock, channels, ranks);
+    float clock         = 0.7;                                  // 700MHz
+    float bw_dram_wf    = 30 * (float)((1 << 30) / 1000000000); // 30GiB/s
+    float bw_cpu_ub     = 10 * (float)((1 << 30) / 1000000000); // 10GiB/s
+    DRAM *dram = new DRAM(dram_name, clock, channels, ranks);
     // 64KiB per tile, 4 tiles deep
     WeightFetcher *wf = new WeightFetcher(256 * 256, 4);
     Interconnect *cpu_ub_icnt = new Interconnect((Unit *)cpu, (Unit *)ub, clock, bw_cpu_ub, ub->GetCapacity(),
@@ -43,7 +100,7 @@ int main(int argc, char *argv[]) {
     // generate request for matrix multiplication
     unsigned int weight_starting_address = 3422552064;      // 0xcc000000 = 3422552064
     unsigned int activation_starting_address = 3758096384;  // 0xe0000000 = 3758096384
-    ctrl->MatrixMultiply(640, 640, 1080, true, 3, weight_starting_address, activation_starting_address);
+    ctrl->MatrixMultiply(X, Y, Z, is_nchw, 3, weight_starting_address, activation_starting_address);
     
     while (!(cpu_ub_icnt->IsIdle() && dram_wf_icnt->IsIdle() && ub_mmu_icnt->IsIdle() && wf_mmu_icnt->IsIdle() && mmu->IsIdle())) {
         mmu->Cycle();
