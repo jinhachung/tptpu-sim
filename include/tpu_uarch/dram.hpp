@@ -16,7 +16,10 @@ public:
 
     double GetFrequencyByName(std::string name);
     void ReceiveRequestSignal(int order, float size);
+    int CalculateStallCycle();
     void Cycle();
+
+    void PrintStats();
 
     bool IsMainMemory() {return is_main_memory;}
     bool IsDRAM() {return true;}
@@ -31,7 +34,10 @@ public:
 
 private:
     bool is_main_memory;
+    int idle_cycle;         // cycles DRAM was not bringing in data
+    int busy_cycle;         // cycles DRAM was bringing in data
     int stall_cycle;        // cycles DRAM needs to wait for it to fetch data from memory -> calculated via ramulator
+    float total_data_size;  // total size of bytes brought in via DRAM
     
     std::string DRAM_name;
     double DRAM_frequency;

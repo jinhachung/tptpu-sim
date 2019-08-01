@@ -14,6 +14,7 @@ CPP_SUFFIX	Makefile	/^CPP_SUFFIX := cpp$/;"	m
 CPU	include/tpu_uarch/cpu.hpp	/^class CPU: public Unit {$/;"	c
 CPU	src/tpu_uarch/cpu.cpp	/^CPU::CPU() {$/;"	f	class:CPU
 CPU_H	include/tpu_uarch/cpu.hpp	2;"	d
+CalculateStallCycle	src/tpu_uarch/dram.cpp	/^int DRAM::CalculateStallCycle() {$/;"	f	class:DRAM
 Controller	include/tpu_uarch/controller.hpp	/^class Controller {$/;"	c
 Controller	src/tpu_uarch/controller.cpp	/^Controller::Controller(MatrixMultiplyUnit *matrixmultiplyunit, std::vector<Interconnect *> *icnt_list,$/;"	f	class:Controller
 Cycle	src/tpu_uarch/buffer.cpp	/^void UnifiedBuffer::Cycle() {$/;"	f	class:UnifiedBuffer
@@ -101,6 +102,7 @@ MatrixMultiplyUnit	src/tpu_uarch/mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUni
 OBJ	Makefile	/^OBJ = $(patsubst $(SRC_DIR)\/%.$(CPP_SUFFIX), $(OBJ_DIR)\/%.o, $(SRC))$/;"	m
 OBJ_DIR	Makefile	/^OBJ_DIR = .\/obj$/;"	m
 PrintAllTiles	src/tpu_uarch/controller.cpp	/^void Controller::PrintAllTiles() {$/;"	f	class:Controller
+PrintStats	src/tpu_uarch/dram.cpp	/^void DRAM::PrintStats() {$/;"	f	class:DRAM
 PrintStats	src/tpu_uarch/interconnect.cpp	/^void Interconnect::PrintStats(std::string name) {$/;"	f	class:Interconnect
 PrintStats	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::PrintStats() {$/;"	f	class:MatrixMultiplyUnit
 PushRequestsFromTiles	src/tpu_uarch/controller.cpp	/^void Controller::PushRequestsFromTiles() {$/;"	f	class:Controller
@@ -132,6 +134,7 @@ activation_tile_queue	include/tpu_uarch/controller.hpp	/^    std::vector<tile> *
 activation_tile_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:CPU
 addrlist	generate_instruction.py	/^addrlist        = []$/;"	v
 bpc	include/tpu_uarch/interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
+busy_cycle	include/tpu_uarch/dram.hpp	/^    int busy_cycle;         \/\/ cycles DRAM was bringing in data$/;"	m	class:DRAM
 busy_cycle	include/tpu_uarch/interconnect.hpp	/^    int busy_cycle;                         \/\/ number of cycles that the interconnect was busy$/;"	m	class:Interconnect
 busy_cycle	include/tpu_uarch/mmu.hpp	/^    int busy_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed computations$/;"	m	class:MatrixMultiplyUnit
 bw	include/tpu_uarch/interconnect.hpp	/^    float bw;                               \/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
@@ -152,6 +155,7 @@ hexaddr	generate_instruction.py	/^        hexaddr = "0" + hexaddr$/;"	v
 hexaddr	generate_instruction.py	/^    hexaddr = "0x" + hexaddr$/;"	v
 hexaddr	generate_instruction.py	/^    hexaddr = hex(addrlist[order]).lstrip("0x")$/;"	v
 id	include/tpu_uarch/controller.hpp	/^    int id;                                         \/\/ number to set for next request's order in tiling process$/;"	m	class:Controller
+idle_cycle	include/tpu_uarch/dram.hpp	/^    int idle_cycle;         \/\/ cycles DRAM was not bringing in data$/;"	m	class:DRAM
 idle_cycle	include/tpu_uarch/interconnect.hpp	/^    int idle_cycle;                         \/\/ number of cycles that the interconnect was idle$/;"	m	class:Interconnect
 idle_cycle	include/tpu_uarch/mmu.hpp	/^    int idle_cycle;                 \/\/ number of cycles Matrix Multiply Unit performed no computations$/;"	m	class:MatrixMultiplyUnit
 interconnect_list	include/tpu_uarch/controller.hpp	/^    std::vector<Interconnect *> *interconnect_list;   \/\/ list of all interconnects in the architecture$/;"	m	class:Controller
@@ -216,6 +220,7 @@ tile_width	generate_instruction.py	/^tile_width      = int(sys.argv[3])$/;"	v
 tile_width	include/tpu_uarch/common.hpp	/^    int tile_width;$/;"	m	struct:tile
 tiling_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *tiling_queue;$/;"	m	class:MatrixMultiplyUnit
 total_computation_number	include/tpu_uarch/mmu.hpp	/^    float total_computation_number; \/\/ total number of computations Matrix Multiply Unit performed$/;"	m	class:MatrixMultiplyUnit
+total_data_size	include/tpu_uarch/dram.hpp	/^    float total_data_size;  \/\/ total size of bytes brought in via DRAM$/;"	m	class:DRAM
 total_height	generate_instruction.py	/^total_height    = int(sys.argv[6])$/;"	v
 total_height	include/tpu_uarch/common.hpp	/^    int total_height;$/;"	m	struct:tile
 total_width	generate_instruction.py	/^total_width     = int(sys.argv[5])$/;"	v
