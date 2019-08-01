@@ -1,4 +1,4 @@
-## tptpu-sim: A Toy-Purpose TPU Simulator
+## TPTPU-Sim: A Toy-Purpose TPU Simulator
 
 TPU (tensor-processing unit) is Google's deep learning architecture for inference (all versions) and training (all versions except 1) focusing mainly on its systolic array-based computation method and throughput.\
 Here's a link to Google's first paper on TPU, from arXiv and later published in 2017 ISCA.\
