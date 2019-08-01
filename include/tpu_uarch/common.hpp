@@ -25,7 +25,7 @@ typedef struct request request;
 struct tile {
     int order;
     unsigned int starting_address;
-
+    int jump_size;
     int tile_width;
     int tile_height;
     int total_width;
@@ -34,7 +34,7 @@ struct tile {
 typedef struct tile tile;
 
 request MakeRequest(int order, float size);
-tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile_height, int total_width, int total_height);
+tile MakeTile(int order, unsigned int starting_address, int jump_size, int tile_width, int tile_height, int total_width, int total_height);
 
 // functions for std::vector<request>
 void pop_front(std::vector<request> &v);

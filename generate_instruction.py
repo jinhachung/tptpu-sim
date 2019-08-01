@@ -49,6 +49,6 @@ for order in range(len(addrlist)):
     # "0x000000AB P_MEM_RD 1" for DRAMSim2
     #f.write(hexaddr + " P_MEM_RD " + str(order) + "\n")
     # "0x000000ab R" for ramulator
-    f.write(hexaddr + "R\n")
+    f.write(hexaddr + " R\n")
 
 f.close()

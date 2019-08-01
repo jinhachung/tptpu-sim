@@ -25,9 +25,9 @@ Cycle	src/tpu_uarch/mmu.cpp	/^void MatrixMultiplyUnit::Cycle() {$/;"	f	class:Mat
 Cycle	src/tpu_uarch/weightfetcher.cpp	/^void WeightFetcher::Cycle() {$/;"	f	class:WeightFetcher
 DIR	Makefile	/^DIR = $(dir $(OBJ))$/;"	m
 DRAM	include/tpu_uarch/dram.hpp	/^class DRAM: public Unit {$/;"	c
-DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM(std::string name) {$/;"	f	class:DRAM
+DRAM	src/tpu_uarch/dram.cpp	/^DRAM::DRAM(std::string name, float frequency, int channels, int ranks) {$/;"	f	class:DRAM
 DRAM_H	include/tpu_uarch/dram.hpp	2;"	d
-DRAM_frequency	include/tpu_uarch/dram.hpp	/^    double DRAM_frequency;$/;"	m	class:DRAM
+DRAM_frequency	include/tpu_uarch/dram.hpp	/^    double DRAM_frequency;  \/\/ in MHz$/;"	m	class:DRAM
 DRAM_name	include/tpu_uarch/dram.hpp	/^    std::string DRAM_name;$/;"	m	class:DRAM
 GetAccumulatorSize	include/tpu_uarch/mmu.hpp	/^    int GetAccumulatorSize() {return accumulator_size;}$/;"	f	class:MatrixMultiplyUnit
 GetActivationTileQueue	include/tpu_uarch/cpu.hpp	/^    std::vector<tile> *GetActivationTileQueue() {return activation_tile_queue;}$/;"	f	class:CPU
@@ -95,7 +95,7 @@ LDFLAGS	Makefile	/^LDFLAGS :=$/;"	m
 LIBS	Makefile	/^LIBS :=$/;"	m
 MMU_H	include/tpu_uarch/mmu.hpp	2;"	d
 MakeRequest	src/tpu_uarch/common.cpp	/^request MakeRequest(int order, float size) {$/;"	f
-MakeTile	src/tpu_uarch/common.cpp	/^tile MakeTile(int order, unsigned int starting_address, int tile_width, int tile_height, int total_width, int total_height) {$/;"	f
+MakeTile	src/tpu_uarch/common.cpp	/^tile MakeTile(int order, unsigned int starting_address, int jump_size, int tile_width, int tile_height, int total_width, int total_height) {$/;"	f
 MatrixMultiply	src/tpu_uarch/controller.cpp	/^void Controller::MatrixMultiply(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 MatrixMultiplyUnit	include/tpu_uarch/mmu.hpp	/^class MatrixMultiplyUnit: public Unit {$/;"	c
 MatrixMultiplyUnit	src/tpu_uarch/mmu.cpp	/^MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher) {$/;"	f	class:MatrixMultiplyUnit
@@ -141,6 +141,7 @@ busy_cycle	include/tpu_uarch/mmu.hpp	/^    int busy_cycle;                 \/\/ 
 bw	include/tpu_uarch/interconnect.hpp	/^    float bw;                               \/\/ bandwidth in GB\/s$/;"	m	class:Interconnect
 capacity	include/tpu_uarch/buffer.hpp	/^    float capacity;         \/\/ 2 x size of one buffer$/;"	m	class:UnifiedBuffer
 capacity	include/tpu_uarch/mmu.hpp	/^    float capacity;                 \/\/ systolic_array_width x systolic_array_height$/;"	m	class:MatrixMultiplyUnit
+channels	generate_dram_config.py	/^channels        = sys.argv[2]$/;"	v
 clock	include/tpu_uarch/interconnect.hpp	/^    float clock;                            \/\/ clock in GHz$/;"	m	class:Interconnect
 controller	include/tpu_uarch/interconnect.hpp	/^    Controller *controller;                 \/\/ pointer to Controller$/;"	m	class:Interconnect
 current_order	include/tpu_uarch/mmu.hpp	/^    int current_order;              \/\/ the order being computer right now, 0 if none$/;"	m	class:MatrixMultiplyUnit
@@ -168,6 +169,7 @@ is_main_memory	include/tpu_uarch/mmu.hpp	/^    bool is_main_memory;$/;"	m	class:
 is_main_memory	include/tpu_uarch/weightfetcher.hpp	/^    bool is_main_memory;$/;"	m	class:WeightFetcher
 is_sender_main_memory	include/tpu_uarch/interconnect.hpp	/^    bool is_sender_main_memory;             \/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
 jump_size	generate_instruction.py	/^jump_size       = int(sys.argv[2])$/;"	v
+jump_size	include/tpu_uarch/common.hpp	/^    int jump_size;$/;"	m	struct:tile
 main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
@@ -181,6 +183,7 @@ org	generate_dram_config.py	/^    org = "DDR3_2Gb_x8"$/;"	v
 org	generate_dram_config.py	/^    org = "DDR4_4Gb_x8"$/;"	v
 pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
 pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<tile> &v) {$/;"	f
+ranks	generate_dram_config.py	/^ranks           = sys.argv[3]$/;"	v
 receiver	include/tpu_uarch/interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
 receiver_capacity	include/tpu_uarch/interconnect.hpp	/^    float receiver_capacity;                \/\/ total amount of bytes the receiver can endure (store) up to$/;"	m	class:Interconnect
 request	include/tpu_uarch/buffer.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
@@ -208,6 +211,8 @@ served_queue	include/tpu_uarch/weightfetcher.hpp	/^    std::vector<request> *ser
 size	include/tpu_uarch/common.hpp	/^    float size;$/;"	m	struct:request
 size	include/tpu_uarch/weightfetcher.hpp	/^    float size;$/;"	m	class:WeightFetcher
 stall_cycle	include/tpu_uarch/dram.hpp	/^    int stall_cycle;        \/\/ cycles DRAM needs to wait for it to fetch data from memory -> calculated via ramulator$/;"	m	class:DRAM
+standard	generate_dram_config.py	/^    standard = "DDR3"$/;"	v
+standard	generate_dram_config.py	/^    standard = "DDR4"$/;"	v
 start_address	generate_instruction.py	/^start_address   = int(sys.argv[1])$/;"	v
 starting_address	include/tpu_uarch/common.hpp	/^    unsigned int starting_address;$/;"	m	struct:tile
 systolic_array_height	include/tpu_uarch/controller.hpp	/^    int systolic_array_height;$/;"	m	class:Controller
@@ -230,6 +235,7 @@ total_height	generate_instruction.py	/^total_height    = int(sys.argv[6])$/;"	v
 total_height	include/tpu_uarch/common.hpp	/^    int total_height;$/;"	m	struct:tile
 total_width	generate_instruction.py	/^total_width     = int(sys.argv[5])$/;"	v
 total_width	include/tpu_uarch/common.hpp	/^    int total_width;$/;"	m	struct:tile
+tptpu_frequency	include/tpu_uarch/dram.hpp	/^    double tptpu_frequency; \/\/ in GHz$/;"	m	class:DRAM
 ub	include/tpu_uarch/mmu.hpp	/^    UnifiedBuffer *ub;              \/\/ pointer to Unified Buffer connected to this unit$/;"	m	class:MatrixMultiplyUnit
 ub_request_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_request_queue;$/;"	m	class:MatrixMultiplyUnit
 ub_sender_queue	include/tpu_uarch/mmu.hpp	/^    std::vector<request> *ub_sender_queue;$/;"	m	class:MatrixMultiplyUnit

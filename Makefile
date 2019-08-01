@@ -47,5 +47,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
 
 clean:
 	rm -rf $(OBJ_DIR)
+	rm ./ramulator_output/*
+	rm ./build/dram/*
 	rm $(TESTMMU)
 	rm $(TESTTILE)

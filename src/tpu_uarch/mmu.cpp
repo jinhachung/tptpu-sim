@@ -89,7 +89,7 @@ void MatrixMultiplyUnit::PrintStats() {
     std::cout << "======================================================================" << std::endl;
     std::cout << "\tMatrix Multiply Unit Statistics:" << std::endl;
     std::cout << "idle cycles: " << idle_cycle << ", busy cycles: " << busy_cycle << std::endl;
-    std::cout << "total number of computations performed by this Matrix Multiply Unit: " << total_computation_number << std::endl;
+    std::cout << "total number of computations performed by this MMU: " << total_computation_number << std::endl;
     std::cout << "======================================================================" << std::endl;
 }
 

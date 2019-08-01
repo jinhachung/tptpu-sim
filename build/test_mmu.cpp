@@ -5,14 +5,16 @@ int main(int argc, char *argv[]) {
     // 256 * 48KiB (12 * 2^20B) per buffer, 256 * 96KiB total (24MiB)
     float buffer_size = (float)(3 * (1 << 22));
     UnifiedBuffer *ub = new UnifiedBuffer(buffer_size);
-    // DDR3-1600K
-    //DRAM *dram = new DRAM("DDR3_1600K");
-    // DDR4-2400R
-    DRAM *dram = new DRAM("DDR4_2400R");
-    // 64KiB per tile, 4 tiles deep
-    WeightFetcher *wf = new WeightFetcher(65536, 4);
     float clock = 1;        // 1GHz
     float bw = 1000;        // 1000GB/s
+    int channels = 4;
+    int ranks = 8;
+    // DDR3-1600K
+    //DRAM *dram = new DRAM("DDR3_1600K", clock, channels, ranks);
+    // DDR4-2400R
+    DRAM *dram = new DRAM("DDR4_2400R", clock, channels, ranks);
+    // 64KiB per tile, 4 tiles deep
+    WeightFetcher *wf = new WeightFetcher(65536, 4);
     Interconnect *cpu_ub_icnt = new Interconnect((Unit *)cpu, (Unit *)ub, clock, bw, ub->GetCapacity(),
                                                  cpu->IsMainMemory(), cpu->GetSenderQueue(),
                                                  ub->GetServedQueue(), ub->GetWaitingQueue(), ub->GetRequestQueue());
@@ -57,6 +59,7 @@ int main(int argc, char *argv[]) {
     // test complete
     cpu_ub_icnt->PrintStats("CPU - Unified Buffer Interconnect");
     dram_wf_icnt->PrintStats("DRAM - Weight Fetcher Interconnect");
+    dram->PrintStats();
     mmu->PrintStats();
     return 0;
 }

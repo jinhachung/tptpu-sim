@@ -1,7 +1,8 @@
 #include "dram.hpp"
 #include <bits/stdc++.h>
+#include <sstream>
 
-DRAM::DRAM(std::string name) {
+DRAM::DRAM(std::string name, float frequency, int channels, int ranks) {
     is_main_memory = true;
     idle_cycle = 0;
     busy_cycle = 0;
@@ -10,13 +11,15 @@ DRAM::DRAM(std::string name) {
 
     DRAM_name = name;
     DRAM_frequency = GetFrequencyByName(name);
+    tptpu_frequency = (double)frequency;
 
     sender_queue = new std::vector<request>();
     memory_request_queue = new std::vector<request>();
     weight_tile_queue = new std::vector<tile>();
 
-    // set DRAM name in dram-config.cfg
-    std::string cmdline = "python generate_dram_config.py " + DRAM_name;
+    // set DRAM standard, channels, ranks, speed and org in dram-config.cfg
+    std::string cmdline = "python generate_dram_config.py "
+                          + DRAM_name + " " + std::to_string(channels) + " " + std::to_string(ranks);
     system(cmdline.c_str());
 }
 
@@ -59,7 +62,91 @@ void DRAM::ReceiveRequestSignal(int order, float size) {
 }
 
 int DRAM::CalculateStallCycle() {
-    return 1;
+    std::vector<tile>::iterator it;
+    //int order, tile_width, tile_height, total_width, total_height, jump_size;
+    //unsigned int starting_address;
+    //std::string cmd_line;
+    int order;
+    std::string order_string, tile_width, tile_height, total_width, total_height, jump_size, starting_address, cmd_line;
+    std::string file_name;
+    order = memory_request_queue->front().order;
+    // search tile queue for tile information
+    for (it = weight_tile_queue->begin(); it != weight_tile_queue->end(); ++it) {
+        if (order == it->order)
+            break;
+    }
+    // we must have found the correct tile
+    assert(it != weight_tile_queue->end());
+
+    // set values
+    tile_width          = std::to_string(it->tile_width);
+    tile_height         = std::to_string(it->tile_height);
+    total_width         = std::to_string(it->total_width);
+    total_height        = std::to_string(it->total_height);
+    jump_size           = std::to_string(it->jump_size);
+    starting_address    = std::to_string(it->starting_address);
+    order_string        = std::to_string(order);
+    // set command to generate instruction trace
+    cmd_line = "python generate_instruction.py " + starting_address
+               + " " + jump_size + " " + tile_width + " " + tile_height
+               + " " + total_width + " " + total_height + " " + order_string + " dram";
+    system(cmd_line.c_str());
+    
+    // set command to run ramulator
+    cmd_line = "./../ramulator/ramulator dram-config.cfg --mode=dram --stats ./ramulator_output/"
+               + order_string + ".output.txt ./build/dram/" + order_string + ".trace";
+    system(cmd_line.c_str());
+    
+    // now the result is written to ramulator_output/order.output.txt
+    file_name = "ramulator_output/" + order_string + ".output.txt";
+    // this part is ad hoc, taken from StackOverflow: "C++ searching text file for
+    // a particular string and returning the line number where that string is on"
+    std::ifstream fileInput;
+    std::string line = "not found yet";
+    std::string searchstring = "ramulator.dram_cycles";
+    const char *search = searchstring.c_str();
+    
+    // open file
+    fileInput.open(file_name);
+    if (!fileInput.is_open()) {
+        std::cerr << "File " << file_name << " cannot be opened." << std::endl;
+        assert(0);
+    }
+
+    // look for "ramulator.dram_cycles" in file
+    while(getline(fileInput, line)) {
+        if (line.find(search, 0) != std::string::npos) {
+            // found
+            break;
+        }
+    }
+
+    // close file
+    fileInput.close();
+
+    // now, line should hold the string with the number of total dram cycles simulated
+    // this part is ad hoc, taken from https://www.geeksforgeeks.org/extract-integers-string-c/
+    std::stringstream ss;
+    ss << line;
+    std::string temp;
+    int ramulator_dram_cycles = -1;
+    int tptpu_dram_cycles;
+    while (!ss.eof()) {
+        ss >> temp;
+        if (std::stringstream(temp) >> ramulator_dram_cycles) {
+            break;
+        }
+    }
+    // check for correctness of ramulator.dram_cycles
+    if (ramulator_dram_cycles == -1) {
+        std::cerr << "Could not find 'ramulator.dram_cycles' in file " << file_name << std::endl;
+        assert(0);
+    }
+
+    // now calculate tptpu's dram_cycles
+    tptpu_dram_cycles = (int)((ramulator_dram_cycles * tptpu_frequency * (double)1000 - 1) / DRAM_frequency) + 1;
+
+    return tptpu_dram_cycles;
 }
 
 void DRAM::Cycle() {

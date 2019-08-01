@@ -11,7 +11,7 @@ typedef struct tile tile;
 
 class DRAM: public Unit {
 public:
-    DRAM(std::string name);
+    DRAM(std::string name, float frequency, int channels, int ranks);
     ~DRAM();
 
     double GetFrequencyByName(std::string name);
@@ -40,7 +40,8 @@ private:
     float total_data_size;  // total size of bytes brought in via DRAM
     
     std::string DRAM_name;
-    double DRAM_frequency;
+    double DRAM_frequency;  // in MHz
+    double tptpu_frequency; // in GHz
 
     std::vector<request> *sender_queue;
     std::vector<request> *memory_request_queue; // queue of memory request coming from the other side of Interconnect
