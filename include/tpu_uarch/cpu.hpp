@@ -13,6 +13,8 @@ class CPU: public Unit {
 public:
     CPU();
     ~CPU();
+
+    void ReceiveRequestSignal(int order, float size);
     void Cycle();
     
     bool IsMainMemory() {return is_main_memory;}
@@ -26,6 +28,7 @@ private:
     bool is_main_memory;
 
     std::vector<request> *sender_queue;
+    std::vector<request> *memory_request_queue; // queue of memory request coming from the other side of Interconnect
     // shared with Controller
     std::vector<tile> *activation_tile_queue;
 };

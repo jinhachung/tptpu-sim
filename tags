@@ -109,6 +109,7 @@ PushRequestsFromTiles	src/tpu_uarch/controller.cpp	/^void Controller::PushReques
 RaiseDoneSignal	src/tpu_uarch/controller.cpp	/^void Controller::RaiseDoneSignal(Unit *done_unit, int order) {$/;"	f	class:Controller
 ReceiveRequest	src/tpu_uarch/interconnect.cpp	/^void Interconnect::ReceiveRequest(request req) {$/;"	f	class:Interconnect
 ReceiveRequestSignal	include/tpu_uarch/unit.hpp	/^    virtual void ReceiveRequestSignal(int order, float size) {assert(0);}$/;"	f	class:Unit
+ReceiveRequestSignal	src/tpu_uarch/cpu.cpp	/^void CPU::ReceiveRequestSignal(int order, float size) {$/;"	f	class:CPU
 ReceiveRequestSignal	src/tpu_uarch/dram.cpp	/^void DRAM::ReceiveRequestSignal(int order, float size) {$/;"	f	class:DRAM
 ReceiverFull	src/tpu_uarch/interconnect.cpp	/^bool Interconnect::ReceiverFull() {$/;"	f	class:Interconnect
 ReceiversSenderQueueSize	src/tpu_uarch/interconnect.cpp	/^float Interconnect::ReceiversSenderQueueSize() {$/;"	f	class:Interconnect
@@ -171,6 +172,7 @@ main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+memory_request_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *memory_request_queue; \/\/ queue of memory request coming from the other side of Interconnect$/;"	m	class:CPU
 memory_request_queue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *memory_request_queue; \/\/ queue of memory request coming from the other side of Interconnect$/;"	m	class:DRAM
 mmu	include/tpu_uarch/controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
 order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:request

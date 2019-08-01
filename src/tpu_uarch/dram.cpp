@@ -1,5 +1,4 @@
 #include "dram.hpp"
-#include <vector>
 #include <bits/stdc++.h>
 
 DRAM::DRAM(std::string name) {
@@ -64,16 +63,6 @@ int DRAM::CalculateStallCycle() {
 }
 
 void DRAM::Cycle() {
-    /*
-    // only for easy debugging... will change to use ramulator later on
-    if (!memory_request_queue->empty()) {
-        request req = memory_request_queue->front();
-        sender_queue->push_back(MakeRequest(req.order, req.size));
-        pop_front(*memory_request_queue);
-    }
-    return;
-    */
-    // in development..
     if (stall_cycle == 0) {
         if (memory_request_queue->empty()) {
             // not bringing in data, not requested to bring in either -> idle
