@@ -120,6 +120,8 @@ TESTMMU	Makefile	/^TESTMMU := .\/build\/testmmu.exe$/;"	m
 TESTMMU_OBJ	Makefile	/^TESTMMU_OBJ := .\/obj\/test_mmu.o$/;"	m
 TESTTILE	Makefile	/^TESTTILE := .\/build\/testtile.exe$/;"	m
 TESTTILE_OBJ	Makefile	/^TESTTILE_OBJ := .\/obj\/test_tile.o$/;"	m
+TESTTPTPU	Makefile	/^TESTTPTPU := .\/build\/testtptpu.exe$/;"	m
+TESTTPTPU_OBJ	Makefile	/^TESTTPTPU_OBJ := .\/obj\/test_tptpu.o$/;"	m
 Tile	src/tpu_uarch/controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 UNIT_H	include/tpu_uarch/unit.hpp	2;"	d
 UnifiedBuffer	include/tpu_uarch/buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
@@ -172,6 +174,7 @@ jump_size	generate_instruction.py	/^jump_size       = int(sys.argv[2])$/;"	v
 jump_size	include/tpu_uarch/common.hpp	/^    int jump_size;$/;"	m	struct:tile
 main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	build/test_tptpu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 memory_request_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *memory_request_queue; \/\/ queue of memory request coming from the other side of Interconnect$/;"	m	class:CPU
