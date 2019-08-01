@@ -182,8 +182,8 @@ void Interconnect::Cycle() {
 
 void Interconnect::PrintStats(std::string name) {
    std::cout << "======================================================================" << std::endl;
-   std::cout << "\t" << name << " Statistics:" << std::endl;
-   std::cout << "idle cycles: " << idle_cycle << ", busy cycles: " << busy_cycle << std::endl;
-   std::cout << "total bytes sent over this interconnect: " << sent_size << std::endl;
+   std::cout << "\t\t" << name << " Statistics:" << std::endl;
+   std::cout << "\tidle cycles: " << idle_cycle << ",\t\tbusy cycles: " << busy_cycle << std::endl;
+   std::cout << "total bytes sent over this interconnect:\t\t" << sent_size << std::endl;
    std::cout << "======================================================================" << std::endl;
 }

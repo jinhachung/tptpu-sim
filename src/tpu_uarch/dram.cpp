@@ -176,9 +176,9 @@ void DRAM::Cycle() {
 
 void DRAM::PrintStats() {
     std::cout << "======================================================================" << std::endl;
-    std::cout << "\t" << DRAM_name << " DRAM Statistics:" << std::endl;
-    std::cout << "idle cycles: " << idle_cycle << ", busy cycles: " << busy_cycle << std::endl;
-    std::cout << "total bytes brought in via this DRAM: " << total_data_size << std::endl;
+    std::cout << "\t\t" << DRAM_name << " DRAM Statistics:" << std::endl;
+    std::cout << "\tidle cycles: " << idle_cycle << ",\t\tbusy cycles: " << busy_cycle << std::endl;
+    std::cout << "total bytes brought in from this DRAM:\t\t\t" << total_data_size << std::endl;
     std::cout << "======================================================================" << std::endl;
 }
 

@@ -1,5 +1,6 @@
 TESTTILE := ./build/testtile.exe
 TESTMMU := ./build/testmmu.exe
+TESTTPTPU := ./build/testtptpu.exe
 
 CC := g++
 CPP_SUFFIX := cpp
@@ -22,9 +23,10 @@ OBJ = $(patsubst $(SRC_DIR)/%.$(CPP_SUFFIX), $(OBJ_DIR)/%.o, $(SRC))
 
 DIR = $(dir $(OBJ))
 
-# for tests
+# objects not mutually shared among tests
 TESTTILE_OBJ := ./obj/test_tile.o
 TESTMMU_OBJ := ./obj/test_mmu.o
+TESTTPTPU_OBJ := ./obj/test_tptpu.o
 
 # executables
 testtile: dir $(OBJ) $(TESTTILE_OBJ)
@@ -32,6 +34,9 @@ testtile: dir $(OBJ) $(TESTTILE_OBJ)
 
 testmmu: dir $(OBJ) $(TESTMMU_OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TESTMMU_OBJ) -o $(TESTMMU) $(LIBS)
+
+testtptpu: dir $(OBJ) $(TESTTPTPU_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TESTTPTPU_OBJ) -o $(TESTTPTPU) $(LIBS)
 
 dir:
 	mkdir -p $(DIR)
@@ -42,6 +47,9 @@ obj/test_tile.o: $(BUILD_DIR)/test_tile.cpp
 obj/test_mmu.o: $(BUILD_DIR)/test_mmu.cpp
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/test_mmu.cpp -o ./obj/test_mmu.o
 
+obj/test_tptpu.o: $(BUILD_DIR)/test_tptpu.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/test_tptpu.cpp -o ./obj/test_tptpu.o
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
 
@@ -49,5 +57,6 @@ clean:
 	rm -rf $(OBJ_DIR)
 	rm ./ramulator_output/*
 	rm ./build/dram/*
+	rm $(TESTTPTPU)
 	rm $(TESTMMU)
 	rm $(TESTTILE)
