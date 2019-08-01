@@ -98,8 +98,8 @@ int main(int argc, char *argv[]) {
     Controller *ctrl = new Controller(mmu, icnt_list, dram->GetWeightTileQueue(), cpu->GetActivationTileQueue());
     // setting complete
     // generate request for matrix multiplication
-    unsigned int weight_starting_address = 3422552064;      // 0xcc000000 = 3422552064
-    unsigned int activation_starting_address = 3758096384;  // 0xe0000000 = 3758096384
+    unsigned int weight_starting_address        = 0xcc000000;
+    unsigned int activation_starting_address    = 0xe0000000;
     ctrl->MatrixMultiply(X, Y, Z, is_nchw, 3, weight_starting_address, activation_starting_address);
     
     while (!(cpu_ub_icnt->IsIdle() && dram_wf_icnt->IsIdle() && ub_mmu_icnt->IsIdle() && wf_mmu_icnt->IsIdle() && mmu->IsIdle())) {
