@@ -148,6 +148,7 @@ depth	include/tpu_uarch/weightfetcher.hpp	/^    int depth;$/;"	m	class:WeightFet
 directory_name	generate_instruction.py	/^directory_name  = "build\/" + sys.argv[8]$/;"	v
 dram_name	generate_dram_config.py	/^dram_name       = sys.argv[1]$/;"	v
 f	generate_instruction.py	/^f = open(file_name, "w+")$/;"	v
+file_name	generate_dram_config.py	/^file_name = "dram-config.cfg"$/;"	v
 file_name	generate_instruction.py	/^file_name       = directory_name + "\/" + sys.argv[7] + ".trace"$/;"	v
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<request> &v, int order) {$/;"	f
 find_and_delete_by_order	src/tpu_uarch/common.cpp	/^void find_and_delete_by_order(std::vector<tile> &v, int order) {$/;"	f
@@ -174,6 +175,8 @@ memory_request_queue	include/tpu_uarch/dram.hpp	/^    std::vector<request> *memo
 mmu	include/tpu_uarch/controller.hpp	/^    MatrixMultiplyUnit *mmu;$/;"	m	class:Controller
 order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:request
 order	include/tpu_uarch/common.hpp	/^    int order;$/;"	m	struct:tile
+org	generate_dram_config.py	/^    org = "DDR3_2Gb_x8"$/;"	v
+org	generate_dram_config.py	/^    org = "DDR4_4Gb_x8"$/;"	v
 pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<request> &v) {$/;"	f
 pop_front	src/tpu_uarch/common.cpp	/^void pop_front(std::vector<tile> &v) {$/;"	f
 receiver	include/tpu_uarch/interconnect.hpp	/^    Unit *receiver;                         \/\/ pointer to the receiver of this interconnect$/;"	m	class:Interconnect
