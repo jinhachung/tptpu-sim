@@ -6,16 +6,17 @@ https://arxiv.org/ftp/arxiv/papers/1704/1704.04760.pdf
 
 ### Purpose:
 
-TPTPU-Sim is a cycle-level simulator built to simulate with different bandwidth/frequency configurations than the original TPU to see what changes, and gain more insight into how architecture for deep learning should focus on.
-
+TPTPU-Sim is a cycle-level simulator built to simulate with different bandwidth/frequency configurations than the original TPU to see what changes, and gain more insight into how architecture for deep learning should focus on.\
+Currently, only TPTPU version 1, which models TPU version 1 is available.\
+TPTPU version 2 is *still in deployment*.
 
 ### How to run TPTPU:
 1. clone both TPTPU(https://github.com/gobblygobble/tptpu-sim) and Ramulator(https://github.com/CMU-SAFARI/ramulator) into the same directory
 2. build ramulator with `make -j` in ramulator directory
-3. build tptpu-sim with `make testtptpu` in tptpu-sim directory
+3. build tptpu-sim with `make tptpu1` in tptpu-sim directory to build TPTPU-Sim version 1
 4. run simulator with proper options\
 (`-d D -c C -r R -x X -y Y -z Z -l L` for X-by-Y matrix times Y-by-Z matrix multiplication with DRAM type D, with C channels and R ranks, and dimension layout L - `nchw` or `nhwc`)\
-Different types of DRAMs supported can be easily spotted in the function `double DRAM::GetFrequencyByName(std::string name)` of `tptpu-sim/src/dram.cpp`.
+Different types of DRAMs supported can be easily spotted in the function `double DRAM::GetFrequencyByName(std::string name)` of `tptpu-sim/src/tpu1_uarch/dram.cpp`. (`tptpu-sim/src/tpu2_uarch/dram.cpp` for TPTPU-Sim version 2)
 
 For example:
 ```
@@ -26,8 +27,8 @@ cd ramulator/
 make -j
 cd ..
 cd tptpu-sim/
-make testtptpu
-.build/testtptpu.exe -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
+make tptpu1
+.build/sim_tptpu1.exe -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
 ```
 
 ### Architecture:
