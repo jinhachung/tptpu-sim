@@ -1,0 +1,64 @@
+tptpu1: tptpu1-tiletest tptpu1-mmutest tptpu1-sim
+
+TPTPU1_TILE_TEST := ./build/tile_test_tptpu1.exe
+TPTPU1_MMU_TEST := ./build/mmu_test_tptpu1.exe
+TPTPU1_SIM := ./build/sim_tptpu1.exe
+
+CC := g++
+CPP_SUFFIX := cpp
+
+INCLUDE_DIR := -I./include/tpu1_uarch
+SRC_DIR = ./src
+OBJ_DIR = ./obj
+BUILD_DIR = ./build
+
+CFLAGS := -g -Wall -std=c++11
+LDFLAGS :=
+LIBS :=
+
+# all sources
+SRC = $(wildcard $(SRC_DIR)/*.$(CPP_SUFFIX))
+SRC += $(wildcard $(SRC_DIR)/tpu1_uarch/*.$(CPP_SUFFIX))
+
+# objects
+OBJ = $(patsubst $(SRC_DIR)/%.$(CPP_SUFFIX), $(OBJ_DIR)/%.o, $(SRC))
+
+DIR = $(dir $(OBJ))
+
+# objects not mutually shared among tests
+TPTPU1_TILE_TEST_OBJ := ./obj/tile_test_tptpu1.o
+TPTPU1_MMU_TEST_OBJ := ./obj/mmu_test_tptpu1.o
+TPTPU1_SIM_OBJ := ./obj/sim_tptpu1.o
+
+# executables
+tptpu1-tiletest: dir $(OBJ) $(TPTPU1_TILE_TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_TILE_TEST_OBJ) -o $(TPTPU1_TILE_TEST) $(LIBS)
+
+tptpu1-mmutest: dir $(OBJ) $(TPTPU1_MMU_TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_MMU_TEST_OBJ) -o $(TPTPU1_MMU_TEST) $(LIBS)
+
+tptpu1-sim: dir $(OBJ) $(TPTPU1_SIM_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_SIM_OBJ) -o $(TPTPU1_SIM) $(LIBS)
+
+dir:
+	mkdir -p $(DIR)
+
+obj/tile_test_tptpu1.o: $(BUILD_DIR)/tile_test_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/tile_test_tptpu1.cpp -o ./obj/tile_test_tptpu1.o
+
+obj/mmu_test_tptpu1.o: $(BUILD_DIR)/mmu_test_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/mmu_test_tptpu1.cpp -o ./obj/mmu_test_tptpu1.o
+
+obj/sim_tptpu1.o: $(BUILD_DIR)/sim_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/sim_tptpu1.cpp -o ./obj/sim_tptpu1.o
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
+
+clean:
+	-rm -rf $(OBJ_DIR)
+	-rm ./ramulator_output1/*
+	-rm ./build/dram1/*
+	-rm $(TPTPU1_SIM)
+	-rm $(TPTPU1_MMU_TEST)
+	-rm $(TPTPU1_TILE_TEST)

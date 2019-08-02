@@ -1,64 +1,20 @@
-tptpu1: tptpu1-tiletest tptpu1-mmutest tptpu1-sim
+# Makefile to take care of both Makefile.tptpu1 and Makefile.tptpu2
 
-TPTPU1_TILE_TEST := ./build/tile_test_tptpu1.exe
-TPTPU1_MMU_TEST := ./build/mmu_test_tptpu1.exe
-TPTPU1_SIM := ./build/sim_tptpu1.exe
+tptpu1:
+	make tptpu1 -f Makefile.tptpu1
 
-CC := g++
-CPP_SUFFIX := cpp
+sim1:
+	make tptpu1-sim -f Makefile.tptpu1
 
-INCLUDE_DIR := -I./include/tpu_uarch
-SRC_DIR = ./src
-OBJ_DIR = ./obj
-BUILD_DIR = ./build
+mmu1:
+	make tptpu1-mmutest -f Makefile.tptpu1
 
-CFLAGS := -g -Wall -std=c++11
-LDFLAGS :=
-LIBS :=
+tile1:
+	make tptpu1-tiletest -f Makefile.tptpu1
 
-# all sources
-SRC = $(wildcard $(SRC_DIR)/*.$(CPP_SUFFIX))
-SRC += $(wildcard $(SRC_DIR)/**/*.$(CPP_SUFFIX))
-
-# objects
-OBJ = $(patsubst $(SRC_DIR)/%.$(CPP_SUFFIX), $(OBJ_DIR)/%.o, $(SRC))
-
-DIR = $(dir $(OBJ))
-
-# objects not mutually shared among tests
-TPTPU1_TILE_TEST_OBJ := ./obj/tile_test_tptpu1.o
-TPTPU1_MMU_TEST_OBJ := ./obj/mmu_test_tptpu1.o
-TPTPU1_SIM_OBJ := ./obj/sim_tptpu1.o
-
-# executables
-tptpu1-tiletest: dir $(OBJ) $(TPTPU1_TILE_TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_TILE_TEST_OBJ) -o $(TPTPU1_TILE_TEST) $(LIBS)
-
-tptpu1-mmutest: dir $(OBJ) $(TPTPU1_MMU_TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_MMU_TEST_OBJ) -o $(TPTPU1_MMU_TEST) $(LIBS)
-
-tptpu1-sim: dir $(OBJ) $(TPTPU1_SIM_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_SIM_OBJ) -o $(TPTPU1_SIM) $(LIBS)
-
-dir:
-	mkdir -p $(DIR)
-
-obj/tile_test_tptpu1.o: $(BUILD_DIR)/tile_test_tptpu1.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/tile_test_tptpu1.cpp -o ./obj/tile_test_tptpu1.o
-
-obj/mmu_test_tptpu1.o: $(BUILD_DIR)/mmu_test_tptpu1.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/mmu_test_tptpu1.cpp -o ./obj/mmu_test_tptpu1.o
-
-obj/sim_tptpu1.o: $(BUILD_DIR)/sim_tptpu1.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/sim_tptpu1.cpp -o ./obj/sim_tptpu1.o
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
+tptpu2:
+	make tptpu2 -f Makefile.tptpu2
 
 clean:
-	rm -rf $(OBJ_DIR)
-	rm ./ramulator_output/*
-	rm ./build/dram/*
-	rm $(TPTPU1_SIM)
-	rm $(TPTPU1_MMU_TEST)
-	rm $(TPTPU1_TILE_TEST)
+	-make clean -f Makefile.tptpu1
+	-make clean -f Makefile.tptpu2

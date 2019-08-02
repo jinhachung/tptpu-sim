@@ -89,16 +89,16 @@ int DRAM::CalculateStallCycle() {
     // set command to generate instruction trace
     cmd_line = "python generate_instruction.py " + starting_address
                + " " + jump_size + " " + tile_width + " " + tile_height
-               + " " + total_width + " " + total_height + " " + order_string + " dram";
+               + " " + total_width + " " + total_height + " " + order_string + " dram1";
     system(cmd_line.c_str());
     
     // set command to run ramulator
-    cmd_line = "./../ramulator/ramulator dram-config.cfg --mode=dram --stats ./ramulator_output/"
-               + order_string + ".output.txt ./build/dram/" + order_string + ".trace";
+    cmd_line = "./../ramulator/ramulator dram-config.cfg --mode=dram --stats ./ramulator_output1/"
+               + order_string + ".output.txt ./build/dram1/" + order_string + ".trace";
     system(cmd_line.c_str());
     
-    // now the result is written to ramulator_output/order.output.txt
-    file_name = "ramulator_output/" + order_string + ".output.txt";
+    // now the result is written to ramulator_output1/order.output.txt
+    file_name = "ramulator_output1/" + order_string + ".output.txt";
     // this part is ad hoc, taken from StackOverflow: "C++ searching text file for
     // a particular string and returning the line number where that string is on"
     std::ifstream fileInput;
