@@ -15,8 +15,8 @@ int main(int argc, char *argv[]) {
     std::string dram_name, dimension_layout;
     bool is_nchw;
     // set default values:
-    channels = 1;
-    ranks = 1;
+    channels = 2;
+    ranks = 2;
     X = 640;
     Y = 640;
     Z = 1080;

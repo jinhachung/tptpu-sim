@@ -116,12 +116,12 @@ ReceiversSenderQueueSize	src/tpu_uarch/interconnect.cpp	/^float Interconnect::Re
 SRC	Makefile	/^SRC = $(wildcard $(SRC_DIR)\/*.$(CPP_SUFFIX))$/;"	m
 SRC_DIR	Makefile	/^SRC_DIR = .\/src$/;"	m
 SetController	include/tpu_uarch/interconnect.hpp	/^    void SetController(Controller *ctrl) {controller = ctrl;}$/;"	f	class:Interconnect
-TESTMMU	Makefile	/^TESTMMU := .\/build\/testmmu.exe$/;"	m
-TESTMMU_OBJ	Makefile	/^TESTMMU_OBJ := .\/obj\/test_mmu.o$/;"	m
-TESTTILE	Makefile	/^TESTTILE := .\/build\/testtile.exe$/;"	m
-TESTTILE_OBJ	Makefile	/^TESTTILE_OBJ := .\/obj\/test_tile.o$/;"	m
-TESTTPTPU	Makefile	/^TESTTPTPU := .\/build\/testtptpu.exe$/;"	m
-TESTTPTPU_OBJ	Makefile	/^TESTTPTPU_OBJ := .\/obj\/test_tptpu.o$/;"	m
+TPTPU1_MMU_TEST	Makefile	/^TPTPU1_MMU_TEST := .\/build\/mmu_test_tptpu1.exe$/;"	m
+TPTPU1_MMU_TEST_OBJ	Makefile	/^TPTPU1_MMU_TEST_OBJ := .\/obj\/mmu_test_tptpu1.o$/;"	m
+TPTPU1_SIM	Makefile	/^TPTPU1_SIM := .\/build\/sim_tptpu1.exe$/;"	m
+TPTPU1_SIM_OBJ	Makefile	/^TPTPU1_SIM_OBJ := .\/obj\/sim_tptpu1.o$/;"	m
+TPTPU1_TILE_TEST	Makefile	/^TPTPU1_TILE_TEST := .\/build\/tile_test_tptpu1.exe$/;"	m
+TPTPU1_TILE_TEST_OBJ	Makefile	/^TPTPU1_TILE_TEST_OBJ := .\/obj\/tile_test_tptpu1.o$/;"	m
 Tile	src/tpu_uarch/controller.cpp	/^void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,$/;"	f	class:Controller
 UNIT_H	include/tpu_uarch/unit.hpp	2;"	d
 UnifiedBuffer	include/tpu_uarch/buffer.hpp	/^class UnifiedBuffer: public Unit {$/;"	c
@@ -172,9 +172,9 @@ is_main_memory	include/tpu_uarch/weightfetcher.hpp	/^    bool is_main_memory;$/;
 is_sender_main_memory	include/tpu_uarch/interconnect.hpp	/^    bool is_sender_main_memory;             \/\/ whether the sender is main memory or not$/;"	m	class:Interconnect
 jump_size	generate_instruction.py	/^jump_size       = int(sys.argv[2])$/;"	v
 jump_size	include/tpu_uarch/common.hpp	/^    int jump_size;$/;"	m	struct:tile
-main	build/test_mmu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
-main	build/test_tile.cpp	/^int main(int argc, char *argv[]) {$/;"	f
-main	build/test_tptpu.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	build/mmu_test_tptpu1.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	build/sim_tptpu1.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+main	build/tile_test_tptpu1.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_cpu_icnt_ub.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	outdated/test_dram_icnt_wf.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 memory_request_queue	include/tpu_uarch/cpu.hpp	/^    std::vector<request> *memory_request_queue; \/\/ queue of memory request coming from the other side of Interconnect$/;"	m	class:CPU

@@ -1,6 +1,8 @@
-TESTTILE := ./build/testtile.exe
-TESTMMU := ./build/testmmu.exe
-TESTTPTPU := ./build/testtptpu.exe
+tptpu1: tptpu1-tiletest tptpu1-mmutest tptpu1-sim
+
+TPTPU1_TILE_TEST := ./build/tile_test_tptpu1.exe
+TPTPU1_MMU_TEST := ./build/mmu_test_tptpu1.exe
+TPTPU1_SIM := ./build/sim_tptpu1.exe
 
 CC := g++
 CPP_SUFFIX := cpp
@@ -24,31 +26,31 @@ OBJ = $(patsubst $(SRC_DIR)/%.$(CPP_SUFFIX), $(OBJ_DIR)/%.o, $(SRC))
 DIR = $(dir $(OBJ))
 
 # objects not mutually shared among tests
-TESTTILE_OBJ := ./obj/test_tile.o
-TESTMMU_OBJ := ./obj/test_mmu.o
-TESTTPTPU_OBJ := ./obj/test_tptpu.o
+TPTPU1_TILE_TEST_OBJ := ./obj/tile_test_tptpu1.o
+TPTPU1_MMU_TEST_OBJ := ./obj/mmu_test_tptpu1.o
+TPTPU1_SIM_OBJ := ./obj/sim_tptpu1.o
 
 # executables
-testtile: dir $(OBJ) $(TESTTILE_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TESTTILE_OBJ) -o $(TESTTILE) $(LIBS)
+tptpu1-tiletest: dir $(OBJ) $(TPTPU1_TILE_TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_TILE_TEST_OBJ) -o $(TPTPU1_TILE_TEST) $(LIBS)
 
-testmmu: dir $(OBJ) $(TESTMMU_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TESTMMU_OBJ) -o $(TESTMMU) $(LIBS)
+tptpu1-mmutest: dir $(OBJ) $(TPTPU1_MMU_TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_MMU_TEST_OBJ) -o $(TPTPU1_MMU_TEST) $(LIBS)
 
-testtptpu: dir $(OBJ) $(TESTTPTPU_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TESTTPTPU_OBJ) -o $(TESTTPTPU) $(LIBS)
+tptpu1-sim: dir $(OBJ) $(TPTPU1_SIM_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU1_SIM_OBJ) -o $(TPTPU1_SIM) $(LIBS)
 
 dir:
 	mkdir -p $(DIR)
 
-obj/test_tile.o: $(BUILD_DIR)/test_tile.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/test_tile.cpp -o ./obj/test_tile.o
+obj/tile_test_tptpu1.o: $(BUILD_DIR)/tile_test_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/tile_test_tptpu1.cpp -o ./obj/tile_test_tptpu1.o
 
-obj/test_mmu.o: $(BUILD_DIR)/test_mmu.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/test_mmu.cpp -o ./obj/test_mmu.o
+obj/mmu_test_tptpu1.o: $(BUILD_DIR)/mmu_test_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/mmu_test_tptpu1.cpp -o ./obj/mmu_test_tptpu1.o
 
-obj/test_tptpu.o: $(BUILD_DIR)/test_tptpu.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/test_tptpu.cpp -o ./obj/test_tptpu.o
+obj/sim_tptpu1.o: $(BUILD_DIR)/sim_tptpu1.cpp
+	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/sim_tptpu1.cpp -o ./obj/sim_tptpu1.o
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(CPP_SUFFIX)
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
@@ -57,6 +59,6 @@ clean:
 	rm -rf $(OBJ_DIR)
 	rm ./ramulator_output/*
 	rm ./build/dram/*
-	rm $(TESTTPTPU)
-	rm $(TESTMMU)
-	rm $(TESTTILE)
+	rm $(TPTPU1_SIM)
+	rm $(TPTPU1_MMU_TEST)
+	rm $(TPTPU1_TILE_TEST)
