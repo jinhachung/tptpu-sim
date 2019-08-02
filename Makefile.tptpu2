@@ -1,7 +1,5 @@
-tptpu2: tptpu2-tiletest tptpu2-mmutest tptpu2-sim
+tptpu2: tptpu2-sim
 
-TPTPU2_TILE_TEST := ./build/tile_test_tptpu2.exe
-TPTPU2_MMU_TEST := ./build/mmu_test_tptpu2.exe
 TPTPU2_SIM := ./build/sim_tptpu2.exe
 
 CC := g++
@@ -26,28 +24,14 @@ OBJ = $(patsubst $(SRC_DIR)/%.$(CPP_SUFFIX), $(OBJ_DIR)/%.o, $(SRC))
 DIR = $(dir $(OBJ))
 
 # objects not mutually shared among tests
-TPTPU2_TILE_TEST_OBJ := ./obj/tile_test_tptpu2.o
-TPTPU2_MMU_TEST_OBJ := ./obj/mmu_test_tptpu2.o
 TPTPU2_SIM_OBJ := ./obj/sim_tptpu2.o
 
 # executables
-tptpu2-tiletest: dir $(OBJ) $(TPTPU2_TILE_TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU2_TILE_TEST_OBJ) -o $(TPTPU2_TILE_TEST) $(LIBS)
-
-tptpu2-mmutest: dir $(OBJ) $(TPTPU2_MMU_TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU2_MMU_TEST_OBJ) -o $(TPTPU2_MMU_TEST) $(LIBS)
-
 tptpu2-sim: dir $(OBJ) $(TPTPU2_SIM_OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TPTPU2_SIM_OBJ) -o $(TPTPU2_SIM) $(LIBS)
 
 dir:
 	mkdir -p $(DIR)
-
-obj/tile_test_tptpu2.o: $(BUILD_DIR)/tile_test_tptpu2.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/tile_test_tptpu2.cpp -o ./obj/tile_test_tptpu2.o
-
-obj/mmu_test_tptpu2.o: $(BUILD_DIR)/mmu_test_tptpu2.cpp
-	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/mmu_test_tptpu2.cpp -o ./obj/mmu_test_tptpu2.o
 
 obj/sim_tptpu2.o: $(BUILD_DIR)/sim_tptpu2.cpp
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c ./build/sim_tptpu2.cpp -o ./obj/sim_tptpu2.o
@@ -60,5 +44,3 @@ clean:
 	-rm ./ramulator_output2/*
 	-rm ./build/dram2/*
 	-rm $(TPTPU2_SIM)
-	-rm $(TPTPU2_MMU_TEST)
-	-rm $(TPTPU2_TILE_TEST)
