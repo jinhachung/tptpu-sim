@@ -6,15 +6,18 @@ DRAM::DRAM(std::string name, float frequency, int channels, int ranks) {
     is_main_memory = true;
     idle_cycle = 0;
     busy_cycle = 0;
-    stall_cycle = 0;
+    wait_cycle = 0;
     total_data_size = (float)0;
 
     DRAM_name = name;
     DRAM_frequency = GetFrequencyByName(name);
     tptpu_frequency = (double)frequency;
 
-    sender_queue = new std::vector<request>();
+    ub_sender_queue = new std::vector<request>();
+    wf_sender_queue = new std::vector<request>();
     memory_request_queue = new std::vector<request>();
+    // shared with Controller
+    activation_tile_queue = new std::vector<tile>();
     weight_tile_queue = new std::vector<tile>();
 
     // set DRAM standard, channels, ranks, speed and org in dram-config.cfg
@@ -52,16 +55,19 @@ double DRAM::GetFrequencyByName(std::string name) {
         return (400.0 / 3) * 9;
     if (name == "DDR4_3200")
         return 1600.0;
+    // HBM
+    if (name == "HBM")
+        return 500.0;
     // should not reach here
     std::cerr << "*** Invalid DRAM name: " << name << " ***" << std::endl;
     assert(0);
 }
 
-void DRAM::ReceiveRequestSignal(int order, float size) {
+void DRAM::ReceiveRequestSignal(int order, float size, bool is_weight, bool is_activation) {
     memory_request_queue->push_back(MakeRequest(order, size));
 }
 
-int DRAM::CalculateStallCycle() {
+int DRAM::CalculateWaitCycle() {
     std::vector<tile>::iterator it;
     //int order, tile_width, tile_height, total_width, total_height, jump_size;
     //unsigned int starting_address;
@@ -150,20 +156,20 @@ int DRAM::CalculateStallCycle() {
 }
 
 void DRAM::Cycle() {
-    if (stall_cycle == 0) {
+    if (wait_cycle == 0) {
         if (memory_request_queue->empty()) {
             // not bringing in data, not requested to bring in either -> idle
             idle_cycle++;
             return;
         }
         // not bring in data, but has been requested to -> not idle
-        stall_cycle = CalculateStallCycle();
+        wait_cycle = CalculateWaitCycle();
     }
     // 'bring in data'
-    stall_cycle--;
+    wait_cycle--;
     busy_cycle++;
     // check if data transfer is complete
-    if (stall_cycle == 0) {
+    if (wait_cycle == 0) {
         // delete from memory_request_queue
         request req = memory_request_queue->front();
         pop_front(*memory_request_queue);
