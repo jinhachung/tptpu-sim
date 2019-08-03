@@ -130,6 +130,11 @@ void Interconnect::Cycle() {
                 // not in tiling_queue -> new request!
                 if (it == tiling_queue->end())
                     sender->GetRequestQueue()->push_back(MakeRequest(order, size));
+                else {
+                    // forgot how this can happen in the first place...
+                    // but nothing seems to reach here anyways
+                    assert(0);
+                }
             }
         }
         // take care of cycle
