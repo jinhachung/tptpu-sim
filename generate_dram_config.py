@@ -16,14 +16,18 @@ dram_name       = sys.argv[1]
 channels        = sys.argv[2]
 ranks           = sys.argv[3]
 
-assert "DDR3" in dram_name or "DDR4" in dram_name, "DRAM type should be DDR3 or DDR4"
+assert "DDR3" in dram_name or "DDR4" in dram_name or "HBM" in dram_name, "DRAM type should be one of: DDR3, DDR4, HBM"
 
 if ("DDR3" in dram_name):
     standard = "DDR3"
     org = "DDR3_2Gb_x8"
-else:
+else if ("DDR4" in dram_name):
     standard = "DDR4"
     org = "DDR4_4Gb_x8"
+else:
+    dram_name = "HBM_1Gbps"
+    standard = "HBM"
+    org = "HBM_4Gb"
 
 file_name = "dram-config.cfg"
 
