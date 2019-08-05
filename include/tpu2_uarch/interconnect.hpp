@@ -13,7 +13,6 @@ public:
     Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _bw, float _receiver_capacity,
                  bool _is_sender_main_memory, std::vector<request> *senderqueue, std::vector<request> *servedqueue,
                  std::vector<request> *waitingqueue, std::vector<request> *requestqueue);
-    ~Interconnect();
     // pushes the given request into receiver's waiting queue
     void ReceiveRequest(request req);
     bool ReceiverFull();

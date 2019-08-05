@@ -35,6 +35,14 @@ void find_and_delete_by_order(std::vector<request> &v, int order) {
     }
     if (it != v.end())
         v.erase(it);
+
+    // now erase the opposite sign
+    for (it = v.begin(); it != v.end(); ++it) {
+        if ((it->order + order) == 0)
+            break;
+    }
+    if (it != v.end())
+        v.erase(it);
 }
 
 // functions for std::vector<tile>
@@ -47,6 +55,13 @@ void find_and_delete_by_order(std::vector<tile> &v, int order) {
     std::vector<tile>::iterator it;
     for (it = v.begin(); it != v.end(); ++it) {
         if (it->order == order)
+            break;
+    }
+    v.erase(it);
+
+    // now erase the opposite sign
+    for (it = v.begin(); it != v.end(); ++it) {
+        if ((it->order + order) == 0)
             break;
     }
     v.erase(it);

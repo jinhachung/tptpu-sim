@@ -21,7 +21,7 @@ assert "DDR3" in dram_name or "DDR4" in dram_name or "HBM" in dram_name, "DRAM t
 if ("DDR3" in dram_name):
     standard = "DDR3"
     org = "DDR3_2Gb_x8"
-else if ("DDR4" in dram_name):
+elif ("DDR4" in dram_name):
     standard = "DDR4"
     org = "DDR4_4Gb_x8"
 else:

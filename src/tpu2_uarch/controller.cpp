@@ -66,7 +66,7 @@ void Controller::Tile(int A, int B, int C, bool is_dimension_nchw, int channel,
                 tile_width = (bb == (b - 1)) ? remainder_b : systolic_array_width;
                 tile_height = (aa == (a - 1)) ? remainder_a : systolic_array_height;
 
-                weight_tile_queue->push_back(MakeTile(id, starting_address, multiply_factor, tile_width, tile_height, total_width, total_height));
+                weight_tile_queue->push_back(MakeTile(-id, starting_address, multiply_factor, tile_width, tile_height, total_width, total_height));
                 // activations
                 starting_address = address_Y + multiply_factor * ((bb * systolic_array_width * C) + (cc * accumulator_size));
                 tile_width = (cc == (c - 1)) ? remainder_c : accumulator_size;

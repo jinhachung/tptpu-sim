@@ -6,7 +6,7 @@ WeightFetcher::WeightFetcher(float _size, int _depth, int sa_height) {
     is_main_memory = false;
 
     systolic_array_height = sa_height;
-    sa_filling_cycle; = 0;
+    sa_filling_cycle = 0;
     
     sender_queue = new std::vector<request>();
     served_queue = new std::vector<request>();
@@ -17,7 +17,7 @@ WeightFetcher::WeightFetcher(float _size, int _depth, int sa_height) {
 WeightFetcher::~WeightFetcher() {
     delete sender_queue;
     delete served_queue;
-    delete watiting_queue;
+    delete waiting_queue;
     delete request_queue;
 }
 
@@ -28,7 +28,7 @@ void WeightFetcher::Cycle() {
         sa_filling_cycle--;
         if (sa_filling_cycle == 0) {
             // finished flooding 
-            assert(!served_queue->empty())
+            assert(!served_queue->empty());
             req = served_queue->front();
             pop_front(*served_queue);
             sender_queue->push_back(MakeRequest(req.order, req.size));

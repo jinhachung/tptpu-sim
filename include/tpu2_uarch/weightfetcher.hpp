@@ -11,6 +11,7 @@ class Unit;
 class WeightFetcher: public Unit {
 public:
     WeightFetcher(float _size, int _depth, int sa_height);
+    ~WeightFetcher();
     void Cycle();
 
     bool IsMainMemory() {return is_main_memory;}

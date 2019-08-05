@@ -7,9 +7,7 @@ Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _
     receiver = _receiver;
     clock = _clock;
     bw = _bw;
-
     bpc = bw / clock;
-
     receiver_capacity = _receiver_capacity;
     is_sender_main_memory = _is_sender_main_memory;
 
@@ -23,13 +21,6 @@ Interconnect::Interconnect(Unit *_sender, Unit *_receiver, float _clock, float _
     served_queue = servedqueue;
     waiting_queue = waitingqueue;
     request_queue = requestqueue;
-}
-
-Interconnect::~Interconnect() {
-    delete sender_queue;
-    delete served_queue;
-    delete waiting_queue;
-    delete request_queue;
 }
 
 /* Called when another request is made from the receiver.

@@ -17,6 +17,7 @@ public:
     double GetFrequencyByName(std::string name);
     void ReceiveRequestSignal(int order, float size);
     int CalculateWaitCycle();
+    std::vector<request>::iterator GetNextMemoryRequestIterator();
     void Cycle();
 
     void PrintStats();
@@ -25,6 +26,8 @@ public:
     bool IsDRAM() {return true;}
     std::string GetDRAMName() {return DRAM_name;}
     double GetDRAMFrequency() {return DRAM_frequency;}
+    std::vector<request> *GetUBSenderQueue() {return ub_sender_queue;}
+    std::vector<request> *GetWFSenderQueue() {return wf_sender_queue;}
     std::vector<tile> *GetActivationTileQueue() {return activation_tile_queue;}
     std::vector<tile> *GetWeightTileQueue() {return weight_tile_queue;}
     // pure virtual functions
@@ -50,6 +53,8 @@ private:
     // shared with Controller
     std::vector<tile> *activation_tile_queue;
     std::vector<tile> *weight_tile_queue;
+    
+    std::vector<request>::iterator servicing_iterator;  // current iterator of memory_request_queue being serviced
 };
 
 #endif /* DRAM_H */

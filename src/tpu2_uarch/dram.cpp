@@ -20,6 +20,8 @@ DRAM::DRAM(std::string name, float frequency, int channels, int ranks) {
     activation_tile_queue = new std::vector<tile>();
     weight_tile_queue = new std::vector<tile>();
 
+    servicing_iterator = memory_request_queue->end();
+
     // set DRAM standard, channels, ranks, speed and org in dram-config.cfg
     std::string cmdline = "python generate_dram_config.py "
                           + DRAM_name + " " + std::to_string(channels) + " " + std::to_string(ranks);
@@ -27,6 +29,10 @@ DRAM::DRAM(std::string name, float frequency, int channels, int ranks) {
 }
 
 DRAM::~DRAM() {
+    delete ub_sender_queue;
+    delete wf_sender_queue;
+    delete memory_request_queue;
+    delete activation_tile_queue;
     delete weight_tile_queue;
 }
 
@@ -63,26 +69,37 @@ double DRAM::GetFrequencyByName(std::string name) {
     assert(0);
 }
 
-void DRAM::ReceiveRequestSignal(int order, float size, bool is_weight, bool is_activation) {
+void DRAM::ReceiveRequestSignal(int order, float size) {
     memory_request_queue->push_back(MakeRequest(order, size));
 }
 
+/* This functions calculates how many TPTPU cycles are required to bring in the requested data pointed to by servicing_iterator
+ * This is the part where it runs python scripts to generate memory access instructions, pass them to be run by Ramulator,
+ * read its output files, and scale them accordingly by TPTPU's running frequency and the configured DRAM's memory frequency
+ * This is the biggest bottleneck of TPTPU in terms of running time, because it uses multiple 'system()' functions
+ * Note that servicing_iterator MUST BE correctly set BEFORE running this function */
 int DRAM::CalculateWaitCycle() {
     std::vector<tile>::iterator it;
-    //int order, tile_width, tile_height, total_width, total_height, jump_size;
-    //unsigned int starting_address;
     //std::string cmd_line;
     int order;
     std::string order_string, tile_width, tile_height, total_width, total_height, jump_size, starting_address, cmd_line;
     std::string file_name;
-    order = memory_request_queue->front().order;
-    // search tile queue for tile information
-    for (it = weight_tile_queue->begin(); it != weight_tile_queue->end(); ++it) {
-        if (order == it->order)
-            break;
+    order = abs(servicing_iterator->order);
+    // look for tile info in the appropriate queue (check sign of order)
+    if (servicing_iterator->order > 0) {
+        for (it = activation_tile_queue->begin(); it != activation_tile_queue->end(); ++it) {
+            if (order == it->order)
+                break;
+        }
+    }
+    else {
+        for (it = weight_tile_queue->begin(); it != weight_tile_queue->end(); ++it) {
+            if ((it->order + order) == 0)
+                break;
+        }
     }
     // we must have found the correct tile
-    assert(it != weight_tile_queue->end());
+    assert((it != activation_tile_queue->end()) && (it != weight_tile_queue->end()));
 
     // set values
     tile_width          = std::to_string(it->tile_width);
@@ -155,14 +172,31 @@ int DRAM::CalculateWaitCycle() {
     return tptpu_dram_cycles;
 }
 
+/* This functions returns an iterator from memory_request_queue with the smallest ABSOLUTE value order
+ * It returns memory_request_queue->end() memory_request_queue is empty */
+std::vector<request>::iterator DRAM::GetNextMemoryRequestIterator() {
+    std::vector<request>::iterator it, return_it;
+    return_it = memory_request_queue->begin();
+    for (it = memory_request_queue->begin(); it != memory_request_queue->end(); ++it) {
+        // if absolute value of order of iterator is smaller than return_it's absolute value of order, change return_it
+        if (abs(it->order) < abs(return_it->order))
+            return_it = it;
+    }
+    // return_it is memory_request_queue->end() if the queue is empty
+    return return_it;
+}
+
 void DRAM::Cycle() {
     if (wait_cycle == 0) {
+        // sanity check
+        //assert(servicing_iterator == memory_request_queue->end());
         if (memory_request_queue->empty()) {
             // not bringing in data, not requested to bring in either -> idle
             idle_cycle++;
             return;
         }
         // not bring in data, but has been requested to -> not idle
+        servicing_iterator = GetNextMemoryRequestIterator();
         wait_cycle = CalculateWaitCycle();
     }
     // 'bring in data'
@@ -171,10 +205,15 @@ void DRAM::Cycle() {
     // check if data transfer is complete
     if (wait_cycle == 0) {
         // delete from memory_request_queue
-        request req = memory_request_queue->front();
-        pop_front(*memory_request_queue);
+        //request req = memory_request_queue->front();
+        //pop_front(*memory_request_queue);
+        request req = *servicing_iterator;
+        memory_request_queue->erase(servicing_iterator);
         // ready to send -> add to sender_queue
-        sender_queue->push_back(MakeRequest(req.order, req.size));
+        if (req.order > 0)
+            ub_sender_queue->push_back(MakeRequest(req.order, req.size));
+        else
+            wf_sender_queue->push_back(MakeRequest(req.order, req.size));
         total_data_size += (float)req.size;
     }
     // do nothing if data transfer is not complete yet

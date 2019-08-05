@@ -9,7 +9,6 @@
 
 #include "buffer.hpp"
 #include "controller.hpp"
-#include "cpu.hpp"
 #include "dram.hpp"
 #include "interconnect.hpp"
 #include "mmu.hpp"

@@ -13,6 +13,7 @@ class WeightFetcher;
 class MatrixMultiplyUnit: public Unit {
 public:
     MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size, UnifiedBuffer *unifiedbuffer, WeightFetcher *weightfetcher);
+    ~MatrixMultiplyUnit();
 
     void UpdateTilingQueue();
     bool IsIdle();

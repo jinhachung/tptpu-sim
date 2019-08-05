@@ -11,6 +11,7 @@ class Unit;
 class UnifiedBuffer: public Unit {
 public:
     UnifiedBuffer(float buffer_size);
+    ~UnifiedBuffer();
     void Cycle();
     
     bool IsMainMemory() {return is_main_memory;}

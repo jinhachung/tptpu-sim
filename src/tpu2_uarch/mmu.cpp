@@ -16,16 +16,26 @@ MatrixMultiplyUnit::MatrixMultiplyUnit(int sa_width, int sa_height, int acc_size
     ub = unifiedbuffer;
     wf = weightfetcher;
 
-    wf_sender_queue = weightfetcher->GetSenderQueue();  // already allocated in Interconnect
+    wf_sender_queue = weightfetcher->GetSenderQueue();
     wf_served_queue = new std::vector<request>();
     wf_waiting_queue = new std::vector<request>();
     wf_request_queue = new std::vector<request>();
-    ub_sender_queue = unifiedbuffer->GetSenderQueue();  // already allocated in Interconnect
+    ub_sender_queue = unifiedbuffer->GetSenderQueue();
     ub_served_queue = new std::vector<request>();
     ub_waiting_queue = new std::vector<request>();
     ub_request_queue = new std::vector<request>();
     
     tiling_queue = new std::vector<request>();
+}
+
+MatrixMultiplyUnit::~MatrixMultiplyUnit() {
+    delete wf_served_queue;
+    delete wf_waiting_queue;
+    delete wf_request_queue;
+    delete ub_served_queue;
+    delete ub_waiting_queue;
+    delete ub_request_queue;
+    delete tiling_queue;
 }
 
 /* Updates tiling_queue so that all requests in ub_sender_queue and wf_sender_queue that share
@@ -36,7 +46,7 @@ void MatrixMultiplyUnit::UpdateTilingQueue() {
     std::vector<request>::iterator begin;
     for (ubit = ub_sender_queue->begin(); ubit != ub_sender_queue->end(); ++ubit) {
         for (wfit = wf_sender_queue->begin(); wfit != wf_sender_queue->end(); ++wfit) {
-            if (ubit->order == wfit->order)
+            if ((ubit->order + wfit->order) == 0)
                 tiling_queue->push_back(MakeRequest(ubit->order, ubit->size));
         }
     }

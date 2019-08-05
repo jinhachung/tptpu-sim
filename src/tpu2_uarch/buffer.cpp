@@ -10,7 +10,7 @@ UnifiedBuffer::UnifiedBuffer(float buffer_size) {
     request_queue = new std::vector<request>();
 }
 
-UnifierBuffer::~UnifiedBuffer() {
+UnifiedBuffer::~UnifiedBuffer() {
     delete sender_queue;
     delete served_queue;
     delete waiting_queue;
