@@ -7,13 +7,13 @@ https://arxiv.org/ftp/arxiv/papers/1704/1704.04760.pdf
 ### Purpose:
 
 TPTPU-Sim is a cycle-level simulator built to simulate with different bandwidth/frequency configurations than the original TPU to see what changes, and gain more insight into how architecture for deep learning should focus on.\
-Currently, only TPTPU version 1, which models TPU version 1 is available.\
-TPTPU version 2 is *still in deployment*.
+Currently, only TPTPU version 1, which models TPU version 1 provides full functionality.\
+TPTPU version 2 is *incomplete*, but also available.
 
-### How to run TPTPU:
+### How to run TPTPU-Sim:
 1. clone both TPTPU(https://github.com/gobblygobble/tptpu-sim) and Ramulator(https://github.com/CMU-SAFARI/ramulator) into the same directory
 2. build ramulator with `make -j` in ramulator directory
-3. build tptpu-sim with `make tptpu1` in tptpu-sim directory to build TPTPU-Sim version 1
+3. build tptpu-sim with `make tptpu1` in tptpu-sim directory to build TPTPU-Sim version 1 (`make tptpu2` for version 2)
 4. run simulator with proper options\
 (`-d D -c C -r R -x X -y Y -z Z -l L` for X-by-Y matrix times Y-by-Z matrix multiplication with DRAM type D, with C channels and R ranks, and dimension layout L - `nchw` or `nhwc`)\
 Different types of DRAMs supported can be easily spotted in the function `double DRAM::GetFrequencyByName(std::string name)` of `tptpu-sim/src/tpu1_uarch/dram.cpp`. (`tptpu-sim/src/tpu2_uarch/dram.cpp` for TPTPU-Sim version 2)
@@ -29,13 +29,17 @@ cd ..
 cd tptpu-sim/
 make tptpu1
 .build/sim_tptpu1.exe -d DDR3_1600K -c 1 -r 1 -x 640 -y 640 -z 1080 -l nchw
+make tptpu2
+./build/sim_tptpu2.exe -d HBM -c 2 -r 2 -x 640 -y 640 -z 1080 -l nchw
 ```
 
 ### Architecture:
 
-1. ***Overall:***
-
-**DRAM** is connected to **Weight Fetcher** via **Interconnect**, **CPU** (interface) is connected to **Unified Buffer** via **Interconnect**, and **Weight Fetcher** and **Unified Buffer** are connected to **Matrix Multiply Unit** via **Interconnects**, providing it with weights and activations for neural network *inference*. It consits of the 5 **bold face** units along with a **Controller**.
+1. ***Overall:***\
+--**Version 1**\
+**DRAM** is connected to **Weight Fetcher** via **Interconnect**, **CPU** (interface) is connected to **Unified Buffer** via **Interconnect**, and **Weight Fetcher** and **Unified Buffer** are connected to **Matrix Multiply Unit** via **Interconnects**, providing it with weights and activations for neural network *inference*. It consits of the 5 **bold face** units along with a **Controller**.\
+--**Version 2**\
+**DRAM** is connected to **Weight Fetcher** *and* **Unified Buffer** via separate **Interconnects**, and the rest of the architecture is equivalent to that of version 1's.
 
 2. ***Interconnect:***
 
@@ -58,3 +62,17 @@ cd ~/path/to/some/directory/
 cd tptpu-sim/
 cp ../ramulator/configs/DDR4-config.cfg ./dram-config.cfg
 ```
+
+### What's new in version 2
+
+While TPTPU-Sim version 1 assumes activations are already fetched in CPU, version 2 has both activations and weights be brought in from DRAM on demand. This is in accordance with the TPU 1 and TPU 2+ architecture.\
+Also, while version 1 assumes all double-buffered weights of systolic array (matrix multiply unit) are automatically latched while the systolic array is doing computation, version 2 takes extra measures to carefully model this double-buffering behavior of weights in systolic array.\
+It should also be noted that while only DDR3 and DDR4 DRAMs are available for simulation on version 1, HBM is also an option in version 2.
+
+### Things to watch out for
+
+1. Running TPTPU-Sim:
+Becuase of the way the `Makefiles` are written, it is highly recommended that you follow the **How To run TPTPU** guide, including the running directories.
+
+2. Running Time:
+Becuase running python scripts and Ramulator are called in C++ files via the `system()` function, it takes quite some time despite all parts of the program being pretty fast. For tests on different configurations, tests with shell scripts are highly recommended.
