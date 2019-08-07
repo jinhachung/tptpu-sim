@@ -24,7 +24,14 @@ addrlist        = []
 # make list of address
 for h in range(tile_height):
     for w in range(tile_width):
-        addrlist.append(start_address + jump_size * ((h * total_width) + w))
+        #addrlist.append(start_address + jump_size * ((h * total_width) + w))
+        # change addresses to be 6-bit-aligned, and add only the ones who don't overlap
+        # number 6 is chosen because for DDR3, DDR4, and HBM, the bring in size is 64 bytes
+        # number MAY NEED TO CHANGE in order to support scalability for other DRAMs
+        actual_address = start_address + jump_size * ((h * total_width) + w)
+        request_address = (actual_address >> 6) << 6
+        if request_address not in addrlist:
+            addrlist.append(request_address)
 
 # create directory if it does not already exist, and open file in write(& create) mode
 if not os.path.exists("build"):

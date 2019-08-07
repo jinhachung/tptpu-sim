@@ -1,5 +1,5 @@
 # Makefile to take care of both Makefile.tptpu1 and Makefile.tptpu2
-
+all: tptpu1 tptpu2
 #TPTPU1 version 1
 tptpu1:
 	make tptpu1 -f Makefile.tptpu1
