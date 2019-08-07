@@ -56,11 +56,13 @@ int main(int argc, char *argv[]) {
     float buffer_size = (float)(3 * (1 << 23));
     float clock         = 0.7;                                  // 700MHz
     // the two bw should be changed later to be more flexible and add up to 300GiB/s
-    float bw_dram_wf    = 150 * (float)((1 << 30) / 1000000000); // 150GiB/s
-    float bw_dram_ub    = 150 * (float)((1 << 30) / 1000000000); // 150GiB/s
+    //float bw_dram_wf    = 30 * (float)((1 << 30) / 1000000000); // 30GiB/s
+    //float bw_dram_ub    = 270 * (float)((1 << 30) / 1000000000); // 270GiB/s
+    float bw_dram_wf = 267; // 267GB/s
+    float bw_dram_ub = 33;  // 33GB/s
     int sa_width = 128;
     int sa_height = 128;
-    int accumulator_size = 2048;
+    int accumulator_size = 1024;
     float bw_ub_mmu = 256;  // meaningless
     float bw_wf_mmu = 100;  // meaningless
     UnifiedBuffer *ub = new UnifiedBuffer(buffer_size);

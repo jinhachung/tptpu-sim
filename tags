@@ -223,6 +223,7 @@ activation_tile_queue	include/tpu1_uarch/controller.hpp	/^    std::vector<tile> 
 activation_tile_queue	include/tpu1_uarch/cpu.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:CPU
 activation_tile_queue	include/tpu2_uarch/controller.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:Controller
 activation_tile_queue	include/tpu2_uarch/dram.hpp	/^    std::vector<tile> *activation_tile_queue;$/;"	m	class:DRAM
+actual_address	generate_instruction.py	/^        actual_address = start_address + jump_size * ((h * total_width) + w)$/;"	v
 addrlist	generate_instruction.py	/^addrlist        = []$/;"	v
 bpc	include/tpu1_uarch/interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
 bpc	include/tpu2_uarch/interconnect.hpp	/^    float bpc;                              \/\/ bytes sent per cycle$/;"	m	class:Interconnect
@@ -329,6 +330,7 @@ request	include/tpu2_uarch/interconnect.hpp	/^typedef struct request request;$/;
 request	include/tpu2_uarch/mmu.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
 request	include/tpu2_uarch/unit.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
 request	include/tpu2_uarch/weightfetcher.hpp	/^typedef struct request request;$/;"	t	typeref:struct:request
+request_address	generate_instruction.py	/^        request_address = (actual_address >> 6) << 6$/;"	v
 request_queue	include/tpu1_uarch/buffer.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:UnifiedBuffer
 request_queue	include/tpu1_uarch/interconnect.hpp	/^    std::vector<request> *request_queue;    \/\/ vector of requests that the receiver needs to request to sender$/;"	m	class:Interconnect
 request_queue	include/tpu1_uarch/weightfetcher.hpp	/^    std::vector<request> *request_queue;$/;"	m	class:WeightFetcher
