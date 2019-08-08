@@ -1,0 +1,120 @@
+Simulation done. Statistics written to ./ramulator_output2/1.output.txt
+Simulation done. Statistics written to ./ramulator_output2/1.output.txt
+Simulation done. Statistics written to ./ramulator_output2/2.output.txt
+Simulation done. Statistics written to ./ramulator_output2/2.output.txt
+Simulation done. Statistics written to ./ramulator_output2/3.output.txt
+Simulation done. Statistics written to ./ramulator_output2/3.output.txt
+Simulation done. Statistics written to ./ramulator_output2/4.output.txt
+Simulation done. Statistics written to ./ramulator_output2/4.output.txt
+Simulation done. Statistics written to ./ramulator_output2/5.output.txt
+Simulation done. Statistics written to ./ramulator_output2/5.output.txt
+Simulation done. Statistics written to ./ramulator_output2/6.output.txt
+Simulation done. Statistics written to ./ramulator_output2/6.output.txt
+Simulation done. Statistics written to ./ramulator_output2/7.output.txt
+Simulation done. Statistics written to ./ramulator_output2/7.output.txt
+Simulation done. Statistics written to ./ramulator_output2/8.output.txt
+Simulation done. Statistics written to ./ramulator_output2/8.output.txt
+Simulation done. Statistics written to ./ramulator_output2/9.output.txt
+Simulation done. Statistics written to ./ramulator_output2/9.output.txt
+Simulation done. Statistics written to ./ramulator_output2/10.output.txt
+Simulation done. Statistics written to ./ramulator_output2/10.output.txt
+Simulation done. Statistics written to ./ramulator_output2/11.output.txt
+Simulation done. Statistics written to ./ramulator_output2/11.output.txt
+Simulation done. Statistics written to ./ramulator_output2/12.output.txt
+Simulation done. Statistics written to ./ramulator_output2/12.output.txt
+Simulation done. Statistics written to ./ramulator_output2/13.output.txt
+Simulation done. Statistics written to ./ramulator_output2/13.output.txt
+Simulation done. Statistics written to ./ramulator_output2/14.output.txt
+Simulation done. Statistics written to ./ramulator_output2/14.output.txt
+Simulation done. Statistics written to ./ramulator_output2/15.output.txt
+Simulation done. Statistics written to ./ramulator_output2/15.output.txt
+Simulation done. Statistics written to ./ramulator_output2/16.output.txt
+Simulation done. Statistics written to ./ramulator_output2/16.output.txt
+Simulation done. Statistics written to ./ramulator_output2/17.output.txt
+Simulation done. Statistics written to ./ramulator_output2/17.output.txt
+Simulation done. Statistics written to ./ramulator_output2/18.output.txt
+Simulation done. Statistics written to ./ramulator_output2/18.output.txt
+Simulation done. Statistics written to ./ramulator_output2/19.output.txt
+Simulation done. Statistics written to ./ramulator_output2/19.output.txt
+Simulation done. Statistics written to ./ramulator_output2/20.output.txt
+Simulation done. Statistics written to ./ramulator_output2/20.output.txt
+Simulation done. Statistics written to ./ramulator_output2/21.output.txt
+Simulation done. Statistics written to ./ramulator_output2/21.output.txt
+Simulation done. Statistics written to ./ramulator_output2/22.output.txt
+Simulation done. Statistics written to ./ramulator_output2/22.output.txt
+Simulation done. Statistics written to ./ramulator_output2/23.output.txt
+Simulation done. Statistics written to ./ramulator_output2/23.output.txt
+Simulation done. Statistics written to ./ramulator_output2/24.output.txt
+Simulation done. Statistics written to ./ramulator_output2/24.output.txt
+Simulation done. Statistics written to ./ramulator_output2/25.output.txt
+Simulation done. Statistics written to ./ramulator_output2/25.output.txt
+Simulation done. Statistics written to ./ramulator_output2/26.output.txt
+Simulation done. Statistics written to ./ramulator_output2/26.output.txt
+Simulation done. Statistics written to ./ramulator_output2/27.output.txt
+Simulation done. Statistics written to ./ramulator_output2/27.output.txt
+Simulation done. Statistics written to ./ramulator_output2/28.output.txt
+Simulation done. Statistics written to ./ramulator_output2/28.output.txt
+Simulation done. Statistics written to ./ramulator_output2/29.output.txt
+Simulation done. Statistics written to ./ramulator_output2/29.output.txt
+Simulation done. Statistics written to ./ramulator_output2/30.output.txt
+Simulation done. Statistics written to ./ramulator_output2/30.output.txt
+Simulation done. Statistics written to ./ramulator_output2/31.output.txt
+Simulation done. Statistics written to ./ramulator_output2/31.output.txt
+Simulation done. Statistics written to ./ramulator_output2/32.output.txt
+Simulation done. Statistics written to ./ramulator_output2/32.output.txt
+Simulation done. Statistics written to ./ramulator_output2/33.output.txt
+Simulation done. Statistics written to ./ramulator_output2/33.output.txt
+Simulation done. Statistics written to ./ramulator_output2/34.output.txt
+Simulation done. Statistics written to ./ramulator_output2/34.output.txt
+Simulation done. Statistics written to ./ramulator_output2/35.output.txt
+Simulation done. Statistics written to ./ramulator_output2/35.output.txt
+Simulation done. Statistics written to ./ramulator_output2/36.output.txt
+Simulation done. Statistics written to ./ramulator_output2/36.output.txt
+Simulation done. Statistics written to ./ramulator_output2/37.output.txt
+Simulation done. Statistics written to ./ramulator_output2/37.output.txt
+Simulation done. Statistics written to ./ramulator_output2/38.output.txt
+Simulation done. Statistics written to ./ramulator_output2/38.output.txt
+Simulation done. Statistics written to ./ramulator_output2/39.output.txt
+Simulation done. Statistics written to ./ramulator_output2/39.output.txt
+Simulation done. Statistics written to ./ramulator_output2/40.output.txt
+Simulation done. Statistics written to ./ramulator_output2/40.output.txt
+Simulation done. Statistics written to ./ramulator_output2/41.output.txt
+Simulation done. Statistics written to ./ramulator_output2/41.output.txt
+Simulation done. Statistics written to ./ramulator_output2/42.output.txt
+Simulation done. Statistics written to ./ramulator_output2/42.output.txt
+Simulation done. Statistics written to ./ramulator_output2/43.output.txt
+Simulation done. Statistics written to ./ramulator_output2/43.output.txt
+Simulation done. Statistics written to ./ramulator_output2/44.output.txt
+Simulation done. Statistics written to ./ramulator_output2/44.output.txt
+Simulation done. Statistics written to ./ramulator_output2/45.output.txt
+Simulation done. Statistics written to ./ramulator_output2/45.output.txt
+Simulation done. Statistics written to ./ramulator_output2/46.output.txt
+Simulation done. Statistics written to ./ramulator_output2/46.output.txt
+Simulation done. Statistics written to ./ramulator_output2/47.output.txt
+Simulation done. Statistics written to ./ramulator_output2/47.output.txt
+Simulation done. Statistics written to ./ramulator_output2/48.output.txt
+Simulation done. Statistics written to ./ramulator_output2/48.output.txt
+Simulation done. Statistics written to ./ramulator_output2/49.output.txt
+Simulation done. Statistics written to ./ramulator_output2/49.output.txt
+Simulation done. Statistics written to ./ramulator_output2/50.output.txt
+Simulation done. Statistics written to ./ramulator_output2/50.output.txt
+======================================================================
+		DRAM - Unified Buffer Interconnect Statistics:
+	idle cycles: 94524,		busy cycles: 139050
+total bytes sent over this interconnect:		6.5536e+06
+======================================================================
+======================================================================
+		DRAM - Weight Fetcher Interconnect Statistics:
+	idle cycles: 231424,		busy cycles: 2150
+total bytes sent over this interconnect:		819200
+======================================================================
+======================================================================
+		HBM DRAM Statistics:
+	idle cycles: 3189,		busy cycles: 230385
+total bytes brought in from this DRAM:			7.3728e+06
+======================================================================
+======================================================================
+		Matrix Multiply Unit Statistics:
+	idle cycles: 176024,		busy cycles: 57550
+total number of computations performed by this MMU:	1.67772e+09
+======================================================================
