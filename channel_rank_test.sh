@@ -8,7 +8,7 @@ do
     for rank in 1 2 4
     do
         outfile="./channel-rank-test/""$channel""channel""$rank""rank.output.txt"
-        ./build/sim_tptpu2.exe -c $channel -r $rank -x 640 -y 640 -z 2048 -l nchw > $outfile
+        ./build/sim_tptpu2.exe -c $channel -r $rank -x 1600 -y 1600 -z 4800 -l nchw > $outfile
         echo Finished $outfile
     done
 done

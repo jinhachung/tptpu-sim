@@ -1,0 +1,14 @@
+Starting channel-rank test...
+Finished ./channel-rank-test/1channel1rank.output.txt
+Finished ./channel-rank-test/1channel2rank.output.txt
+Finished ./channel-rank-test/1channel4rank.output.txt
+Finished ./channel-rank-test/2channel1rank.output.txt
+Finished ./channel-rank-test/2channel2rank.output.txt
+Finished ./channel-rank-test/2channel4rank.output.txt
+Finished ./channel-rank-test/4channel1rank.output.txt
+Finished ./channel-rank-test/4channel2rank.output.txt
+Finished ./channel-rank-test/4channel4rank.output.txt
+Finished ./channel-rank-test/8channel1rank.output.txt
+Finished ./channel-rank-test/8channel2rank.output.txt
+Finished ./channel-rank-test/8channel4rank.output.txt
+Finished channel-rank test, ho ho ho~
