@@ -11,7 +11,7 @@ Currently, only TPTPU version 1, which models TPU version 1 provides full functi
 TPTPU version 2 is *incomplete*, but also available.
 
 ### How to run TPTPU-Sim:
-1. clone both TPTPU(https://github.com/gobblygobble/tptpu-sim) and Ramulator(https://github.com/CMU-SAFARI/ramulator) into the same directory
+1. clone both TPTPU(https://github.com/jinhachung/tptpu-sim) and Ramulator(https://github.com/CMU-SAFARI/ramulator) into the same directory
 2. build ramulator with `make -j` in ramulator directory
 3. build tptpu-sim with `make tptpu1` in tptpu-sim directory to build TPTPU-Sim version 1 (`make tptpu2` for version 2)
 4. run simulator with proper options\
@@ -21,7 +21,7 @@ Different types of DRAMs supported can be easily spotted in the function `double
 For example:
 ```
 cd ~/path/to/some/directory/
-git clone https://github.com/gobblygobble/tptpu-sim
+git clone https://github.com/jinhachung/tptpu-sim
 git clone https://github.com/CMU-SAFARI/ramulator
 cd ramulator/
 make -j
